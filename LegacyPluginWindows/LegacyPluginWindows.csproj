@@ -133,9 +133,6 @@
     <Compile Include="..\LegacyPluginUnity\System\Net\Sockets\TcpClient.cs">
       <Link>System\Net\Sockets\TcpClient.cs</Link>
     </Compile>
-    <Compile Include="..\LegacyPluginUnity\System\ReflectionExtensions.cs">
-      <Link>System\ReflectionExtensions.cs</Link>
-    </Compile>
     <Compile Include="..\LegacyPluginUnity\System\Threading\Thread.cs">
       <Link>System\Threading\Thread.cs</Link>
     </Compile>
@@ -143,6 +140,7 @@
     <Compile Include="System\IO\EncryptedStreamReader.cs" />
     <Compile Include="System\IO\EncryptedStreamWriter.cs" />
     <Compile Include="System\IO\EncryptionProvider.cs" />
+    <Compile Include="System\ReflectionExtensions.cs" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
