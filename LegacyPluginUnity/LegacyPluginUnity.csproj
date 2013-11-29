@@ -42,6 +42,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Dispatcher.cs" />
+    <Compile Include="System\ApplicationException.cs" />
     <Compile Include="System\Collections\ArrayList.cs" />
     <Compile Include="System\Collections\Hashtable.cs" />
     <Compile Include="System\Collections\Specialized\IOrderedDictionary.cs" />
@@ -50,6 +51,7 @@
     <Compile Include="System\IO\File.cs" />
     <Compile Include="System\MissingExtensions.cs" />
     <Compile Include="System\Net\Sockets\TcpClient.cs" />
+    <Compile Include="System\ReflectionExtensions.cs" />
     <Compile Include="System\Threading\Thread.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

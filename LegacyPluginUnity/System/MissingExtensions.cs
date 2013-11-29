@@ -28,32 +28,6 @@ namespace LegacySystem
         {
             return sb.AppendFormat(format, new object[] { arg0, arg1, arg2 });
         }
-
-        /**
-         * Missing IsSubclassOf, this works well
-         */
-        public static bool IsSubclassOf(this System.Type type, System.Type parent)
-        {
-#if NETFX_CORE
-            return parent.GetTypeInfo().IsAssignableFrom(type.GetTypeInfo());
-#else
-            return type.IsSubclassOf(parent);
-#endif
-        }
-
-        /**
-         * Just forward this call to the proper spot
-         */
-        public static bool IsAssignableFrom(this System.Type type, System.Type other)
-        {
-#if NETFX_CORE
-            return type.GetTypeInfo().IsAssignableFrom(other.GetTypeInfo());
-#else
-            return type.IsAssignableFrom(other);
-#endif
-        }
-
-
     }
 }
 

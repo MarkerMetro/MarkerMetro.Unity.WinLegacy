@@ -106,6 +106,9 @@
     <Compile Include="..\LegacyPluginUnity\Dispatcher.cs">
       <Link>Dispatcher.cs</Link>
     </Compile>
+    <Compile Include="..\LegacyPluginUnity\System\ApplicationException.cs">
+      <Link>System\ApplicationException.cs</Link>
+    </Compile>
     <Compile Include="..\LegacyPluginUnity\System\Collections\ArrayList.cs">
       <Link>System\Collections\ArrayList.cs</Link>
     </Compile>
@@ -124,8 +127,14 @@
     <Compile Include="..\LegacyPluginUnity\System\IO\File.cs">
       <Link>System\IO\File.cs</Link>
     </Compile>
+    <Compile Include="..\LegacyPluginUnity\System\MissingExtensions.cs">
+      <Link>System\MissingExtensions.cs</Link>
+    </Compile>
     <Compile Include="..\LegacyPluginUnity\System\Net\Sockets\TcpClient.cs">
       <Link>System\Net\Sockets\TcpClient.cs</Link>
+    </Compile>
+    <Compile Include="..\LegacyPluginUnity\System\ReflectionExtensions.cs">
+      <Link>System\ReflectionExtensions.cs</Link>
     </Compile>
     <Compile Include="..\LegacyPluginUnity\System\Threading\Thread.cs">
       <Link>System\Threading\Thread.cs</Link>
@@ -134,8 +143,6 @@
     <Compile Include="System\IO\EncryptedStreamReader.cs" />
     <Compile Include="System\IO\EncryptedStreamWriter.cs" />
     <Compile Include="System\IO\EncryptionProvider.cs" />
-    <Compile Include="System\MissingExtensions.cs" />
-    <Compile Include="System\Type.cs" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
