@@ -6,7 +6,7 @@ using System.Reflection;
 using System;
 using System.Runtime.InteropServices;
 
-namespace LegacySystem
+namespace MarkerMetro.Unity.WinLegacy
 {
     /**
      * Helpers for missing functions of classes, turned into extensions instead...

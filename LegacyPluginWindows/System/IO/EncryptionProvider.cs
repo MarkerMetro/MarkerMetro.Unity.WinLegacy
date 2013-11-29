@@ -3,7 +3,7 @@ using Windows.Security.Cryptography;
 using Windows.Security.Cryptography.Core;
 using Windows.Storage.Streams;
 
-namespace LegacySystem.IO
+namespace MarkerMetro.Unity.WinLegacy.IO
 {
     internal static class EncryptionProvider
     {

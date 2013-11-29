@@ -6,7 +6,8 @@ using System.Reflection;
 using System;
 using System.Runtime.InteropServices;
 
-namespace LegacySystem.Collections.Specialized {
+namespace MarkerMetro.Unity.WinLegacy.Collections.Specialized
+{
 
 	public interface IOrderedDictionary : IDictionary, ICollection, IEnumerable {
 		

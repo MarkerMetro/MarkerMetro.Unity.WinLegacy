@@ -7,8 +7,8 @@
     <ProjectGuid>{02F383C2-3484-4183-8DD4-B201D41B74D5}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LegacyPlugin</RootNamespace>
-    <AssemblyName>LegacyPlugin</AssemblyName>
+    <RootNamespace>MarkerMetro.Unity.WinLegacy</RootNamespace>
+    <AssemblyName>MarkerMetro.Unity.WinLegacy</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkProfile />

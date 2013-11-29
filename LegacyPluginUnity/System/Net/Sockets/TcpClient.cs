@@ -15,7 +15,7 @@ using System.Net.Sockets;
 #endif
 
 
-namespace LegacySystem.Net.Sockets
+namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
 {
 
     public class TcpClient

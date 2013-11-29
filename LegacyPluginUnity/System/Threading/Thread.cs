@@ -1,6 +1,4 @@
-﻿
-
-namespace LegacySystem.Threading
+﻿namespace MarkerMetro.Unity.WinLegacy.Threading
 {
     public class Thread
     {

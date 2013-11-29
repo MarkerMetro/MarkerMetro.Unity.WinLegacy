@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Collections;
 
-namespace LegacySystem
+namespace MarkerMetro.Unity.WinLegacy
 {
 
     public class ApplicationException : Exception

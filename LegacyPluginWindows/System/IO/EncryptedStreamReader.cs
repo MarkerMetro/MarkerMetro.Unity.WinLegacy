@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using Windows.ApplicationModel.Store;
 
-namespace LegacySystem.IO
+namespace MarkerMetro.Unity.WinLegacy.IO
 {
     internal class EncryptedStreamReader : StreamReader
     {

@@ -2,11 +2,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
 VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LegacyPluginUnity", "LegacyPluginUnity\LegacyPluginUnity.csproj", "{02F383C2-3484-4183-8DD4-B201D41B74D5}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkerMetro.Unity.WinLegacyUnity", "LegacyPluginUnity\MarkerMetro.Unity.WinLegacyUnity.csproj", "{02F383C2-3484-4183-8DD4-B201D41B74D5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LegacyPluginWP8", "LegacyPluginWP8\LegacyPluginWP8.csproj", "{B31A195C-FAC1-44A1-92D4-F133A21B0FDC}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkerMetro.Unity.WinLegacyWP8", "LegacyPluginWP8\MarkerMetro.Unity.WinLegacyWP8.csproj", "{B31A195C-FAC1-44A1-92D4-F133A21B0FDC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LegacyPluginWindows", "LegacyPluginWindows\LegacyPluginWindows.csproj", "{1C6D430B-911E-4B0D-BC1C-B4B37100B393}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkerMetro.Unity.WinLegacyMetro", "LegacyPluginWindows\MarkerMetro.Unity.WinLegacyMetro.csproj", "{1C6D430B-911E-4B0D-BC1C-B4B37100B393}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{A9EA72E8-D0E5-45E2-BA67-0539ED1AED66}"
 	ProjectSection(SolutionItems) = preProject

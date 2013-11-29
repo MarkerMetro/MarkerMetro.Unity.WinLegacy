@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 
 
-namespace LegacyPlugin
+namespace MarkerMetro.Unity.WinLegacy
 {
     /// <summary>
     /// Handles dispatching to the UI and App Threads

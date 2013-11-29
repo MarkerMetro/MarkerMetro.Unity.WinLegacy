@@ -12,7 +12,7 @@ using Windows.Storage.Streams;
 #endif
 
 
-namespace LegacySystem.IO
+namespace MarkerMetro.Unity.WinLegacy.IO
 {
     public class File
     {

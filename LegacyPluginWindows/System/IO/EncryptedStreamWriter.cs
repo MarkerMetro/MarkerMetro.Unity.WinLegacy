@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Store;
 
-namespace LegacySystem.IO
+namespace MarkerMetro.Unity.WinLegacy.IO
 {
     internal class EncryptedStreamWriter : StreamWriter
     {

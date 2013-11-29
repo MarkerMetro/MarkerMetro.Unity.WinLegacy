@@ -9,8 +9,8 @@
     <ProjectGuid>{1C6D430B-911E-4B0D-BC1C-B4B37100B393}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>LegacyPlugin</RootNamespace>
-    <AssemblyName>LegacyPlugin</AssemblyName>
+    <RootNamespace>MarkerMetro.Unity.WinLegacy</RootNamespace>
+    <AssemblyName>MarkerMetro.Unity.WinLegacy</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
@@ -133,6 +133,9 @@
     <Compile Include="..\LegacyPluginUnity\System\Net\Sockets\TcpClient.cs">
       <Link>System\Net\Sockets\TcpClient.cs</Link>
     </Compile>
+    <Compile Include="..\LegacyPluginUnity\System\ReflectionExtensions.cs">
+      <Link>System\ReflectionExtensions.cs</Link>
+    </Compile>
     <Compile Include="..\LegacyPluginUnity\System\Threading\Thread.cs">
       <Link>System\Threading\Thread.cs</Link>
     </Compile>
@@ -140,7 +143,6 @@
     <Compile Include="System\IO\EncryptedStreamReader.cs" />
     <Compile Include="System\IO\EncryptedStreamWriter.cs" />
     <Compile Include="System\IO\EncryptionProvider.cs" />
-    <Compile Include="System\ReflectionExtensions.cs" />
   </ItemGroup>
   <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">

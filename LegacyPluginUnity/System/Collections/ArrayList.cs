@@ -7,7 +7,7 @@ using System.Reflection;
 using System;
 using System.Runtime.InteropServices;
 
-namespace LegacySystem.Collections
+namespace MarkerMetro.Unity.WinLegacy.Collections
 {
     /**
      * An ArrayList is just a dynamic array of generic objects... very close to List<> which is supported in Metro

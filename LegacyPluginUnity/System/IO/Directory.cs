@@ -9,7 +9,7 @@ using Windows.ApplicationModel;
 using System.IO;
 #endif
 
-namespace LegacySystem.IO
+namespace MarkerMetro.Unity.WinLegacy.IO
 {
     public class Directory
     {

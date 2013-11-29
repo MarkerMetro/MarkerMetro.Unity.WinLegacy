@@ -8,7 +8,7 @@ using System.Reflection;
 using System;
 using System.Runtime.InteropServices;
 
-namespace LegacySystem.Collections
+namespace MarkerMetro.Unity.WinLegacy.Collections
 {
     /**
      * Implement Hashtable like it exists in .NET 2.0... or at least the part I'm using
