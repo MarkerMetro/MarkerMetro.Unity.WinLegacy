@@ -103,40 +103,40 @@
     <Prefer32Bit>true</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\LegacyPluginUnity\Dispatcher.cs">
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\Dispatcher.cs">
       <Link>Dispatcher.cs</Link>
     </Compile>
-    <Compile Include="..\LegacyPluginUnity\System\ApplicationException.cs">
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\ApplicationException.cs">
       <Link>System\ApplicationException.cs</Link>
     </Compile>
-    <Compile Include="..\LegacyPluginUnity\System\Collections\ArrayList.cs">
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Collections\ArrayList.cs">
       <Link>System\Collections\ArrayList.cs</Link>
     </Compile>
-    <Compile Include="..\LegacyPluginUnity\System\Collections\Hashtable.cs">
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Collections\Hashtable.cs">
       <Link>System\Collections\Hashtable.cs</Link>
     </Compile>
-    <Compile Include="..\LegacyPluginUnity\System\Collections\Specialized\IOrderedDictionary.cs">
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Collections\Specialized\IOrderedDictionary.cs">
       <Link>System\Collections\Specialized\IOrderedDictionary.cs</Link>
     </Compile>
-    <Compile Include="..\LegacyPluginUnity\System\Collections\Specialized\OrderedDictionary.cs">
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Collections\Specialized\OrderedDictionary.cs">
       <Link>System\Collections\Specialized\OrderedDictionary.cs</Link>
     </Compile>
-    <Compile Include="..\LegacyPluginUnity\System\IO\Directory.cs">
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\Directory.cs">
       <Link>System\IO\Directory.cs</Link>
     </Compile>
-    <Compile Include="..\LegacyPluginUnity\System\IO\File.cs">
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\File.cs">
       <Link>System\IO\File.cs</Link>
     </Compile>
-    <Compile Include="..\LegacyPluginUnity\System\MissingExtensions.cs">
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\MissingExtensions.cs">
       <Link>System\MissingExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\LegacyPluginUnity\System\Net\Sockets\TcpClient.cs">
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Net\Sockets\TcpClient.cs">
       <Link>System\Net\Sockets\TcpClient.cs</Link>
     </Compile>
-    <Compile Include="..\LegacyPluginUnity\System\ReflectionExtensions.cs">
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\ReflectionExtensions.cs">
       <Link>System\ReflectionExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\LegacyPluginUnity\System\Threading\Thread.cs">
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Threading\Thread.cs">
       <Link>System\Threading\Thread.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />

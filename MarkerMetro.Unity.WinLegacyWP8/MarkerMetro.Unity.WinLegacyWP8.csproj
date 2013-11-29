@@ -85,16 +85,16 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="..\LegacyPluginUnity\Dispatcher.cs">
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\Dispatcher.cs">
       <Link>Dispatcher.cs</Link>
     </Compile>
-    <Compile Include="..\LegacyPluginUnity\System\io\Directory.cs">
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\io\Directory.cs">
       <Link>System\IO\Directory.cs</Link>
     </Compile>
-    <Compile Include="..\LegacyPluginUnity\System\io\File.cs">
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\io\File.cs">
       <Link>System\IO\File.cs</Link>
     </Compile>
-    <Compile Include="..\LegacyPluginUnity\System\Net\Sockets\TcpClient.cs">
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Net\Sockets\TcpClient.cs">
       <Link>System\Net\Sockets\TcpClient.cs</Link>
     </Compile>
     <Compile Include="System\Encryption\EncryptionProvider.cs" />
