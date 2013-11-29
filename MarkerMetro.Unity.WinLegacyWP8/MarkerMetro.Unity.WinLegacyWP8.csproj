@@ -88,16 +88,9 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\Dispatcher.cs">
       <Link>Dispatcher.cs</Link>
     </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\io\Directory.cs">
-      <Link>System\IO\Directory.cs</Link>
-    </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\io\File.cs">
-      <Link>System\IO\File.cs</Link>
-    </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Net\Sockets\TcpClient.cs">
       <Link>System\Net\Sockets\TcpClient.cs</Link>
     </Compile>
-    <Compile Include="System\Encryption\EncryptionProvider.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
