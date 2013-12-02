@@ -26,7 +26,7 @@ namespace MarkerMetro.Unity.WinLegacy.Collections
          * I'm mostly doing this to show it CAN be done, rather than encouraging it -- it's probably easier
          * to rewrite the code that uses the enumerator
          */
-#if !NETFX_CORE
+#if !NETFX_CORE && !WINDOWS_PHONE
         [System.Serializable]
 #endif
         public struct HashtableEnumerator : IDictionaryEnumerator, IEnumerator<DictionaryEntry>
