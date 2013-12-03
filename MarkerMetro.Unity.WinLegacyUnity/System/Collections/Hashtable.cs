@@ -1,6 +1,4 @@
-﻿
-
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections;
 using System.Linq;
 using System.Text;
@@ -183,6 +181,17 @@ namespace MarkerMetro.Unity.WinLegacy.Collections
         public new IDictionaryEnumerator GetEnumerator()
         {
             return ((IDictionary)this).GetEnumerator();
+        }
+
+        /**
+         * Cast from Hashtable, which is a Dictionary<object,object> to Dictionary<K, V>.
+         */
+        public Dictionary<K, V> CastTo<K, V>()
+        {
+            Dictionary<K, V> d = new Dictionary<K, V>();
+            foreach (var key in Keys)
+                d.Add((K)key, (V)this[key]);
+            return d;
         }
     }
 }
