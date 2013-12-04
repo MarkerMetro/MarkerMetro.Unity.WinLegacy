@@ -66,13 +66,13 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
         public void Start()
         {
             EnsureTask();
-            _task.Start(TaskScheduler.FromCurrentSynchronizationContext());
+            _task.Start(TaskScheduler.Default);
         }
 
         public void Start(Object param)
         {
             EnsureTask(param);
-            _task.Start();
+            _task.Start(TaskScheduler.Default);
         }
 
         /// <summary>
