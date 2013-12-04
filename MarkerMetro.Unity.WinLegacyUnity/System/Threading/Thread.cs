@@ -15,6 +15,10 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
     public class Thread
     {
 
+        /*
+         * pretty sure Task.Start doesn't always spin up a new thread (depends on synccontext)
+         * pretty sure that we'll need try/catching as tasks can throw exceptions when their state isn't as expected (e.g. waiting on a completed task?)
+         * */
 
 #if NETFX_CORE
 
@@ -24,20 +28,24 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
         private Task _task = null;
         private CancellationTokenSource _taskCancellationTokenSource;
 
-        public bool IsBackground { get; set; }
-
-        public Thread()
+        /// <summary>
+        /// Currently this value is ignored, not sure how to implement this
+        /// </summary>
+        public bool IsBackground
         {
-            _taskCancellationTokenSource = new CancellationTokenSource();
+            get { return true; }
+            set { throw new NotImplementedException("currently always on background"); }
         }
 
-        public Thread(ThreadStart start) : this()
+        public Thread(ThreadStart start)
         {
+            _taskCancellationTokenSource = new CancellationTokenSource();
             _threadStart = start;
         }
 
-        public Thread(ParameterizedThreadStart start) : this()
+        public Thread(ParameterizedThreadStart start)
         {
+            _taskCancellationTokenSource = new CancellationTokenSource();
             _paramThreadStart = start;
         }
 
@@ -51,30 +59,38 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
 
         public bool Join(int ms)
         {
+            EnsureTask();
             return _task.Wait(ms, _taskCancellationTokenSource.Token);
         }
 
         public void Start()
         {
-            if (_paramThreadStart != null)
-            {
-                _task = new Task(() => _paramThreadStart(null), _taskCancellationTokenSource.Token);
-            }
-            else if (_threadStart != null)
-            {
-                _task = new Task(() => _threadStart(), _taskCancellationTokenSource.Token);
-            }
+            EnsureTask();
+            _task.Start(TaskScheduler.FromCurrentSynchronizationContext());
         }
 
         public void Start(Object param)
         {
-            if (_paramThreadStart != null)
-            {
-                _task = new Task(() => _paramThreadStart(param), _taskCancellationTokenSource.Token);
-            }
-            else if (_threadStart != null)
-            {
-                _task = new Task(() => _threadStart(), _taskCancellationTokenSource.Token);
+            EnsureTask(param);
+            _task.Start();
+        }
+
+        /// <summary>
+        /// Ensures the underlying Task is created and initialized correctly
+        /// </summary>
+        /// <param name="paramThreadStartParam"></param>
+        private void EnsureTask(object paramThreadStartParam = null)
+        {
+            if (_task == null)
+            { 
+                if (_paramThreadStart != null)
+                {
+                    _task = new Task(() => _paramThreadStart(paramThreadStartParam), _taskCancellationTokenSource.Token);
+                }
+                else if (_threadStart != null)
+                {
+                    _task = new Task(() => _threadStart(), _taskCancellationTokenSource.Token);
+                }
             }
         }
 
