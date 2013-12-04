@@ -1,44 +1,84 @@
 ﻿using System;
 using System.Threading;
 
+#if NETFX_CORE
+using System.Threading.Tasks;
+#endif
+
 namespace MarkerMetro.Unity.WinLegacy.Threading
 {
+#if NETFX_CORE
     public delegate void ParameterizedThreadStart(object target);
     public delegate void ThreadStart();
+#endif
 
     public class Thread
     {
+
+
+#if NETFX_CORE
+
+        private ParameterizedThreadStart _paramThreadStart;
+        private ThreadStart _threadStart;
+
+        private Task _task = null;
+        private CancellationTokenSource _taskCancellationTokenSource;
+
         public bool IsBackground { get; set; }
 
-        public Thread(ThreadStart start)
+        public Thread()
         {
-            throw new NotImplementedException();
+            _taskCancellationTokenSource = new CancellationTokenSource();
         }
 
-        public Thread(ParameterizedThreadStart start)
+        public Thread(ThreadStart start) : this()
         {
-            throw new NotImplementedException();
+            _threadStart = start;
+        }
+
+        public Thread(ParameterizedThreadStart start) : this()
+        {
+            _paramThreadStart = start;
         }
 
         public void Abort()
         {
-            throw new NotImplementedException();
+            if (_taskCancellationTokenSource != null)
+            { 
+                _taskCancellationTokenSource.Cancel();
+            }
         }
 
         public bool Join(int ms)
         {
-            return false;
+            return _task.Wait(ms, _taskCancellationTokenSource.Token);
         }
 
         public void Start()
         {
-            throw new NotImplementedException();
+            if (_paramThreadStart != null)
+            {
+                _task = new Task(() => _paramThreadStart(null), _taskCancellationTokenSource.Token);
+            }
+            else if (_threadStart != null)
+            {
+                _task = new Task(() => _threadStart(), _taskCancellationTokenSource.Token);
+            }
         }
 
-        public void Start(Object thread)
+        public void Start(Object param)
         {
-            throw new NotImplementedException();
+            if (_paramThreadStart != null)
+            {
+                _task = new Task(() => _paramThreadStart(param), _taskCancellationTokenSource.Token);
+            }
+            else if (_threadStart != null)
+            {
+                _task = new Task(() => _threadStart(), _taskCancellationTokenSource.Token);
+            }
         }
+
+#endif
 
         public static void Sleep(int ms)
         {
@@ -46,9 +86,14 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
         }
     }
 
+    
+#if NETFX_CORE
+
     public class ThreadAbortException : Exception
     {
         
     }
+
+#endif
 }
 
