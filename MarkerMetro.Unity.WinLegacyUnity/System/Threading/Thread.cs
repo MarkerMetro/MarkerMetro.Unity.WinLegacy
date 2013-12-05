@@ -10,7 +10,6 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
 #if NETFX_CORE
     public delegate void ParameterizedThreadStart(object target);
     public delegate void ThreadStart();
-#endif
 
     public class Thread
     {
@@ -19,8 +18,6 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
          * pretty sure Task.Start doesn't always spin up a new thread (depends on synccontext)
          * pretty sure that we'll need try/catching as tasks can throw exceptions when their state isn't as expected (e.g. waiting on a completed task?)
          * */
-
-#if NETFX_CORE
 
         private ParameterizedThreadStart _paramThreadStart;
         private ThreadStart _threadStart;
@@ -94,7 +91,7 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
             }
         }
 
-#endif
+
 
         public static void Sleep(int ms)
         {
@@ -102,14 +99,58 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
         }
     }
 
-    
-#if NETFX_CORE
+#else
+    public delegate void ParameterizedThreadStart(object target);
+    public delegate void ThreadStart();
+
+    public class Thread
+    {
+        public bool IsBackground { get; set; }
+
+        public Thread(ThreadStart start)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Thread(ParameterizedThreadStart start)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Abort()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool Join(int ms)
+        {
+            return false;
+        }
+
+        public void Start()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Start(Object thread)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void Sleep(int ms)
+        {
+            new ManualResetEvent(false).WaitOne(ms);
+        }
+    }
+#endif
+
+    //#if NETFX_CORE
 
     public class ThreadAbortException : Exception
     {
         
     }
 
-#endif
+//#endif
 }
 
