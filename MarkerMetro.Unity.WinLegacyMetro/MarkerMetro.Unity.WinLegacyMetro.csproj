@@ -127,8 +127,8 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\File.cs">
       <Link>System\IO\File.cs</Link>
     </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\Zip.cs">
-      <Link>System\IO\Zip.cs</Link>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\ZipFile.cs">
+      <Link>System\IO\ZipFile.cs</Link>
     </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\MissingExtensions.cs">
       <Link>System\MissingExtensions.cs</Link>

@@ -16,14 +16,23 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 {
     public class ZipFile
     {
+        #if NETFX_CORE
         private StorageFile _storageFile;
         private ZipArchive _zipArchive;
         //private MemoryStream _stream;
+        #endif
 
         public ZipFile()
         {
             //Create(fileName);
         }
+
+        // NOTE: async methods CANNOT be exposed in the .net 3.5 unity assembly. 
+        // You can use async methods internally in win 8.1 libraries, but must call them via a s
+        // a standard .net method either with a .Wait on the Task to force syncrhonicity (see previous integration for File)
+        // or using a standard callback approach
+
+        #if NETFX_CORE
 
         public async void Create(string fileName)
         {
@@ -52,6 +61,8 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 
             using (var writer = new StreamWriter(entry.Open()))
                 writer.Write(bytes);
+
+
         }
 
         public async void Read()
@@ -93,6 +104,9 @@ namespace MarkerMetro.Unity.WinLegacy.IO
                 }
             }
         }
+
+        #endif
+
     }
 }
 
