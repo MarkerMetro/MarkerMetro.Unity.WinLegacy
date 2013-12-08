@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace MarkerMetro.Unity.WinLegacy.Threading
 {
-#if NETFX_CORE
+
     public delegate void ParameterizedThreadStart(object target);
     public delegate void ThreadStart();
 
@@ -22,8 +22,11 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
         private ParameterizedThreadStart _paramThreadStart;
         private ThreadStart _threadStart;
 
+#if NETFX_CORE
+
         private Task _task = null;
         private CancellationTokenSource _taskCancellationTokenSource;
+#endif
 
         /// <summary>
         /// Currently this value is ignored, not sure how to implement this
@@ -36,42 +39,67 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
 
         public Thread(ThreadStart start)
         {
+#if NETFX_CORE
             _taskCancellationTokenSource = new CancellationTokenSource();
             _threadStart = start;
+#else
+            throw new NotSupportedException();
+#endif
         }
 
         public Thread(ParameterizedThreadStart start)
         {
+#if NETFX_CORE
             _taskCancellationTokenSource = new CancellationTokenSource();
             _paramThreadStart = start;
+#else
+            throw new NotSupportedException();
+#endif
         }
 
         public void Abort()
         {
+#if NETFX_CORE
             if (_taskCancellationTokenSource != null)
             { 
                 _taskCancellationTokenSource.Cancel();
             }
+#else
+            throw new NotSupportedException();
+#endif
         }
 
         public bool Join(int ms)
         {
+#if NETFX_CORE
             EnsureTask();
             return _task.Wait(ms, _taskCancellationTokenSource.Token);
+#else
+            throw new NotSupportedException();
+#endif
         }
 
         public void Start()
         {
+#if NETFX_CORE
             EnsureTask();
             _task.Start(TaskScheduler.Default);
+#else
+            throw new NotSupportedException();
+#endif
         }
 
         public void Start(Object param)
         {
+#if NETFX_CORE
             EnsureTask(param);
             _task.Start(TaskScheduler.Default);
+#else
+            throw new NotSupportedException();
+#endif
         }
 
+#if NETFX_CORE
         /// <summary>
         /// Ensures the underlying Task is created and initialized correctly
         /// </summary>
@@ -90,67 +118,18 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
                 }
             }
         }
-
-
-
-        public static void Sleep(int ms)
-        {
-            new ManualResetEvent(false).WaitOne(ms);
-        }
-    }
-
-#else
-    public delegate void ParameterizedThreadStart(object target);
-    public delegate void ThreadStart();
-
-    public class Thread
-    {
-        public bool IsBackground { get; set; }
-
-        public Thread(ThreadStart start)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Thread(ParameterizedThreadStart start)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Abort()
-        {
-            throw new NotImplementedException();
-        }
-
-        public bool Join(int ms)
-        {
-            return false;
-        }
-
-        public void Start()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Start(Object thread)
-        {
-            throw new NotImplementedException();
-        }
-
-        public static void Sleep(int ms)
-        {
-            new ManualResetEvent(false).WaitOne(ms);
-        }
-    }
 #endif
 
-    //#if NETFX_CORE
+        public static void Sleep(int ms)
+        {
+            new ManualResetEvent(false).WaitOne(ms);
+        }
+    }
 
     public class ThreadAbortException : Exception
     {
         
     }
 
-//#endif
 }
 
