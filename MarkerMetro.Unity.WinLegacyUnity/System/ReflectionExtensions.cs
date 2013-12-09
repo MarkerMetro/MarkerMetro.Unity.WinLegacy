@@ -20,6 +20,24 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 
     public static class ReflectionExtensions
     {
+        public static bool IsValueType(this Type type)
+        {
+#if NETFX_CORE
+            return type.GetTypeInfo().IsValueType;
+#else
+            return type.IsValueType();
+#endif
+        }
+
+        public static Assembly GetAssembly(this Type type)
+        {
+#if NETFX_CORE
+            return type.GetTypeInfo().Assembly;
+#else
+            //return Assembly.GetAssembly(type);
+            return new Assembly();
+#endif
+        }
 
         public static bool IsClass(this Type type)
         {
@@ -159,6 +177,12 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
         {
             return GetMethod(t, name, flags, null);
         }
+#if NETFX_CORE
+        public static Type GetBaseType(this Type type)
+        {
+            return type.GetTypeInfo().BaseType;
+        }
+#endif
 
         public static MethodInfo GetMethod(Type t, string name, BindingFlags flags, Type[] parameters)
         {
@@ -239,5 +263,18 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 #endif
         }
 
+    }
+
+    public class Assembly
+    {
+        public Type[] GetTypes()
+        {
+            return new Type[0];
+            //#if NETFX_CORE
+            //    return (Type[])assembly.DefinedTypes;
+            //#else
+            //return (Type[])assembly.DefinedTypes;
+            //#endif
+        }
     }
 }

@@ -134,6 +134,11 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 #endif
         }
 
+        public static Stream Open(string path, FileMode fileMode)
+        {
+            throw new NotImplementedException();
+        }
+
         public static Stream Create(string path)
         {
 #if NETFX_CORE

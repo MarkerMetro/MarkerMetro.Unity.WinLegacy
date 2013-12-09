@@ -16,6 +16,9 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 {
     public class ZipFile
     {
+        public Encoding AlternateEncoding { get; set; }
+        public ZipOption AlternateEncodingUsage { get; set; }
+
         #if NETFX_CORE
         private StorageFile _storageFile;
         private ZipArchive _zipArchive;
@@ -65,6 +68,8 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 
         }
 
+        
+
         public async void Read()
         {
             var zipFile = await ApplicationData.Current.LocalFolder.GetFileAsync("output.zip");
@@ -105,7 +110,16 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             }
         }
 
-        #endif
+#endif
+        // TODO : Make these methods use Task
+        public void AddEntry(string key, byte[] bytes)
+        {
+        }
+
+        public void AddEntry()
+        {
+            
+        }
 
     }
 }
