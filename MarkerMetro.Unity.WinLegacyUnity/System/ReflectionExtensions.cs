@@ -18,21 +18,129 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
         DeclaredOnly
     }
 
+    public enum TypeCode
+    {
+        Byte,
+        Int16,
+        Int32,
+        Int64,
+        SByte,
+        UInt16,
+        UInt32,
+        UInt64,
+        Single,
+        Double,
+        Char,
+        Boolean,
+        String,
+        DateTime,
+        Decimal,
+        Empty,
+        DBNull, // Never used
+        Object
+    }
+
     public static class ReflectionExtensions
     {
+
+        private static readonly Dictionary<Type, TypeCode> _typeCodeTable =
+           new Dictionary<Type, TypeCode>()
+            {
+                    { typeof( Boolean ), TypeCode.Boolean },
+                    { typeof( Char ), TypeCode.Char },
+                    { typeof( Byte ), TypeCode.Byte },
+                    { typeof( Int16 ), TypeCode.Int16 },
+                    { typeof( Int32 ), TypeCode.Int32 },
+                    { typeof( Int64 ), TypeCode.Int64 },
+                    { typeof( SByte ), TypeCode.SByte },
+                    { typeof( UInt16 ), TypeCode.UInt16 },
+                    { typeof( UInt32 ), TypeCode.UInt32 },
+                    { typeof( UInt64 ), TypeCode.UInt64 },
+                    { typeof( Single ), TypeCode.Single },
+                    { typeof( Double ), TypeCode.Double },
+                    { typeof( DateTime ), TypeCode.DateTime },
+                    { typeof( Decimal ), TypeCode.Decimal },
+                    { typeof( String ), TypeCode.String },
+            };
+
+
         public static bool IsValueType(this Type type)
         {
 #if NETFX_CORE
             return type.GetTypeInfo().IsValueType;
+            
 #else
             return type.IsValueType;
+            
+#endif
+        }
+
+        public static bool IsGenericType(this Type type)
+        {
+#if NETFX_CORE
+            return type.GetTypeInfo().IsGenericType;
+#else
+            return type.IsGenericType;
+#endif
+        }
+
+        public static object[] GetCustomAttributes(this Type type, Type attrType)
+        {
+#if NETFX_CORE
+            var customAttributes = type.GetTypeInfo().GetCustomAttributes(attrType);
+            if (customAttributes == null) return null;
+            return customAttributes.ToArray();
+#else
+            throw new NotImplementedException();
+#endif
+        }
+
+        public static object[] GetCustomAttributes(this Type type, Type attrType, bool inherit)
+        {
+#if NETFX_CORE
+
+            var customAttributes = type.GetTypeInfo().GetCustomAttributes(attrType, inherit);
+            if (customAttributes == null) return null;
+            return customAttributes.ToArray();
+#else
+            throw new NotImplementedException();
 #endif
         }
 
         public static Assembly GetAssembly(this Type type)
         {
 #if NETFX_CORE
+
             return type.GetTypeInfo().Assembly;
+#else
+            throw new NotImplementedException();
+#endif
+        }
+
+        public static bool IsAbstract(this Type type)
+        {
+#if NETFX_CORE
+            return type.GetTypeInfo().IsAbstract;
+#else
+            return type.IsAbstract;
+#endif
+        }
+
+        public static bool IsDefined(this Type type, Type attributeType)
+        {
+#if NETFX_CORE
+
+            return type.GetTypeInfo().IsDefined(attributeType);
+#else
+            throw new NotImplementedException();
+#endif
+        }
+
+        public static bool IsDefined(this Type type, Type attributeType, bool inherit)
+        {
+#if NETFX_CORE
+
+            return type.GetTypeInfo().IsDefined(attributeType, inherit);
 #else
             throw new NotImplementedException();
 #endif
@@ -41,6 +149,7 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
         public static bool IsClass(this Type type)
         {
 #if NETFX_CORE
+
             return type.GetTypeInfo().IsClass;
 #else
             return type.IsClass;
@@ -56,6 +165,26 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 #endif
         }
 
+        public static ConstructorInfo GetParameterlessConstructor(this Type type)
+        {
+#if NETFX_CORE
+            return type.GetTypeInfo().DeclaredConstructors.FirstOrDefault(c => !c.GetParameters().Any());
+#else
+            throw new NotImplementedException();
+#endif       
+        }
+
+        public static ConstructorInfo[] GetConstructors(this Type type)
+        {
+#if NETFX_CORE
+            var decConstructors = type.GetTypeInfo().DeclaredConstructors;
+            if (decConstructors == null) return null;
+            return decConstructors.ToArray();
+#else
+            throw new NotImplementedException();
+#endif
+        }
+
         public static Type GetInterface(this Type type, string name)
         {
 #if NETFX_CORE
@@ -63,6 +192,13 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 #else
             throw new NotImplementedException();
 #endif
+        }
+
+        public static PropertyInfo GetProperty(this Type type, string name)
+        {
+            var props = type.GetProperties();
+            if (!props.Any()) return null;
+            return props.FirstOrDefault(f => f.Name == name);
         }
 
         public static PropertyInfo[] GetProperties(this Type type)
@@ -162,6 +298,13 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 #endif
         }
 
+        public static FieldInfo GetField(this Type type, string name)
+        {
+            var fields = type.GetFields();
+            if (!fields.Any()) return null;
+            return fields.FirstOrDefault(f => f.Name == name);
+        }
+
         public static MethodInfo GetMethod(this Type type, string name)
         {
             return GetMethod(type, name, BindingFlags.Default, null);
@@ -231,6 +374,15 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 #endif
         }
 
+        public static bool IsInterface(this Type type)
+        {
+#if NETFX_CORE
+            return type.GetTypeInfo().IsInterface;
+#else
+            return type.IsInterface;
+#endif
+        }
+
         public static bool IsPrimitive(this Type current)
         {
             if (current == typeof(Boolean)) return true;
@@ -281,6 +433,23 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
             throw new NotImplementedException();
 #endif
 
+        }
+
+ 
+        public static TypeCode GetTypeCode(this Type type)
+        {
+            if (type == null)
+            {
+                return TypeCode.Empty;
+            }
+
+            TypeCode result;
+            if (!_typeCodeTable.TryGetValue(type, out result))
+            {
+                result = TypeCode.Object;
+            }
+
+            return result;
         }
 
     }
