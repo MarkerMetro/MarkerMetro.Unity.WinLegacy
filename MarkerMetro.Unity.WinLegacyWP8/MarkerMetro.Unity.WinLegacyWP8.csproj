@@ -100,6 +100,15 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Collections\Specialized\OrderedDictionary.cs">
       <Link>System\Collections\Specialized\OrderedDictionary.cs</Link>
     </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\ZipEntry.cs">
+      <Link>System\IO\ZipEntry.cs</Link>
+    </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\ZipFile.cs">
+      <Link>System\IO\ZipFile.cs</Link>
+    </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\ZipOption.cs">
+      <Link>System\IO\ZipOption.cs</Link>
+    </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Net\Sockets\TcpClient.cs">
       <Link>System\Net\Sockets\TcpClient.cs</Link>
     </Compile>
