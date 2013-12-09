@@ -51,8 +51,6 @@
     <Compile Include="System\IO\BinaryWriter.cs" />
     <Compile Include="System\IO\FileMode.cs" />
     <Compile Include="System\IO\FileStream.cs" />
-    <Compile Include="System\IO\MemoryStream.cs" />
-    <Compile Include="System\IO\Stream.cs" />
     <Compile Include="System\IO\ZipEntry.cs" />
     <Compile Include="System\IO\ZipFile.cs" />
     <Compile Include="System\IO\Directory.cs" />
