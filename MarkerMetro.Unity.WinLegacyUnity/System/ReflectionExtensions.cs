@@ -25,7 +25,7 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 #if NETFX_CORE
             return type.GetTypeInfo().IsValueType;
 #else
-            return type.IsValueType();
+            return type.IsValueType;
 #endif
         }
 
@@ -34,8 +34,7 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 #if NETFX_CORE
             return type.GetTypeInfo().Assembly;
 #else
-            //return Assembly.GetAssembly(type);
-            return new Assembly();
+            throw new NotImplementedException();
 #endif
         }
 
@@ -263,18 +262,29 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 #endif
         }
 
+
+        public static Type[] GetTypes(this Assembly assembly)
+        {
+#if NETFX_CORE
+
+            if (assembly.DefinedTypes == null) return null;
+            if (assembly.DefinedTypes.Count() == 0) return new Type[0];
+            var typeInfos = assembly.DefinedTypes.ToArray();
+            Type[] types = new Type[typeInfos.Count()];
+            for (var x = 0; x < types.Length; x++)
+            {
+                types[x] = typeInfos[x].AsType();
+            }
+            return types;
+
+#else
+            throw new NotImplementedException();
+#endif
+
+        }
+
     }
 
-    public class Assembly
-    {
-        public Type[] GetTypes()
-        {
-            return new Type[0];
-            //#if NETFX_CORE
-            //    return (Type[])assembly.DefinedTypes;
-            //#else
-            //return (Type[])assembly.DefinedTypes;
-            //#endif
-        }
-    }
+
+
 }
