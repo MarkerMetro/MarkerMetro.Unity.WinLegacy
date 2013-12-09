@@ -20,9 +20,9 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         public ZipOption AlternateEncodingUsage { get; set; }
 
         #if NETFX_CORE
-        private StorageFile _storageFile;
-        private ZipArchive _zipArchive;
-        //private MemoryStream _stream;
+        StorageFile _storageFile;
+        ZipArchive _zipArchive = null;
+        //MemoryStream _stream;
         #endif
 
         public ZipFile()

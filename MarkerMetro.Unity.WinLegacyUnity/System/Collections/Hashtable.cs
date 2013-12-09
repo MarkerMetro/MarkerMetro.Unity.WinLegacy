@@ -17,7 +17,7 @@ namespace MarkerMetro.Unity.WinLegacy.Collections
      *
      * The reason this code looks so complex is I'm [trying to deal] with the enumerators properly (foreach loops over a Hashtable object).
      */
-    public class Hashtable : System.Collections.Generic.Dictionary<object, object>, IEnumerable, IDictionary
+    public class Hashtable : global::System.Collections.Generic.Dictionary<object, object>, IEnumerable, IDictionary
     {
         /**
          * This is an advanced example of writing an enumerator to be compatible with .NET 2.0.
@@ -25,7 +25,7 @@ namespace MarkerMetro.Unity.WinLegacy.Collections
          * to rewrite the code that uses the enumerator
          */
 #if !NETFX_CORE && !WINDOWS_PHONE
-        [System.Serializable]
+        [global::System.Serializable]
 #endif
         public struct HashtableEnumerator : IDictionaryEnumerator, IEnumerator<DictionaryEntry>
         {

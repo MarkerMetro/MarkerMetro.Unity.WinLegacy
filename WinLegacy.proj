@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Rebuild;Publish" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <RestorePackages>true</RestorePackages>
+    <OutDir>$(MSBuildProjectDirectory)\Output\</OutDir>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <UnityProject Include="$(MSBuildProjectDirectory)\MarkerMetro.Unity.WinLegacyUnity\MarkerMetro.Unity.WinLegacyUnity.csproj">
+      <SubFolder>Unity</SubFolder>
+    </UnityProject>
+    <WP8Project Include="$(MSBuildProjectDirectory)\MarkerMetro.Unity.WinLegacyWP8\MarkerMetro.Unity.WinLegacyWP8.csproj">
+      <SubFolder>WP8</SubFolder>
+    </WP8Project>
+    <MetroProject Include="$(MSBuildProjectDirectory)\MarkerMetro.Unity.WinLegacyMetro\MarkerMetro.Unity.WinLegacyMetro.csproj">
+      <SubFolder>Metro</SubFolder>
+    </MetroProject>
+    <Projects Include="@(UnityProject);@(WP8Project);@(MetroProject)"/>
+  </ItemGroup>
+
+  <PropertyGroup>
+    <ReferencesUnity>\References\Unity</ReferencesUnity>
+    <ReferencesWP8>\References\WP8</ReferencesWP8>
+    <ReferencesMetro>\References\Metro</ReferencesMetro>
+    <JsonFxFolder>$(MSBuildProjectDirectory)\..\MarkerMetro.Unity.JsonFx</JsonFxFolder>
+    <LitJsonFolder>$(MSBuildProjectDirectory)\..\MarkerMetro.Unity.LitJson</LitJsonFolder>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <MSBuildProperties>Configuration=$(Configuration);Platfrom=$(Platform);RestorePackages=$(RestorePackages)</MSBuildProperties>
+  </PropertyGroup>
+
+  <Target Name="Clean">
+    <MSBuild Projects="@(Projects)"
+             Targets="Clean"
+             Properties="$(MSBuildProperties);OutDir=$(OutDir)%(Projects.SubFolder)"/>
+
+    <CreateItem Include="$(OutDir)\**\*.*">
+      <Output TaskParameter="Include" ItemName="FilesToDelete"/>
+    </CreateItem>
+    <Delete Files="$(FilesToDelete)"/>
+    <RemoveDir Directories="$(OutDir)" ContinueOnError="true"/>
+  </Target>
+
+  <Target Name="Build">
+    <MakeDir Directories="$(OutDir)" ContinueOnError="true"/>
+
+    <MSBuild Projects="@(Projects)"
+             Targets="Build"
+             Properties="$(MSBuildProperties);OutDir=$(OutDir)%(Projects.SubFolder)"/>
+  </Target>
+
+  <Target Name="Rebuild" DependsOnTargets="Clean;Build"/>
+
+  <Target Name="PublishToJsonFx" Condition="Exists('$(JsonFxFolder)')">
+    <Copy SourceFiles="$(OutDir)Unity\MarkerMetro.Unity.WinLegacy.dll" DestinationFolder="$(JsonFxFolder)\$(ReferencesUnity)"/>
+    <Copy SourceFiles="$(OutDir)WP8\MarkerMetro.Unity.WinLegacy.dll" DestinationFolder="$(JsonFxFolder)\$(ReferencesWP8)"/>
+    <Copy SourceFiles="$(OutDir)Metro\MarkerMetro.Unity.WinLegacyMetro\MarkerMetro.Unity.WinLegacy.dll" DestinationFolder="$(JsonFxFolder)\$(ReferencesMetro)"/>
+  </Target>
+
+  <Target Name="PublishToLitJson" Condition="Exists('$(LitJsonFolder)')">
+    <Copy SourceFiles="$(OutDir)Unity\MarkerMetro.Unity.WinLegacy.dll" DestinationFolder="$(LitJsonFolder)\$(ReferencesUnity)"/>
+    <Copy SourceFiles="$(OutDir)WP8\MarkerMetro.Unity.WinLegacy.dll" DestinationFolder="$(LitJsonFolder)\$(ReferencesWP8)"/>
+    <Copy SourceFiles="$(OutDir)Metro\MarkerMetro.Unity.WinLegacyMetro\MarkerMetro.Unity.WinLegacy.dll" DestinationFolder="$(LitJsonFolder)\$(ReferencesMetro)"/>
+  </Target>
+
+  <Target Name="PublishToPublishDir" Condition="Exists('$(PublishDir)')">
+    <Copy SourceFiles="$(OutDir)Unity\MarkerMetro.Unity.WinLegacy.dll" DestinationFolder="$(PublishDir)\$(ReferencesUnity)"/>
+    <Copy SourceFiles="$(OutDir)WP8\MarkerMetro.Unity.WinLegacy.dll" DestinationFolder="$(PublishDir)\$(ReferencesWP8)"/>
+    <Copy SourceFiles="$(OutDir)Metro\MarkerMetro.Unity.WinLegacyMetro\MarkerMetro.Unity.WinLegacy.dll" DestinationFolder="$(PublishDir)\$(ReferencesMetro)"/>
+  </Target>
+  
+  <Target Name="Publish" DependsOnTargets="Build;PublishToJsonFx;PublishToLitJson;PublishToPublishDir"/>
+</Project>

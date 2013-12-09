@@ -109,6 +109,9 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\ApplicationException.cs">
       <Link>System\ApplicationException.cs</Link>
     </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Attribute.cs">
+      <Link>System\Attribute.cs</Link>
+    </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Collections\ArrayList.cs">
       <Link>System\Collections\ArrayList.cs</Link>
     </Compile>
@@ -133,14 +136,23 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\File.cs">
       <Link>System\IO\File.cs</Link>
     </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\FileAccess.cs">
+      <Link>System\IO\FileAccess.cs</Link>
+    </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\FileMode.cs">
       <Link>System\IO\FileMode.cs</Link>
+    </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\ZipEntry.cs">
+      <Link>System\IO\ZipEntry.cs</Link>
+    </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\FileShare.cs">
+      <Link>System\IO\FileShare.cs</Link>
     </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\FileStream.cs">
       <Link>System\IO\FileStream.cs</Link>
     </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\ZipEntry.cs">
-      <Link>System\IO\ZipEntry.cs</Link>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\StreamExtensions.cs">
+      <Link>System\IO\StreamExtensions.cs</Link>
     </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\ZipFile.cs">
       <Link>System\IO\ZipFile.cs</Link>
@@ -156,6 +168,9 @@
     </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\ReflectionExtensions.cs">
       <Link>System\ReflectionExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Reflection\ICustomAttributeProvider.cs">
+      <Link>System\Reflection\ICustomAttributeProvider.cs</Link>
     </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Threading\Thread.cs">
       <Link>System\Threading\Thread.cs</Link>

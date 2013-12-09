@@ -194,6 +194,15 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 #endif
         }
 
+        public static Type GetInterface(this Type type, string name, bool ignoreCase)
+        {
+#if NETFX_CORE
+            return type.GetTypeInfo().ImplementedInterfaces.FirstOrDefault(t => t.Name.Equals(name, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal));
+#else
+            throw new NotImplementedException();
+#endif
+        }
+
         public static PropertyInfo GetProperty(this Type type, string name)
         {
             var props = type.GetProperties();
@@ -405,7 +414,7 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
         /**
          * Missing IsSubclassOf, this works well
          */
-        public static bool IsSubclassOf(this Type type, System.Type parent)
+        public static bool IsSubclassOf(this Type type, global::System.Type parent)
         {
 #if NETFX_CORE
             return parent.GetTypeInfo().IsAssignableFrom(type.GetTypeInfo());

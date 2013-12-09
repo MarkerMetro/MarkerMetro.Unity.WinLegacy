@@ -55,7 +55,7 @@ namespace MarkerMetro.Unity.WinLegacy
             }
         }
 
-        public override System.Collections.IDictionary Data
+        public override global::System.Collections.IDictionary Data
         {
             get
             {

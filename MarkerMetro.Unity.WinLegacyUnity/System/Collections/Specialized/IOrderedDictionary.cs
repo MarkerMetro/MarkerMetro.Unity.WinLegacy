@@ -13,7 +13,7 @@ namespace MarkerMetro.Unity.WinLegacy.Collections.Specialized
 		
 		Object this[int index] { get; set; }
 		
-		IDictionaryEnumerator GetEnumerator();
+		new IDictionaryEnumerator GetEnumerator();
 		void Insert(int index, Object key, Object value);
 		void RemoveAt(int index);
 	}

@@ -14,10 +14,10 @@ namespace MarkerMetro.Unity.WinLegacy.Collections
      */
     public class ArrayList : List<object>
     {
-        public System.Array ToArray(System.Type elementType)
+        public global::System.Array ToArray(global::System.Type elementType)
         {
-            var array = System.Array.CreateInstance(elementType, Count);
-            System.Array.Copy(ToArray(), array, Count);
+            var array = global::System.Array.CreateInstance(elementType, Count);
+            global::System.Array.Copy(ToArray(), array, Count);
 
             return array;
         }

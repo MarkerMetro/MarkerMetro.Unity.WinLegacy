@@ -9,9 +9,9 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 {
     public class BinaryWriter
     {
-        public Stream BaseStream { get; set; }
+        public global::System.IO.Stream BaseStream { get; set; }
 
-        public BinaryWriter(Stream ouput)
+        public BinaryWriter(global::System.IO.Stream ouput)
         {
             throw new NotImplementedException();
         }

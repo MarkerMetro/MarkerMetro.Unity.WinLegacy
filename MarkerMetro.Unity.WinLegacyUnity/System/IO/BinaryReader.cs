@@ -8,9 +8,9 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 {
     public class BinaryReader
     {
-        public Stream BaseStream { get; set; }
+        public global::System.IO.Stream BaseStream { get; set; }
 
-        public BinaryReader(Stream input)
+        public BinaryReader(global::System.IO.Stream input)
         {
             throw new NotImplementedException();
         }

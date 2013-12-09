@@ -16,15 +16,15 @@ namespace MarkerMetro.Unity.WinLegacy
         /**
          * Helping Metro convert from System.Format(string,Object) to Windows App Store's System.Format(string,Object[]).
          */
-        public static string Format(string format, System.Object oneParam)
+        public static string Format(string format, global::System.Object oneParam)
         {
-            return System.String.Format(format, new System.Object[] { oneParam });
+            return global::System.String.Format(format, new global::System.Object[] { oneParam });
         }
 
         /**
          * StringBuilder.AppendFormat(arg0,arg1,arg2) isn't implemented on WP8, so use this instead.
          */
-        public static StringBuilder AppendFormatEx(this StringBuilder sb, string format, System.Object arg0, System.Object arg1 = null, System.Object arg2 = null)
+        public static StringBuilder AppendFormatEx(this StringBuilder sb, string format, global::System.Object arg0, global::System.Object arg1 = null, global::System.Object arg2 = null)
         {
             return sb.AppendFormat(format, new object[] { arg0, arg1, arg2 });
         }

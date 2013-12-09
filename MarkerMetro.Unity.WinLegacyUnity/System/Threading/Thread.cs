@@ -19,8 +19,10 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
          * pretty sure that we'll need try/catching as tasks can throw exceptions when their state isn't as expected (e.g. waiting on a completed task?)
          * */
 
+#if NETFX_CORE
         private ParameterizedThreadStart _paramThreadStart;
         private ThreadStart _threadStart;
+#endif
 
 #if NETFX_CORE
 
@@ -131,5 +133,14 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
         
     }
 
+    public class EventWaitHandle : WaitHandle
+    {
+
+    }
+
+    public class AutoResetEvent : EventWaitHandle
+    {
+
+    }
 }
 
