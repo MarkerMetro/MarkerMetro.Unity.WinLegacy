@@ -28,6 +28,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         public ZipFile()
         {
             //Create(fileName);
+            throw new NotImplementedException();
         }
 
         // NOTE: async methods CANNOT be exposed in the .net 3.5 unity assembly. 
@@ -114,11 +115,12 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         // TODO : Make these methods use Task
         public void AddEntry(string key, byte[] bytes)
         {
+            throw new NotImplementedException();
         }
 
         public void AddEntry()
         {
-            
+            throw new NotImplementedException();
         }
 
     }

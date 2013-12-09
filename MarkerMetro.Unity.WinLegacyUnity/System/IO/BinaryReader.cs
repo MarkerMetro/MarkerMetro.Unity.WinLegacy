@@ -12,40 +12,42 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 
         public BinaryReader(Stream input)
         {
-            
+            throw new NotImplementedException();
         }
 
         public string ReadString()
         {
-            return "";
+            throw new NotImplementedException();
         }
 
         public int ReadInt32()
         {
-            return 0;
+            throw new NotImplementedException();
         }
 
         public byte ReadByte()
         {
-            return new byte();
+            throw new NotImplementedException();
         }
 
         public bool ReadBoolean()
         {
-            return false;
+            throw new NotImplementedException();
         }
 
         public float ReadSingle()
         {
-            return new float();
+            throw new NotImplementedException();
         }
 
         public uint ReadUInt32()
         {
-            return new uint();
+            throw new NotImplementedException();
         }
 
         public void Close()
-        { }
+        {
+            throw new NotImplementedException();
+        }
     }
 }
