@@ -100,6 +100,30 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Collections\Specialized\OrderedDictionary.cs">
       <Link>System\Collections\Specialized\OrderedDictionary.cs</Link>
     </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\Directory.cs">
+      <Link>System\IO\Directory.cs</Link>
+    </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\File.cs">
+      <Link>System\IO\File.cs</Link>
+    </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\FileAccess.cs">
+      <Link>System\IO\FileAccess.cs</Link>
+    </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\FileMode.cs">
+      <Link>System\IO\FileMode.cs</Link>
+    </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\FileShare.cs">
+      <Link>System\IO\FileShare.cs</Link>
+    </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\FileStream.cs">
+      <Link>System\IO\FileStream.cs</Link>
+    </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\SearchOption.cs">
+      <Link>System\IO\SearchOption.cs</Link>
+    </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\StreamExtensions.cs">
+      <Link>System\IO\StreamExtensions.cs</Link>
+    </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\ZipEntry.cs">
       <Link>System\IO\ZipEntry.cs</Link>
     </Compile>

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-#if NETFX_CORE
+#if NETFX_CORE || SILVERLIGHT
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.ApplicationModel;
@@ -33,7 +33,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 
         public static string[] GetFiles(string path, string searchPattern, SearchOption searchOption)
         {
-#if NETFX_CORE
+#if NETFX_CORE || SILVERLIGHT
             var t = GetFilesAsync(path.Replace('/', '\\'));
             t.Wait();
             return t.Result;
@@ -112,6 +112,9 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             }
         }
 
+#endif
+
+#if NETFX_CORE || SILVERLIGHT
         private static async Task<string[]> GetFilesAsync(string path)
         {
             try
@@ -130,7 +133,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             }
         }
 
-        private static async Task<string[]> GetFilesAsync(string path, string filter)
+        static async Task<string[]> GetFilesAsync(string path, string filter)
         {
             try
             {
