@@ -5,7 +5,6 @@ using System.Text;
 
 namespace MarkerMetro.Unity.WinLegacy.Reflection
 {
-#if NETFX_CORE
     // Summary:
     //     Provides custom attributes for reflection objects that support them.
     // [ComVisible(true)]
@@ -75,5 +74,4 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
             throw new NotSupportedException();
         }
     }
-#endif
 }
