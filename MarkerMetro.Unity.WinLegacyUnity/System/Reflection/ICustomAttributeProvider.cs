@@ -69,9 +69,48 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 
     public static class CustomAttributeProviderExtensions
     {
+#if NETFX_CORE
+        class FieldInfoWrapper : ICustomAttributeProvider
+        {
+            readonly System.Reflection.FieldInfo _fieldInfo;
+
+            public FieldInfoWrapper(System.Reflection.FieldInfo fieldInfo)
+            {
+                if (fieldInfo == null)
+                    throw new ArgumentNullException("fieldInfo", "fieldInfo is null.");
+
+                _fieldInfo = fieldInfo;
+            }
+
+            public object[] GetCustomAttributes(bool inherit)
+            {
+                return _fieldInfo.CustomAttributes.ToArray();
+            }
+
+            public object[] GetCustomAttributes(Type attributeType, bool inherit)
+            {
+                return _fieldInfo.CustomAttributes
+                    .Where(ca => ca.AttributeType == attributeType)
+                    .ToArray();
+            }
+
+            public bool IsDefined(Type attributeType, bool inherit)
+            {
+                return _fieldInfo.CustomAttributes
+                    .Any(ca => ca.AttributeType == attributeType);
+            }
+        }
+#endif
         public static ICustomAttributeProvider ToICustomAttributeProvider(this System.Reflection.FieldInfo fieldInfo)
         {
-            throw new NotSupportedException();
+            if (fieldInfo == null)
+                throw new ArgumentNullException("fieldInfo", "fieldInfo is null.");
+
+#if NETFX_CORE
+            return new FieldInfoWrapper(fieldInfo);
+#else
+            throw new PlatformNotSupportedException();
+#endif
         }
     }
 }

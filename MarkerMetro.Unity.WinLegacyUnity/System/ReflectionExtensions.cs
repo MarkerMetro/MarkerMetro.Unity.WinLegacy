@@ -280,14 +280,14 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 
         public static FieldInfo[] GetFields(this Type type)
         {
-            return GetFields(type, BindingFlags.Default);
+            return GetFields(type, BindingFlags.Default | BindingFlags.Public | BindingFlags.Instance);
         }
 
         public static FieldInfo[] GetFields(this Type t, BindingFlags flags)
         {
 #if NETFX_CORE
             if (!flags.HasFlag(BindingFlags.Instance) && !flags.HasFlag(BindingFlags.Static)) 
-                return new FieldInfo[0];
+                return null;
 
             var ti = t.GetTypeInfo();
             var origFields = ti.DeclaredFields;
