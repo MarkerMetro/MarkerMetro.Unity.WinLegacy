@@ -70,44 +70,62 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
     public static class CustomAttributeProviderExtensions
     {
 #if NETFX_CORE
-        class FieldInfoWrapper : ICustomAttributeProvider
+        class MemberInfoWrapper : ICustomAttributeProvider
         {
-            readonly System.Reflection.FieldInfo _fieldInfo;
+            readonly System.Reflection.MemberInfo _memberInfo;
 
-            public FieldInfoWrapper(System.Reflection.FieldInfo fieldInfo)
+            public MemberInfoWrapper(System.Reflection.MemberInfo memberInfo)
             {
-                if (fieldInfo == null)
-                    throw new ArgumentNullException("fieldInfo", "fieldInfo is null.");
+                if (memberInfo == null)
+                    throw new ArgumentNullException("memberInfo", "memberInfo is null.");
 
-                _fieldInfo = fieldInfo;
+                _memberInfo = memberInfo;
             }
 
             public object[] GetCustomAttributes(bool inherit)
             {
-                return _fieldInfo.CustomAttributes.ToArray();
+                return _memberInfo.CustomAttributes.ToArray();
             }
 
             public object[] GetCustomAttributes(Type attributeType, bool inherit)
             {
-                return _fieldInfo.CustomAttributes
+                return _memberInfo.CustomAttributes
                     .Where(ca => ca.AttributeType == attributeType)
                     .ToArray();
             }
 
             public bool IsDefined(Type attributeType, bool inherit)
             {
-                return _fieldInfo.CustomAttributes
+                return _memberInfo.CustomAttributes
                     .Any(ca => ca.AttributeType == attributeType);
             }
         }
 #endif
+        public static ICustomAttributeProvider ToICustomAttributeProvider(this object value)
+        {
+            if (value == null)
+                return null;
+
+            if(value is ICustomAttributeProvider)
+                return (ICustomAttributeProvider)value;
+
+#if NETFX_CORE
+            if(value is System.Reflection.MemberInfo)
+                return new MemberInfoWrapper((System.Reflection.MemberInfo)value);
+
+            return null;
+#else
+            throw new PlatformNotSupportedException();
+#endif
+        }
+
         public static ICustomAttributeProvider ToICustomAttributeProvider(this System.Reflection.FieldInfo fieldInfo)
         {
             if (fieldInfo == null)
-                throw new ArgumentNullException("fieldInfo", "fieldInfo is null.");
+                return null;
 
 #if NETFX_CORE
-            return new FieldInfoWrapper(fieldInfo);
+            return new MemberInfoWrapper(fieldInfo);
 #else
             throw new PlatformNotSupportedException();
 #endif

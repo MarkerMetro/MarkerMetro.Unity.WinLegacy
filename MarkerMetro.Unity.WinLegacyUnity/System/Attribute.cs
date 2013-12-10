@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using MarkerMetro.Unity.WinLegacy.Reflection;
 
 namespace MarkerMetro.Unity.WinLegacy
 {
@@ -14,8 +15,15 @@ namespace MarkerMetro.Unity.WinLegacy
     {
         public static new global::System.Attribute GetCustomAttribute(MemberInfo element, Type attributeType)
         {
+            if (element == null)
+                throw new ArgumentNullException("element", "element is null.");
+            if (attributeType == null)
+                throw new ArgumentNullException("attributeType", "attributeType is null.");
+
 #if NETFX_CORE
-            throw new NotImplementedException();
+            var provider = element.ToICustomAttributeProvider();
+
+            return provider.GetCustomAttributes(attributeType, true).OfType<global::System.Attribute>().FirstOrDefault();
 #else
             throw new PlatformNotSupportedException();
 #endif
@@ -50,8 +58,15 @@ namespace MarkerMetro.Unity.WinLegacy
         //     element is not a constructor, method, property, event, type, or field.
         public static new bool IsDefined(MemberInfo element, Type attributeType)
         {
+            if (element == null)
+                throw new ArgumentNullException("element", "element is null.");
+            if (attributeType == null)
+                throw new ArgumentNullException("attributeType", "attributeType is null.");
+
 #if NETFX_CORE
-            throw new NotImplementedException();
+            var provider = element.ToICustomAttributeProvider();
+
+            return provider.GetCustomAttributes(attributeType, true).OfType<global::System.Attribute>().Any();
 #else
             throw new NotImplementedException();
 #endif
