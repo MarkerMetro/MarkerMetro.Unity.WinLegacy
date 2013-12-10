@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.ApplicationModel;
 using System.IO;
+using Windows.Storage.Search;
 #endif
 
 namespace MarkerMetro.Unity.WinLegacy.IO
@@ -15,6 +16,22 @@ namespace MarkerMetro.Unity.WinLegacy.IO
     {
 
         public static string[] GetFiles(string path)
+        {
+#if NETFX_CORE
+            var t = GetFilesAsync(path.Replace('/', '\\'));
+            t.Wait();
+            return t.Result;
+#else
+            throw new NotImplementedException();
+#endif
+        }
+
+        public static string[] GetFiles(string path, string searchPattern)
+        {
+            return GetFiles(path, searchPattern, SearchOption.AllDirectories);
+        }
+
+        public static string[] GetFiles(string path, string searchPattern, SearchOption searchOption)
         {
 #if NETFX_CORE
             var t = GetFilesAsync(path.Replace('/', '\\'));
@@ -113,6 +130,21 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             }
         }
 
+        private static async Task<string[]> GetFilesAsync(string path, string filter)
+        {
+            try
+            {
+                var folder = await StorageFolder.GetFolderFromPathAsync(path);
+                var fileQuery = folder.CreateFileQueryWithOptions(new QueryOptions(CommonFileQuery.DefaultQuery, new [] { filter }));
+                var files = await fileQuery.GetFilesAsync();
+
+                return files.Select(f => f.Path).ToArray();
+            }
+            catch
+            {
+                return null;
+            }
+        }
 #endif
 
     }

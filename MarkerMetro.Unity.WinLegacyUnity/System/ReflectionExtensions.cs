@@ -286,7 +286,8 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
         public static FieldInfo[] GetFields(this Type t, BindingFlags flags)
         {
 #if NETFX_CORE
-            if (!flags.HasFlag(BindingFlags.Instance) && !flags.HasFlag(BindingFlags.Static)) return null;
+            if (!flags.HasFlag(BindingFlags.Instance) && !flags.HasFlag(BindingFlags.Static)) 
+                return new FieldInfo[0];
 
             var ti = t.GetTypeInfo();
             var origFields = ti.DeclaredFields;

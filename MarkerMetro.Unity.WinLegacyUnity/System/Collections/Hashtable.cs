@@ -105,7 +105,7 @@ namespace MarkerMetro.Unity.WinLegacy.Collections
         public Hashtable() : base() { }
         public Hashtable(int capacity) : base(capacity) { }
         public Hashtable(IDictionary<object, object> dictionary) : base(dictionary) { }
-
+        
         /**
          * Do we contain this key?
          */

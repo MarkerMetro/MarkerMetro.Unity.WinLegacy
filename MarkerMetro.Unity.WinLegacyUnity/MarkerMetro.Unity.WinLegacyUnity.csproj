@@ -54,6 +54,7 @@
     <Compile Include="System\IO\FileMode.cs" />
     <Compile Include="System\IO\FileShare.cs" />
     <Compile Include="System\IO\FileStream.cs" />
+    <Compile Include="System\IO\SearchOption.cs" />
     <Compile Include="System\IO\StreamExtensions.cs" />
     <Compile Include="System\IO\ZipEntry.cs" />
     <Compile Include="System\IO\ZipFile.cs" />
