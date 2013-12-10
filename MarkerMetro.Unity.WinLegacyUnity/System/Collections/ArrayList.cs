@@ -24,7 +24,31 @@ namespace MarkerMetro.Unity.WinLegacy.Collections
 
         public ArrayList() { }
         public ArrayList(IEnumerable enumerable) : base(enumerable.Cast<object>()) { }
+
+        /**
+         * ArrayList.Clone just creates a shallow copy of the ArrayList.
+         */
+        public virtual Object Clone()
+        {
+            return base.MemberwiseClone();
+        }
+
+        public virtual void Sort(IComparer comparer)
+        {
+            base.Sort(new ArrayListComparer(comparer));
+        }
+
+        private struct ArrayListComparer : IComparer<object>
+        {
+            private IComparer comparer;
+            public ArrayListComparer(IComparer comparer) 
+            {
+                this.comparer = comparer;
+            }
+            public int Compare(Object x, Object y)
+            {
+                return comparer.Compare(x, y);
+            }
+        }
     }
 }
-
-
