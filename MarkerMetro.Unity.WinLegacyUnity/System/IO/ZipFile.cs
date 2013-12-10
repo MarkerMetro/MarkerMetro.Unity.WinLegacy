@@ -6,7 +6,6 @@ using System.Runtime.CompilerServices;
 using System.Text;
 
 #if NETFX_CORE
-using System.IO;
 using System.IO.Compression;
 using Windows.Storage;
 using Windows.ApplicationModel;
