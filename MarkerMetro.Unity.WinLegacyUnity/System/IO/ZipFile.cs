@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -119,6 +119,26 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         }
 
         public void AddEntry()
+        {
+            throw new NotImplementedException();
+        }
+
+        public static ZipFile Read(MemoryStream stream)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Save(MemoryStream stream)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool ContainsEntry(string entry)
         {
             throw new NotImplementedException();
         }
