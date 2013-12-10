@@ -130,11 +130,11 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Diagnostics\StackFrame.cs">
       <Link>System\Diagnostics\StackFrame.cs</Link>
     </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\BinaryReader.cs">
-      <Link>System\IO\BinaryReader.cs</Link>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\BinaryReaderExtensions.cs">
+      <Link>System\IO\BinaryReaderExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\BinaryWriter.cs">
-      <Link>System\IO\BinaryWriter.cs</Link>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\BinaryWriterExtensions.cs">
+      <Link>System\IO\BinaryWriterExtensions.cs</Link>
     </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\Directory.cs">
       <Link>System\IO\Directory.cs</Link>
@@ -148,8 +148,14 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\FileMode.cs">
       <Link>System\IO\FileMode.cs</Link>
     </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\MemoryStreamExtensions.cs">
+      <Link>System\IO\MemoryStreamExtensions.cs</Link>
+    </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\SearchOption.cs">
       <Link>System\IO\SearchOption.cs</Link>
+    </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\StreamReaderExtensions.cs">
+      <Link>System\IO\StreamReaderExtensions.cs</Link>
     </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\ZipEntry.cs">
       <Link>System\IO\ZipEntry.cs</Link>
@@ -162,6 +168,9 @@
     </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\StreamExtensions.cs">
       <Link>System\IO\StreamExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\ZipException.cs">
+      <Link>System\IO\ZipException.cs</Link>
     </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\ZipFile.cs">
       <Link>System\IO\ZipFile.cs</Link>
