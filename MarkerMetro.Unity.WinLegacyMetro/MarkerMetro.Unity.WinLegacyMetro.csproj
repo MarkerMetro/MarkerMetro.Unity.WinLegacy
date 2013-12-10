@@ -118,11 +118,17 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Collections\Hashtable.cs">
       <Link>System\Collections\Hashtable.cs</Link>
     </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Collections\Queue.cs">
+      <Link>System\Collections\Queue.cs</Link>
+    </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Collections\Specialized\IOrderedDictionary.cs">
       <Link>System\Collections\Specialized\IOrderedDictionary.cs</Link>
     </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Collections\Specialized\OrderedDictionary.cs">
       <Link>System\Collections\Specialized\OrderedDictionary.cs</Link>
+    </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Diagnostics\StackFrame.cs">
+      <Link>System\Diagnostics\StackFrame.cs</Link>
     </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\BinaryReader.cs">
       <Link>System\IO\BinaryReader.cs</Link>
