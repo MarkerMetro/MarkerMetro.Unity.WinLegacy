@@ -20,14 +20,10 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
          * */
 
 #if NETFX_CORE
-        private ParameterizedThreadStart _paramThreadStart;
-        private ThreadStart _threadStart;
-#endif
-
-#if NETFX_CORE
-
-        private Task _task = null;
-        private CancellationTokenSource _taskCancellationTokenSource;
+        ParameterizedThreadStart _paramThreadStart;
+        ThreadStart _threadStart;
+        Task _task = null;
+        CancellationTokenSource _taskCancellationTokenSource;
 #endif
 
         /// <summary>
@@ -58,6 +54,8 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
             throw new NotSupportedException();
 #endif
         }
+
+        public string Name { get; set; }
 
         public void Abort()
         {
