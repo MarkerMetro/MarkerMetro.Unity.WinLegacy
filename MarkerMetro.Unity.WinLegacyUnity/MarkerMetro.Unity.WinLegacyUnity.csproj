@@ -68,6 +68,7 @@
     <Compile Include="System\IO\Directory.cs" />
     <Compile Include="System\IO\File.cs" />
     <Compile Include="System\IO\ZipOption.cs" />
+    <Compile Include="System\Math.cs" />
     <Compile Include="System\MissingExtensions.cs" />
     <Compile Include="System\Net\Sockets\TcpClient.cs" />
     <Compile Include="System\ReflectionExtensions.cs" />

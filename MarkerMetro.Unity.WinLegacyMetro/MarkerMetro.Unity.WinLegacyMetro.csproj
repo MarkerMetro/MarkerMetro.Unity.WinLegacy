@@ -184,6 +184,9 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\ZipOption.cs">
       <Link>System\IO\ZipOption.cs</Link>
     </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Math.cs">
+      <Link>System\Math.cs</Link>
+    </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\MissingExtensions.cs">
       <Link>System\MissingExtensions.cs</Link>
     </Compile>
