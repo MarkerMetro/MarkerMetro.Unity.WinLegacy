@@ -28,6 +28,18 @@ namespace MarkerMetro.Unity.WinLegacy
         {
             return sb.AppendFormat(format, new object[] { arg0, arg1, arg2 });
         }
+
+        /**
+         * List<T>.ForEach(Action<T>) isn't implemented on WSA, so use this instead.
+         */
+        public static void ForEach<T>(this List<T> list, Action<T> action)
+        {
+            if (action == null)
+                throw new ArgumentNullException();
+
+            foreach (T obj in list)
+                action(obj);
+        }
     }
 }
 
