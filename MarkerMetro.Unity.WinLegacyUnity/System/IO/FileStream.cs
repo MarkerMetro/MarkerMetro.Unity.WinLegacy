@@ -89,9 +89,9 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             get { throw new NotImplementedException(); }
         }
 
-        //public override void Close()
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public void Close()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
