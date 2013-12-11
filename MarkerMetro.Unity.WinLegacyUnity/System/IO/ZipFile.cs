@@ -15,7 +15,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
     {
         public Encoding AlternateEncoding { get; set; }
         public ZipOption AlternateEncodingUsage { get; set; }
-        private List<ZipEntry> _zipEntries;
+        //private List<ZipEntry> _zipEntries;
 
         #if NETFX_CORE
         StorageFile _storageFile;

@@ -89,9 +89,11 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             get { throw new NotImplementedException(); }
         }
 
+#if NETFX_CORE
         public void Close()
         {
             throw new NotImplementedException();
         }
+#endif
     }
 }
