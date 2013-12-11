@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Text;
 
 #if NETFX_CORE
@@ -17,6 +15,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
     {
         public Encoding AlternateEncoding { get; set; }
         public ZipOption AlternateEncodingUsage { get; set; }
+        private List<ZipEntry> _zipEntries;
 
         #if NETFX_CORE
         StorageFile _storageFile;
@@ -28,6 +27,20 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         {
             //Create(fileName);
             throw new NotImplementedException();
+        }
+
+        public ZipEntry this[string key]
+        {
+            get
+            {
+                throw new NotImplementedException();
+                //return _zipEntries[key];
+            }
+            set
+            {
+                throw new NotImplementedException();
+                //_zipEntries[key] = value;
+            }
         }
 
         // NOTE: async methods CANNOT be exposed in the .net 3.5 unity assembly. 
