@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Globalization;
 
 namespace MarkerMetro.Unity.WinLegacy.Reflection
 {
@@ -187,17 +188,26 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 
         public static Type GetInterface(this Type type, string name)
         {
-#if NETFX_CORE
-            return type.GetTypeInfo().ImplementedInterfaces.FirstOrDefault(t => t.Name == name);
-#else
-            throw new NotImplementedException();
-#endif
+            return GetInterface(type, name, false);
         }
 
         public static Type GetInterface(this Type type, string name, bool ignoreCase)
         {
 #if NETFX_CORE
-            return type.GetTypeInfo().ImplementedInterfaces.FirstOrDefault(t => t.Name.Equals(name, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal));
+            var interfaces = type.GetTypeInfo().ImplementedInterfaces;
+
+			foreach (var interfaceType in interfaces) 
+            {
+				/*We must compare against the generic type definition*/
+				var t = interfaceType.IsGenericType() ? interfaceType.GetGenericTypeDefinition () : interfaceType;
+
+				if (t.Name.Equals(name, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal))
+					return interfaceType;
+				if (t.FullName.Equals(name, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal))
+					return interfaceType;
+			}
+
+			return null;
 #else
             throw new NotImplementedException();
 #endif
