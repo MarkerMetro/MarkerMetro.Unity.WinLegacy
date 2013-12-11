@@ -61,6 +61,7 @@
     <Compile Include="System\IO\SearchOption.cs" />
     <Compile Include="System\IO\StreamExtensions.cs" />
     <Compile Include="System\IO\StreamReaderExtensions.cs" />
+    <Compile Include="System\IO\TextReaderExtensions.cs" />
     <Compile Include="System\IO\ZipEntry.cs" />
     <Compile Include="System\IO\ZipException.cs" />
     <Compile Include="System\IO\ZipFile.cs" />
