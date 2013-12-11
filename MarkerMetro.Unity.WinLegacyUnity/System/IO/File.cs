@@ -202,6 +202,15 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 #endif
         }
 
+        public static FileStream OpenRead(string path)
+        {
+#if NETFX_CORE
+            return new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+#else
+            throw new NotImplementedException();
+#endif
+        }
+
 #if NETFX_CORE
 
 
