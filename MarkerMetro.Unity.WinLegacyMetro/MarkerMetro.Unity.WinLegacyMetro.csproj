@@ -127,6 +127,9 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Collections\Specialized\OrderedDictionary.cs">
       <Link>System\Collections\Specialized\OrderedDictionary.cs</Link>
     </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Cryptography\SHA1.cs">
+      <Link>System\Cryptography\SHA1.cs</Link>
+    </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Diagnostics\StackFrame.cs">
       <Link>System\Diagnostics\StackFrame.cs</Link>
     </Compile>
