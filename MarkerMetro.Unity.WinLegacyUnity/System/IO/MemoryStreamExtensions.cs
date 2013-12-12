@@ -8,6 +8,9 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         public static void Close(this MemoryStream memoryStream)
         {
             // No need to implement, this should be enough to satisfy the signature
+#if NETFX_CORE
+            memoryStream.SetLength(0);
+#endif
         }
     }
 }
