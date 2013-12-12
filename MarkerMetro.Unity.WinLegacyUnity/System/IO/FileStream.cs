@@ -15,6 +15,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
     public class FileStream : global::System.IO.Stream
     {
         readonly System.IO.Stream stream;
+        bool closed = false;
 
         // @todo Support usage of this stream.
         internal FileStream(System.IO.Stream stream)
@@ -184,7 +185,11 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         #if NETFX_CORE
         public void Close()
         {
-            // NOOP
+            if (!closed)
+            {
+                stream.Dispose();
+                closed = true;
+            }
         }
         #else
         public override void Close()
@@ -196,7 +201,13 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         protected override void Dispose(bool disposing)
         {
             if (disposing)
-                stream.Dispose();
+            {
+                if (!closed)
+                {
+                    stream.Dispose();
+                    closed = true;
+                }
+            }
 
             base.Dispose(disposing);
         }

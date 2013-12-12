@@ -136,7 +136,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 
         public static Stream Open(string path, FileMode fileMode)
         {
-            throw new NotImplementedException();
+            return new FileStream(path, fileMode);
         }
 
         public static FileStream Create(string path)
