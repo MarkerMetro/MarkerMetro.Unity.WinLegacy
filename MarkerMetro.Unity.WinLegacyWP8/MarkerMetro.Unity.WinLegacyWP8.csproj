@@ -121,9 +121,6 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\FileShare.cs">
       <Link>System\IO\FileShare.cs</Link>
     </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\FileStream.cs">
-      <Link>System\IO\FileStream.cs</Link>
-    </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\SearchOption.cs">
       <Link>System\IO\SearchOption.cs</Link>
     </Compile>
