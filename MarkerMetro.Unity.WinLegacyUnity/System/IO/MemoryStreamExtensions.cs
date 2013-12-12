@@ -7,7 +7,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
     {
         public static void Close(this MemoryStream memoryStream)
         {
-            throw new NotImplementedException();
+            // No need to implement, this should be enough to satisfy the signature
         }
     }
 }
