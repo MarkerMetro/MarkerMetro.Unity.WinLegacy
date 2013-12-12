@@ -7,7 +7,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
     {
         public static void Close(this BinaryReader binaryReader)
         {
-            throw new NotImplementedException();
+            binaryReader.Close();
         }
     }
 }
