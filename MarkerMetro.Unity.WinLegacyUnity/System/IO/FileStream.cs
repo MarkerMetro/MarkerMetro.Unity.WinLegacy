@@ -9,6 +9,15 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 {
     public class FileStream : global::System.IO.Stream
     {
+
+        private System.IO.Stream stream;
+
+        // @todo Support usage of this stream.
+        internal FileStream(System.IO.Stream stream)
+        {
+            this.stream = stream;
+        }
+
         public FileStream(string filePath, FileMode mode)
             : this(filePath, mode, FileAccess.ReadWrite)
         {
@@ -89,11 +98,9 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             get { throw new NotImplementedException(); }
         }
 
-#if NETFX_CORE
         public void Close()
         {
             throw new NotImplementedException();
         }
-#endif
     }
 }

@@ -139,7 +139,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             throw new NotImplementedException();
         }
 
-        public static Stream Create(string path)
+        public static FileStream Create(string path)
         {
 #if NETFX_CORE
             path = FixPath(path);
@@ -147,7 +147,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             thread.Wait();
 
             if (thread.IsCompleted)
-                return thread.Result;
+                return new FileStream(thread.Result);
 
             throw thread.Exception;
 #else
