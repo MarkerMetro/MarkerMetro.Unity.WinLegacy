@@ -1,6 +1,8 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 
 #if NETFX_CORE
@@ -15,7 +17,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
     {
         public Encoding AlternateEncoding { get; set; }
         public ZipOption AlternateEncodingUsage { get; set; }
-        //private List<ZipEntry> _zipEntries;
+        private List<ZipEntry> _zipEntries;
 
         #if NETFX_CORE
         StorageFile _storageFile;
@@ -25,21 +27,17 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 
         public ZipFile()
         {
-            //Create(fileName);
-            throw new NotImplementedException();
         }
 
         public ZipEntry this[string key]
         {
             get
             {
-                throw new NotImplementedException();
-                //return _zipEntries[key];
+                return _zipEntries.Find(z => z.Key == key);
             }
             set
             {
                 throw new NotImplementedException();
-                //_zipEntries[key] = value;
             }
         }
 
@@ -77,11 +75,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 
             using (var writer = new StreamWriter(entry.Open()))
                 writer.Write(bytes);
-
-
         }
-
-        
 
         public async void Read()
         {
@@ -127,22 +121,12 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         // TODO : Make these methods use Task
         public void AddEntry(string key, byte[] bytes)
         {
-            throw new NotImplementedException();
+            _zipEntries.Add(new ZipEntry { Key = key, Bytes = bytes });
         }
 
-        public void AddEntry()
+        public void AddEntry(string key, MemoryStream stream)
         {
-            throw new NotImplementedException();
-        }
-
-        public static ZipFile Read(MemoryStream stream)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Save(MemoryStream stream)
-        {
-            throw new NotImplementedException();
+            _zipEntries.Add(new ZipEntry { Key = key, MemoryStream = stream });
         }
 
         public void Dispose()
@@ -150,9 +134,9 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             throw new NotImplementedException();
         }
 
-        public bool ContainsEntry(string entry)
+        public bool ContainsEntry(string key)
         {
-            throw new NotImplementedException();
+            return _zipEntries.FirstOrDefault(z => z.Key == key) != null;
         }
 
     }
