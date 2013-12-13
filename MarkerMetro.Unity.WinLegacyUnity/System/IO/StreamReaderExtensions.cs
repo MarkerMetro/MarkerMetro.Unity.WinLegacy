@@ -7,9 +7,6 @@ namespace MarkerMetro.Unity.WinLegacy.IO
     {
         public static void Close(this StreamReader streamReader)
         {
-            if (streamReader == null)
-                throw new ArgumentNullException("streamReader", "streamReader is null.");
-
             streamReader.Dispose();
         }
     }
