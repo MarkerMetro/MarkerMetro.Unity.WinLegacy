@@ -8,12 +8,18 @@ using MarkerMetro.Unity.WinLegacy.IO;
 namespace MarkerMetro.Unity.WinLegacy.Reflection.Tests
 {
     [TestClass]
-    public class FileStreamTests
+    public class StreamReaderExtensionsTests
     {
         [TestMethod]
-        public void StaticOpenRead_DNF()
+        public void Close_DNF()
         {
-            //FileStream.OpenRead();
+            using(var ms = new System.IO.MemoryStream())
+            {
+                using(var sr = new System.IO.StreamReader(ms))
+                {
+                    sr.Close();
+                }
+            }
         }
     }
 }
