@@ -7,7 +7,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
     {
         public static void Close(this StreamReader streamReader)
         {
-            throw new NotImplementedException();
+            streamReader.Dispose();
         }
     }
 }
