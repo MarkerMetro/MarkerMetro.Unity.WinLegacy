@@ -30,7 +30,7 @@ namespace MarkerMetro.Unity.WinLegacy.Collections
          */
         public virtual Object Clone()
         {
-            return base.MemberwiseClone();
+            return new ArrayList(this);
         }
 
         public virtual void Sort(IComparer comparer)
