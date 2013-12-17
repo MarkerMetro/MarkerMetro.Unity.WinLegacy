@@ -166,7 +166,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             throw new NotImplementedException();
         }
 
-        public ZipFile Read(MemoryStream stream)
+        public static ZipFile Read(MemoryStream stream)
         {
             //return ReadAsync(stream);
             throw new NotImplementedException();
