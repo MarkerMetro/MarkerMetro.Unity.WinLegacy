@@ -14,7 +14,7 @@
   </metadata>
   <files>
     <file src="MarkerMetro.Unity.WinLegacyUnity\bin\Release\MarkerMetro.Unity.WinLegacy.dll" target="lib\net35\"/>
-    <file src="MarkerMetro.Unity.WinLegacyUnity\bin\Release\MarkerMetro.Unity.WinLegacy.dll" target="lib\net35-Unity Subset v3.5\"/>
+    <file src="MarkerMetro.Unity.WinLegacyUnity\bin\Release\MarkerMetro.Unity.WinLegacy.dll" target="lib\"/>
     <file src="MarkerMetro.Unity.WinLegacyWP8\Bin\Release\MarkerMetro.Unity.WinLegacy.dll" target="lib\windowsphone8\"/>
     <file src="MarkerMetro.Unity.WinLegacyMetro\bin\Release\MarkerMetro.Unity.WinLegacy.dll" target="lib\netcore45\"/>
   </files>
