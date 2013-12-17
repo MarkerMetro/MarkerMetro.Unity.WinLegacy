@@ -17,6 +17,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
     {
         public Encoding AlternateEncoding { get; set; }
         public ZipOption AlternateEncodingUsage { get; set; }
+        public byte[] Bytes { get; set; }
         private List<ZipEntry> _zipEntries;
 
         #if NETFX_CORE
@@ -24,6 +25,9 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         ZipArchive _zipArchive = null;
         //MemoryStream _stream;
         #endif
+
+
+        // TODO : Create the zip file temp_name specific to the device
 
         public ZipFile()
         {
@@ -53,40 +57,43 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             _storageFile = await ApplicationData.Current.LocalFolder.GetFileAsync("output.zip");
         }
 
-        // Open the existing zip file and add an entry...
-        //public async void AddEntry(string key, byte[] bytes)
+        private async void AddEntryAsync(string key, byte[] bytes)
+        {
+            var zipFile = await ApplicationData.Current.LocalFolder.CreateFileAsync("output.zip", CreationCollisionOption.OpenIfExists);
+            using (var zipStream = await zipFile.OpenStreamForWriteAsync())
+            {
+                using (ZipArchive archive = new ZipArchive(zipStream, ZipArchiveMode.Update))
+                {
+                    ZipArchiveEntry readmeEntry = archive.CreateEntry(key);
+                    //Stream byteStream = new MemoryStream(bytes);
+                    using (StreamWriter writer = new StreamWriter(new MemoryStream(bytes)))
+                    {
+                        writer.Write(bytes);
+                        //_zipEntries.Add(new ZipEntry { Key = key, Bytes = bytes });
+                    }
+                }
+            }
+
+            var entry = _zipArchive.CreateEntry(key);
+
+            using (var writer = new StreamWriter(entry.Open()))
+                writer.Write(bytes);
+        }
+
+
+        /// <summary>
+        /// Create and return a ZipFile from the zipped bytes
+        /// </summary>
+        /// <param name="compressedStream"></param>
+        /// <returns></returns>
+        //private static async ZipFile ReadAsync(MemoryStream stream)
         //{
-        //    var zipFile = await ApplicationData.Current.LocalFolder.CreateFileAsync("output.zip", CreationCollisionOption.OpenIfExists);
-        //    using (var zipStream = await zipFile.OpenStreamForWriteAsync())
+        //    var zipArchiveFile = await ApplicationData.Current.LocalFolder.GetFileAsync("output.zip");
+        //    using (var zipStream = await zipArchiveFile.OpenReadAsync())
         //    {
-        //        using (ZipArchive archive = new ZipArchive(zipStream, ZipArchiveMode.Update))
+        //        using (var zipArchive = new ZipArchive(zipStream.AsStream()))
         //        {
-        //            ZipArchiveEntry readmeEntry = archive.CreateEntry(key);
-        //            //Stream byteStream = new MemoryStream(bytes);
-        //            using (StreamWriter writer = new StreamWriter(new MemoryStream(bytes)))
-        //            {
-        //                writer.Write(bytes);
-        //                //writer.WriteLine("Information about this package.");
-        //                //writer.WriteLine("========================");
-        //                //_zipEntries.Add(new ZipEntry { Key = key, Bytes = bytes });
-        //            }
-        //        }
-        //    }
-
-        //    var entry = _zipArchive.CreateEntry(key);
-
-        //    using (var writer = new StreamWriter(entry.Open()))
-        //        writer.Write(bytes);
-        //}
-
-        //public async void Read()
-        //{
-        //    var zipFile = await ApplicationData.Current.LocalFolder.GetFileAsync("output.zip");
-        //    using (var zipStream = await zipFile.OpenReadAsync())
-        //    {
-        //        using (var archive = new ZipArchive(zipStream.AsStream()))
-        //        {
-        //            foreach (var archiveEntry in archive.Entries)
+        //            foreach (var archiveEntry in zipArchive.Entries)
         //            {
         //                using (var outStream = archiveEntry.Open())
         //                {
@@ -100,8 +107,34 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         //            }
         //        }
         //    }
+
+        //    return zipArchiveFile;
         //}
 
+        /// <summary>
+        /// Pass compressed byte[] to the Zip library, read it and decompress then return the created ZipFile from this stream
+        /// </summary>
+        /// <param name="compressedStream"></param>
+        public async void ReadAsync(MemoryStream compressedStream)
+        {
+            var zipArchiveFile = await ApplicationData.Current.LocalFolder.GetFileAsync("output.zip");
+            var zipFile = new ZipFile();
+            
+
+            using (var zipStream = await zipArchiveFile.OpenStreamForReadAsync())
+            {
+                using (ZipArchive archive = new ZipArchive(zipStream, ZipArchiveMode.Read))
+                {                    
+                    //ZipArchiveEntry readmeEntry = archive.CreateEntry("Readme.txt");
+                    //using (StreamWriter writer = new StreamWriter(readmeEntry.Open()))
+                    //{
+                    //    writer.Write();
+                    //    writer.WriteLine("Information about this package.");
+                    //    writer.WriteLine("========================");
+                    //}
+                }
+            }
+        }
         //public async void Save(MemoryStream stream)
         //{
         //    var zipFile = await ApplicationData.Current.LocalFolder.CreateFileAsync("output.zip", CreationCollisionOption.ReplaceExisting);
@@ -120,10 +153,10 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         //}
 
 #endif
-        // TODO : Make these methods use Task
         public void AddEntry(string key, byte[] bytes)
         {
             //_zipEntries.Add(new ZipEntry { Key = key, Bytes = bytes });
+            //AddEntryAsync(key, bytes);
             throw new NotImplementedException();
         }
 
@@ -133,12 +166,11 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             throw new NotImplementedException();
         }
 
-        public static ZipFile Read(MemoryStream stream)
+        public ZipFile Read(MemoryStream stream)
         {
+            //return ReadAsync(stream);
             throw new NotImplementedException();
         }
-
-        
 
         public void Save(MemoryStream stream)
         {
