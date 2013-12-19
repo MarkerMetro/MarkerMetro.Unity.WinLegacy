@@ -10,6 +10,7 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
 
     public delegate void ParameterizedThreadStart(object target);
     public delegate void ThreadStart();
+    
 
     public class Thread
     {
@@ -33,6 +34,15 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
         {
             get { return true; }
             set { throw new NotImplementedException("currently always on background"); }
+        }
+
+        /// <summary>
+        /// Determine if the thread is Alive, not implemented
+        /// </summary>
+        public bool IsAlive
+        {
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
         public Thread(ThreadStart start)
