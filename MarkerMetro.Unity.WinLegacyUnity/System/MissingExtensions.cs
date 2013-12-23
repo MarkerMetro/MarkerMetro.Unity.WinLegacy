@@ -8,6 +8,8 @@ using System.Runtime.InteropServices;
 
 namespace MarkerMetro.Unity.WinLegacy
 {
+    public delegate TOutput Converter<in TInput, out TOutput>(TInput input);
+
     /**
      * Helpers for missing functions of classes, turned into extensions instead...
     */
@@ -40,6 +42,21 @@ namespace MarkerMetro.Unity.WinLegacy
             foreach (T obj in list)
                 action(obj);
         }
+
+        /**
+         * List<TOutput>.ConvertAll<TOutput>(Converter) is neither implement in WSA nor in WP8.
+         */
+        public static List<TOutput> ConvertAll<T, TOutput>(this List<T> list, Converter<T, TOutput> converter)
+        {
+            if (converter == null)
+                throw new ArgumentNullException("converter is null.");
+            
+            List<TOutput> result = new List<TOutput>(list.Count);
+            foreach (T t in list)
+                result.Add(converter(t));
+            return result;
+        }
+
     }
 }
 
