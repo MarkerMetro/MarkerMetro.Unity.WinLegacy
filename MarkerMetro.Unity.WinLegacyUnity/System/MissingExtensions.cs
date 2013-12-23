@@ -8,6 +8,9 @@ using System.Runtime.InteropServices;
 
 namespace MarkerMetro.Unity.WinLegacy
 {
+    /** 
+     * Converter is not supported in Win8 or WP8.1, but supported in WP8.
+     */
     public delegate TOutput Converter<in TInput, out TOutput>(TInput input);
 
     /**
