@@ -45,6 +45,7 @@
     <Compile Include="System\ApplicationException.cs" />
     <Compile Include="System\Attribute.cs" />
     <Compile Include="System\Collections\ArrayList.cs" />
+    <Compile Include="System\Collections\CollectionsExtensions.cs" />
     <Compile Include="System\Collections\Hashtable.cs" />
     <Compile Include="System\Collections\Queue.cs" />
     <Compile Include="System\Collections\Specialized\IOrderedDictionary.cs" />

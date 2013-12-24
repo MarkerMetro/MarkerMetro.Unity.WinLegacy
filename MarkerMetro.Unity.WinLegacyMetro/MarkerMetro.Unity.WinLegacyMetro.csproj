@@ -115,6 +115,9 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Collections\ArrayList.cs">
       <Link>System\Collections\ArrayList.cs</Link>
     </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Collections\CollectionsExtensions.cs">
+      <Link>System\Collections\CollectionsExtensions.cs</Link>
+    </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Collections\Hashtable.cs">
       <Link>System\Collections\Hashtable.cs</Link>
     </Compile>
