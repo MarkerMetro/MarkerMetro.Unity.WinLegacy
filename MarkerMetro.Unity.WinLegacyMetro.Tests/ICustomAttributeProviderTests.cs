@@ -6,9 +6,7 @@ using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 
 namespace MarkerMetro.Unity.WinLegacy.Reflection.Tests
 {
-
 #pragma warning disable 3021
-
     [TestClass]
     public class ICustomAttributeProviderTests
     {

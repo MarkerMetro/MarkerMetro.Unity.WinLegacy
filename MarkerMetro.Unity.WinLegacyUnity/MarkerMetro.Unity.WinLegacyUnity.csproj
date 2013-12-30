@@ -63,12 +63,8 @@
     <Compile Include="System\IO\StreamExtensions.cs" />
     <Compile Include="System\IO\StreamReaderExtensions.cs" />
     <Compile Include="System\IO\TextReaderExtensions.cs" />
-    <Compile Include="System\IO\ZipEntry.cs" />
-    <Compile Include="System\IO\ZipException.cs" />
-    <Compile Include="System\IO\ZipFile.cs" />
     <Compile Include="System\IO\Directory.cs" />
     <Compile Include="System\IO\File.cs" />
-    <Compile Include="System\IO\ZipOption.cs" />
     <Compile Include="System\Math.cs" />
     <Compile Include="System\MissingExtensions.cs" />
     <Compile Include="System\Net\Sockets\TcpClient.cs" />

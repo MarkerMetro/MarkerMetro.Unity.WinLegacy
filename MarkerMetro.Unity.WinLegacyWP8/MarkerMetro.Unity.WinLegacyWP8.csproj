@@ -133,15 +133,6 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\StreamExtensions.cs">
       <Link>System\IO\StreamExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\ZipEntry.cs">
-      <Link>System\IO\ZipEntry.cs</Link>
-    </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\ZipFile.cs">
-      <Link>System\IO\ZipFile.cs</Link>
-    </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\ZipOption.cs">
-      <Link>System\IO\ZipOption.cs</Link>
-    </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Math.cs">
       <Link>System\Math.cs</Link>
     </Compile>
