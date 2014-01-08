@@ -33,7 +33,14 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
         public bool IsBackground
         {
             get { return true; }
-            set { throw new NotImplementedException("currently always on background"); }
+            set 
+            {
+#if NETFX_CORE
+                // Not implemented
+#else
+                throw new NotSupportedException();
+#endif
+            }
         }
 
         /// <summary>
@@ -41,7 +48,14 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
         /// </summary>
         public bool IsAlive
         {
-            get { throw new NotImplementedException(); }
+            get 
+            {
+#if NETFX_CORE
+                return _task != null && !_task.IsCompleted;
+#else
+                throw new NotImplementedException(); 
+#endif
+            }
             set { throw new NotImplementedException(); }
         }
 
