@@ -222,8 +222,19 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 
         public static PropertyInfo[] GetProperties(this Type type)
         {
+            if (type == null)
+                throw new NullReferenceException();
+
 #if NETFX_CORE
-            return type.GetTypeInfo().DeclaredProperties != null ? type.GetTypeInfo().DeclaredProperties.ToArray() : null;
+            var list = new List<PropertyInfo>();
+            while (type != null)
+            {
+                list.AddRange(type.GetTypeInfo().DeclaredProperties);
+
+                type = type.GetBaseType();
+            }
+
+            return list.ToArray();
 #else
             throw new NotImplementedException();
 #endif

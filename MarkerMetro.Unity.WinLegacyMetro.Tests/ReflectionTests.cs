@@ -18,5 +18,23 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection.Tests
 
             Assert.IsNotNull(actual, "Must find generic IDictionary");
         }
+
+        abstract class BaseClass
+        {
+            public string BaseProperty { get; set; }
+        }
+
+        class DerivedClass : BaseClass
+        {
+            public string DerivedProperty { get; set; }
+        }
+
+        [TestMethod]
+        public void GetProperties_OnDerivedType_ShouldReturnUnionOfProperties()
+        {
+            var actual = typeof(DerivedClass).GetProperties();
+
+            Assert.AreEqual(2, actual.Length);
+        }
     }
 }
