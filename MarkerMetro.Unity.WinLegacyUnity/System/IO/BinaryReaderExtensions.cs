@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 
 namespace MarkerMetro.Unity.WinLegacy.IO
@@ -7,7 +8,8 @@ namespace MarkerMetro.Unity.WinLegacy.IO
     {
         public static void Close(this BinaryReader binaryReader)
         {
-            binaryReader.Close();
+            // Just igore it: binaryReader.Close();
+            Debug.WriteLine("Ignoring BinaryReader.Close()");
         }
     }
 }
