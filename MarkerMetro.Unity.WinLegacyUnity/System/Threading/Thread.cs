@@ -3,15 +3,14 @@ using System.Threading;
 
 #if NETFX_CORE
 using System.Threading.Tasks;
+using System.Diagnostics;
 #endif
 
 namespace MarkerMetro.Unity.WinLegacy.Threading
 {
-
     public delegate void ParameterizedThreadStart(object target);
     public delegate void ThreadStart();
     
-
     public class Thread
     {
 
@@ -36,9 +35,9 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
             set 
             {
 #if NETFX_CORE
-                // Not implemented
+                Debug.WriteLine("Thread.IsBackground ignored.");
 #else
-                throw new NotSupportedException();
+                throw new PlatformNotSupportedException();
 #endif
             }
         }
@@ -53,7 +52,7 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
 #if NETFX_CORE
                 return _task != null && !_task.IsCompleted;
 #else
-                throw new NotImplementedException(); 
+                throw new PlatformNotSupportedException();
 #endif
             }
             set { throw new NotImplementedException(); }
@@ -65,7 +64,7 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
             _taskCancellationTokenSource = new CancellationTokenSource();
             _threadStart = start;
 #else
-            throw new NotSupportedException();
+                throw new PlatformNotSupportedException();
 #endif
         }
 
@@ -75,7 +74,7 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
             _taskCancellationTokenSource = new CancellationTokenSource();
             _paramThreadStart = start;
 #else
-            throw new NotSupportedException();
+                throw new PlatformNotSupportedException();
 #endif
         }
 
@@ -89,7 +88,7 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
                 _taskCancellationTokenSource.Cancel();
             }
 #else
-            throw new NotSupportedException();
+                throw new PlatformNotSupportedException();
 #endif
         }
 
@@ -99,7 +98,7 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
             EnsureTask();
             return _task.Wait(ms, _taskCancellationTokenSource.Token);
 #else
-            throw new NotSupportedException();
+                throw new PlatformNotSupportedException();
 #endif
         }
 
@@ -109,7 +108,7 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
             EnsureTask();
             _task.Start(TaskScheduler.Default);
 #else
-            throw new NotSupportedException();
+                throw new PlatformNotSupportedException();
 #endif
         }
 
@@ -119,7 +118,7 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
             EnsureTask(param);
             _task.Start(TaskScheduler.Default);
 #else
-            throw new NotSupportedException();
+                throw new PlatformNotSupportedException();
 #endif
         }
 
