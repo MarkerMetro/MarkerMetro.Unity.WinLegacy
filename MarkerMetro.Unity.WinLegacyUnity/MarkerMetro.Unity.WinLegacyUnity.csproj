@@ -61,7 +61,9 @@
     <Compile Include="System\IO\MemoryStreamExtensions.cs" />
     <Compile Include="System\IO\SearchOption.cs" />
     <Compile Include="System\IO\StreamExtensions.cs" />
+    <Compile Include="System\IO\StreamReader.cs" />
     <Compile Include="System\IO\StreamReaderExtensions.cs" />
+    <Compile Include="System\IO\StreamWriter.cs" />
     <Compile Include="System\IO\TextReaderExtensions.cs" />
     <Compile Include="System\IO\Directory.cs" />
     <Compile Include="System\IO\File.cs" />

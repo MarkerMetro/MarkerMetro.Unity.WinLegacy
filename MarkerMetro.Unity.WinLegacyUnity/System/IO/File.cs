@@ -1,9 +1,7 @@
-﻿
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+
 #if NETFX_CORE
 using Windows.Storage;
 using System.Threading.Tasks;
@@ -14,9 +12,8 @@ using System.IO;
 
 namespace MarkerMetro.Unity.WinLegacy.IO
 {
-    public class File
+    public static class File
     {
-
         public static void Move(string source, string destination)
         {
 #if NETFX_CORE
@@ -155,7 +152,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 #endif
         }
 
-        public static System.IO.StreamWriter CreateText(string path)
+        public static StreamWriter CreateText(string path)
         {
 #if NETFX_CORE
             path = FixPath(path);
@@ -171,7 +168,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 #endif
         }
 
-        public static System.IO.StreamReader OpenText(string path)
+        public static StreamReader OpenText(string path)
         {
 #if NETFX_CORE
             path = FixPath(path);

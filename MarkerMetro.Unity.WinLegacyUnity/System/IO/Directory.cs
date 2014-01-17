@@ -1,20 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 #if NETFX_CORE || SILVERLIGHT
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.ApplicationModel;
 using System.IO;
 using Windows.Storage.Search;
+
 #endif
 
 namespace MarkerMetro.Unity.WinLegacy.IO
 {
-    public class Directory
+    public static class Directory
     {
-
         public static string[] GetFiles(string path)
         {
 #if NETFX_CORE
@@ -48,9 +47,13 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             var t = ExistsAsync(path.Replace('/', '\\'));
             t.Wait();
             if (t.IsCompleted)
+            {
                 return t.Result;
+            }
             else
+            {
                 return false;
+            }
 #else
             throw new NotImplementedException();
 #endif
@@ -62,9 +65,13 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             var t = CreateDirectoryAsync(path);
             t.Wait();
             if (t.IsCompleted)
+            {
                 return t.Result;
+            }
             else
+            {
                 return false;
+            }
 #else
             throw new NotImplementedException();
 #endif
@@ -86,7 +93,6 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         /// </summary>
         private static async Task<bool> CreateDirectoryAsync(string folderName)
         {
-
             try
             {
                 await ApplicationData.Current.LocalFolder.CreateFolderAsync(folderName, CreationCollisionOption.ReplaceExisting);
@@ -123,8 +129,10 @@ namespace MarkerMetro.Unity.WinLegacy.IO
                 var files = await folder.GetFilesAsync();
                 var result = new string[files.Count];
 
-                for (int i = 0; i < files.Count; i++)
+                for (var i = 0; i < files.Count; i++)
+                {
                     result[i] = Path.Combine(path, files[i].Name);
+                }
                 return result;
             }
             catch
@@ -133,7 +141,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             }
         }
 
-        static async Task<string[]> GetFilesAsync(string path, string filter)
+        private static async Task<string[]> GetFilesAsync(string path, string filter)
         {
             try
             {

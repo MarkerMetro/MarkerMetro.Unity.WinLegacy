@@ -160,8 +160,14 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\SearchOption.cs">
       <Link>System\IO\SearchOption.cs</Link>
     </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\StreamReader.cs">
+      <Link>System\IO\StreamReader.cs</Link>
+    </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\StreamReaderExtensions.cs">
       <Link>System\IO\StreamReaderExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\StreamWriter.cs">
+      <Link>System\IO\StreamWriter.cs</Link>
     </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\TextReaderExtensions.cs">
       <Link>System\IO\TextReaderExtensions.cs</Link>
