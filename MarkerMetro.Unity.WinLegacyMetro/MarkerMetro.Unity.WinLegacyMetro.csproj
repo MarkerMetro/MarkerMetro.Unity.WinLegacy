@@ -207,7 +207,6 @@
     <Compile Include="System\IO\EncryptedStreamWriter.cs" />
     <Compile Include="System\IO\EncryptionProvider.cs" />
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
