@@ -70,6 +70,9 @@
     <Compile Include="System\Math.cs" />
     <Compile Include="System\MissingExtensions.cs" />
     <Compile Include="System\Net\Sockets\TcpClient.cs" />
+    <Compile Include="System\Net\WebException.cs" />
+    <Compile Include="System\Net\WebHeaderCollection.cs" />
+    <Compile Include="System\Net\WebRequest.cs" />
     <Compile Include="System\ReflectionExtensions.cs" />
     <Compile Include="System\Reflection\ICustomAttributeProvider.cs" />
     <Compile Include="System\Threading\Thread.cs" />
