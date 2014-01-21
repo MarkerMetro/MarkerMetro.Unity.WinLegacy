@@ -190,15 +190,6 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Net\Sockets\TcpClient.cs">
       <Link>System\Net\Sockets\TcpClient.cs</Link>
     </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Net\WebException.cs">
-      <Link>System\Net\WebException.cs</Link>
-    </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Net\WebHeaderCollection.cs">
-      <Link>System\Net\WebHeaderCollection.cs</Link>
-    </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Net\WebRequest.cs">
-      <Link>System\Net\WebRequest.cs</Link>
-    </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\ReflectionExtensions.cs">
       <Link>System\ReflectionExtensions.cs</Link>
     </Compile>
@@ -213,9 +204,7 @@
     <Compile Include="System\IO\EncryptedStreamWriter.cs" />
     <Compile Include="System\IO\EncryptionProvider.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
