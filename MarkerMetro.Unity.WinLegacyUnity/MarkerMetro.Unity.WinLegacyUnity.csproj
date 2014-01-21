@@ -49,6 +49,7 @@
     <Compile Include="System\Collections\Hashtable.cs" />
     <Compile Include="System\Collections\Queue.cs" />
     <Compile Include="System\Collections\Specialized\IOrderedDictionary.cs" />
+    <Compile Include="System\Collections\Specialized\NameValueCollection.cs" />
     <Compile Include="System\Collections\Specialized\OrderedDictionary.cs" />
     <Compile Include="System\Cryptography\SHA1.cs" />
     <Compile Include="System\Diagnostics\StackFrame.cs" />
@@ -70,6 +71,8 @@
     <Compile Include="System\Math.cs" />
     <Compile Include="System\MissingExtensions.cs" />
     <Compile Include="System\Net\Sockets\TcpClient.cs" />
+    <Compile Include="System\Net\WebHeaderCollection.cs" />
+    <Compile Include="System\Net\WebRequest.cs" />
     <Compile Include="System\ReflectionExtensions.cs" />
     <Compile Include="System\Reflection\ICustomAttributeProvider.cs" />
     <Compile Include="System\Threading\Thread.cs" />

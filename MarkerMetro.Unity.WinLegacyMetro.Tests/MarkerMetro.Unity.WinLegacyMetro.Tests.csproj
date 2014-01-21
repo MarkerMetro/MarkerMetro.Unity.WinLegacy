@@ -113,6 +113,7 @@
     <SDKReference Include="TestPlatform, Version=11.0" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NameValueCollectionTests.cs" />
     <Compile Include="StreamReaderExtensionsTests.cs" />
     <Compile Include="ICustomAttributeProviderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
