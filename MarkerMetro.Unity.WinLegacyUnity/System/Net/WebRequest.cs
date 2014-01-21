@@ -48,7 +48,12 @@ namespace MarkerMetro.Unity.WinLegacy.Net
 #if NETFX_CORE || SILVERLIGHT
         int _timeout;   // TODO: Set default value
 #endif
+
+#if SILVERLIGHT
         public virtual int Timeout
+#else
+        public override int Timeout
+#endif
         {
             get
             {
