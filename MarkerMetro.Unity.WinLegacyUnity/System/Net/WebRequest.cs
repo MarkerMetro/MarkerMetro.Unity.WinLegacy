@@ -61,5 +61,15 @@ namespace MarkerMetro.Unity.WinLegacy.Net
                 _timeout = value;
             }
         }
+
+        public IAsyncResult BeginGetResponse(AsyncCallback callback, object state)
+        {
+            return _actual.BeginGetResponse(callback, state);
+        }
+
+        public System.Net.WebResponse EndGetResponse(IAsyncResult result)
+        {
+            return _actual.EndGetResponse(result);
+        }
     }
 }
