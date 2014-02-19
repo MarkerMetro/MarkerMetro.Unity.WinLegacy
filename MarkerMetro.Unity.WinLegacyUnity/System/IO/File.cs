@@ -66,11 +66,12 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 
             throw thread.Exception;
 #elif SILVERLIGHT
-            using(var stream = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Open))
+            using (var stream = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Open))
             {
-                var streamReader = new StreamReader(stream);
-
-                return streamReader.ReadToEnd();
+                using (var streamReader = new StreamReader(stream))
+                {
+                    return streamReader.ReadToEnd();
+                }
             }
 #else
             throw new NotImplementedException();
@@ -89,7 +90,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 
             throw thread.Exception;
 #elif SILVERLIGHT
-            using(var stream = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Open))
+            using (var stream = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Open))
             {
                 var data = new byte[stream.Length];
                 stream.Read(data, 0, (int)stream.Length);
@@ -107,7 +108,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             var thread = PathIO.WriteBytesAsync(path, data).AsTask();
             thread.Wait();
 #elif SILVERLIGHT
-            using(var stream = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Create))
+            using (var stream = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Create))
             {
                 stream.Write(data, 0, (int)data.Length);
             }
@@ -123,9 +124,13 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             var thread = PathIO.WriteTextAsync(path, data).AsTask();
             thread.Wait();
 #elif SILVERLIGHT
-            using(var stream = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Create))
+            using (var stream = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Create))
             {
-                new StreamWriter(stream).Write(data);
+                using (var sw = new StreamWriter(stream))
+                {
+                    sw.Write(data);
+                    sw.Flush();
+                }
             }
 #else
             throw new NotImplementedException();
