@@ -22,6 +22,8 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 
             var thread = MoveAsync(source, destination);
             thread.Wait();
+#elif SILVERLIGHT
+            System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().MoveFile(source, destination);
 #else
             throw new NotImplementedException();
 #endif
@@ -45,6 +47,8 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             {
                 return false;
             }
+#elif SILVERLIGHT
+            return System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().FileExists(path);
 #else
             throw new NotImplementedException();
 #endif
@@ -61,6 +65,13 @@ namespace MarkerMetro.Unity.WinLegacy.IO
                 return thread.Result;
 
             throw thread.Exception;
+#elif SILVERLIGHT
+            using(var stream = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Open))
+            {
+                var streamReader = new StreamReader(stream);
+
+                return streamReader.ReadToEnd();
+            }
 #else
             throw new NotImplementedException();
 #endif
@@ -77,6 +88,13 @@ namespace MarkerMetro.Unity.WinLegacy.IO
                 return thread.Result;
 
             throw thread.Exception;
+#elif SILVERLIGHT
+            using(var stream = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Open))
+            {
+                var data = new byte[stream.Length];
+                stream.Read(data, 0, (int)stream.Length);
+                return data;
+            }
 #else
             throw new NotImplementedException();
 #endif
@@ -88,6 +106,11 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             path = FixPath(path);
             var thread = PathIO.WriteBytesAsync(path, data).AsTask();
             thread.Wait();
+#elif SILVERLIGHT
+            using(var stream = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Create))
+            {
+                stream.Write(data, 0, (int)data.Length);
+            }
 #else
             throw new NotImplementedException();
 #endif
@@ -99,6 +122,11 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             path = FixPath(path);
             var thread = PathIO.WriteTextAsync(path, data).AsTask();
             thread.Wait();
+#elif SILVERLIGHT
+            using(var stream = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Create))
+            {
+                new StreamWriter(stream).Write(data);
+            }
 #else
             throw new NotImplementedException();
 #endif
@@ -110,6 +138,8 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             path = FixPath(path);
             var thread = DeleteAsync(path);
             thread.Wait();
+#elif SILVERLIGHT
+            System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().DeleteFile(path);
 #else
             throw new NotImplementedException();
 #endif
@@ -126,6 +156,8 @@ namespace MarkerMetro.Unity.WinLegacy.IO
                 return thread.Result;
 
             throw thread.Exception;
+#elif SILVERLIGHT
+            return System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Open);
 #else
             throw new NotImplementedException();
 #endif
@@ -147,6 +179,8 @@ namespace MarkerMetro.Unity.WinLegacy.IO
                 return new FileStream(thread.Result);
 
             throw thread.Exception;
+#elif SILVERLIGHT
+            return new FileStream(System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().CreateFile(path));
 #else
             throw new NotImplementedException();
 #endif
@@ -163,6 +197,8 @@ namespace MarkerMetro.Unity.WinLegacy.IO
                 return thread.Result;
 
             throw thread.Exception;
+#elif SILVERLIGHT
+            return new StreamWriter(System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().CreateFile(path));
 #else
             throw new NotImplementedException();
 #endif
@@ -179,6 +215,8 @@ namespace MarkerMetro.Unity.WinLegacy.IO
                 return thread.Result;
 
             throw thread.Exception;
+#elif SILVERLIGHT
+            return new StreamReader(System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Open));
 #else
             throw new NotImplementedException();
 #endif
@@ -203,6 +241,8 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         {
 #if NETFX_CORE
             return new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
+#elif SILVERLIGHT
+            return new FileStream(System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Open));
 #else
             throw new NotImplementedException();
 #endif
@@ -212,6 +252,8 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         {
 #if NETFX_CORE
             return new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
+#elif SILVERLIGHT
+            return new FileStream(System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Open, System.IO.FileAccess.ReadWrite));
 #else
             throw new NotImplementedException();
 #endif
