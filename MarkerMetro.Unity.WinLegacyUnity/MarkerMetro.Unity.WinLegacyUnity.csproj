@@ -76,6 +76,7 @@
     <Compile Include="System\Net\WebRequest.cs" />
     <Compile Include="System\ReflectionExtensions.cs" />
     <Compile Include="System\Reflection\ICustomAttributeProvider.cs" />
+    <Compile Include="System\Reflection\TargetException.cs" />
     <Compile Include="System\Threading\Thread.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="System\Timers\Timer.cs" />

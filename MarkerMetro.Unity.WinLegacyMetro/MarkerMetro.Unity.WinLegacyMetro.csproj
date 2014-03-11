@@ -208,6 +208,9 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Reflection\ICustomAttributeProvider.cs">
       <Link>System\Reflection\ICustomAttributeProvider.cs</Link>
     </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Reflection\TargetException.cs">
+      <Link>TargetException.cs</Link>
+    </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Threading\Thread.cs">
       <Link>System\Threading\Thread.cs</Link>
     </Compile>
