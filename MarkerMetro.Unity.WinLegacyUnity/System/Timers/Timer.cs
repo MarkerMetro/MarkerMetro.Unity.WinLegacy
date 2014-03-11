@@ -5,7 +5,10 @@ namespace MarkerMetro.Unity.WinLegacy.Timers
     public delegate void ElapsedEventHandler(Object sender,	ElapsedEventArgs e);
     public class Timer
     {
+#pragma warning disable // <-- delete this after implementing.
         public event ElapsedEventHandler Elapsed;
+#pragma warning enable
+
         public Timer(double interval)
         {
             throw new System.NotImplementedException();
