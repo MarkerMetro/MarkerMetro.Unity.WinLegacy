@@ -78,6 +78,7 @@
     <Compile Include="System\Reflection\ICustomAttributeProvider.cs" />
     <Compile Include="System\Threading\Thread.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System\Timers\Timer.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
