@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace MarkerMetro.Unity.WinLegacy.IO.Timers
+namespace MarkerMetro.Unity.WinLegacy.Timers
 {
     public delegate void ElapsedEventHandler(Object sender,	ElapsedEventArgs e);
     public class Timer

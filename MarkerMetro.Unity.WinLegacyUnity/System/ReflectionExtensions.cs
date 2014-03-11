@@ -85,6 +85,17 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 #endif
         }
 
+        public static object[] GetCustomAttributes(this Type type, bool inherit)
+        {
+#if NETFX_CORE
+            var customAttributes = type.GetTypeInfo().GetCustomAttributes(inherit);
+            if (customAttributes == null) return null;
+            return customAttributes.ToArray();
+#else
+            throw new NotImplementedException();
+#endif
+        }
+
         public static object[] GetCustomAttributes(this Type type, Type attrType)
         {
 #if NETFX_CORE
