@@ -24,6 +24,6 @@ namespace MarkerMetro.Unity.WinLegacy.IO.Timers
 
     public class ElapsedEventArgs : EventArgs
     {
-        public DateTime SignalTime { get; }
+        public DateTime SignalTime { get; private set; }
     }
 }
