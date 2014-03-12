@@ -16,6 +16,9 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             throw new NotSupportedException();
         }
 
+        public StreamReader(string path) : this(new FileStream(path, FileMode.Open))
+        { }
+
         public StreamReader(System.IO.Stream stream) : this(stream, true) 
         { }
         
