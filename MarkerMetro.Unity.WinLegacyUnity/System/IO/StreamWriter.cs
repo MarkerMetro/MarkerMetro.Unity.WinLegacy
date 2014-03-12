@@ -37,6 +37,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             : this(stream, Encoding.UTF8)
         {
         }
+
         //
         // Summary:
         //     Initializes a new instance of the System.IO.StreamWriter class for the specified
@@ -59,6 +60,52 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             : this(stream, encoding, DefaultBufferSize)
         {
         }
+
+        //
+        // Summary:
+        //     Initializes a new instance of the StreamWriter class for the specified file by using the default
+        //     encoding and buffer size. If the file exists, it can be either overwritten or appended to.
+        //     If the file does not exist, this constructor creates a new file.
+        //
+        // Parameters:
+        //   path:
+        //     The complete file path to write to. 
+        //
+        //   append:
+        //     true to append data to the file; false to overwrite the file. If the specified file does not
+        //     exist, this parameter has no effect, and the constructor creates a new file. 
+        //
+        // Exceptions:
+        //   System.ArgumentNullException:
+        //     path is null.
+        //
+        //   System.UnauthorizedAccessException:
+        //     Access is denied.
+        //
+        //   System.ArgumentException:
+        //     path is empty.
+        //     -or-
+        //     path contains the name of a system device (com1, com2, and so on).
+        //
+        //   System.IO.DirectoryNotFoundException:
+        //     The specified path is invalid (for example, it is on an unmapped drive).
+        //
+        //   System.IO.IOException:
+        //     path includes an incorrect or invalid syntax for file name, directory name, or volume label syntax. 
+        //
+        //   System.IO.PathTooLongException:
+        //     The specified path, file name, or both exceed the system-defined maximum length. For example, on
+        //     Windows-based platforms, paths must not exceed 248 characters, and file names must not
+        //     exceed 260 characters. 
+        //
+        //   System.Security.SecurityException:
+        //     The caller does not have the required permission. 
+        public StreamWriter(string path, bool append) 
+        {
+            var fileWriter = new FileStream(path, append? FileMode.Append : FileMode.OpenOrCreate);
+            _actual = new System.IO.StreamWriter(fileWriter);
+        }
+
         //
         // Summary:
         //     Initializes a new instance of the System.IO.StreamWriter class for the specified
