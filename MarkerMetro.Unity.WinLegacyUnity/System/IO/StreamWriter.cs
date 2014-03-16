@@ -314,6 +314,13 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             _actual.Write(buffer, index, count);
         }
 
+#pragma warning disable
+        public void Close()
+        {
+            _actual.Dispose();
+        }
+#pragma warning restore
+
         internal static int DefaultBufferSize { get { return 0x400; } }
     }
 }
