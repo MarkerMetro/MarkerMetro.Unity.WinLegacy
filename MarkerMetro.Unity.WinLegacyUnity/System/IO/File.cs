@@ -137,6 +137,15 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 #endif
         }
 
+        public static void Copy(string sourceFileName, string destFileName, bool overwrite)
+        {
+#if NETFX_CORE
+            CopyAsync(sourceFileName, destFileName, overwrite).Wait();
+#else
+            throw new NotImplementedException();
+#endif
+        }
+
         public static void Delete(string path)
         {
 #if NETFX_CORE
