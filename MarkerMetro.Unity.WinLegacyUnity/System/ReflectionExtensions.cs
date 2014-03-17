@@ -251,7 +251,7 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 #endif
         }
 
-        public static MethodInfo[] GetMethods(this Type t, BindingFlags flags)
+        public static MethodInfo[] GetMethods(this Type t, BindingFlags flags = BindingFlags.Public | BindingFlags.Instance)
         {
 #if NETFX_CORE
             if (!flags.HasFlag(BindingFlags.Instance) && !flags.HasFlag(BindingFlags.Static)) return null;
