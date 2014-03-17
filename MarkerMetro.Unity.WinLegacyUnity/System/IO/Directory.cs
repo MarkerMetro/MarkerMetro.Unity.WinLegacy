@@ -76,7 +76,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 #endif
         }
 
-        public static void Delete(string path)
+        public static void Delete(string path, bool recursive = false)
         {
 #if NETFX_CORE
             path = path.Replace('/', '\\');
@@ -84,9 +84,12 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             folderTask.Wait();
             var folder = folderTask.Result;
 
-            var filesTask = folder.GetFilesAsync().AsTask<IReadOnlyList<StorageFile>>();
-            if (filesTask.Result.Count > 0)
-                throw new IOException("The directory specified by path is not empty.");
+            if (!recursive)
+            {
+                var filesTask = folder.GetFilesAsync().AsTask<IReadOnlyList<StorageFile>>();
+                if (filesTask.Result.Count > 0)
+                    throw new IOException("The directory specified by path is not empty.");
+            }
 
             folder.DeleteAsync().AsTask().Wait();            
 #else
