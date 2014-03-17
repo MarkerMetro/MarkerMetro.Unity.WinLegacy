@@ -7,7 +7,6 @@ using Windows.Storage;
 using Windows.ApplicationModel;
 using System.IO;
 using Windows.Storage.Search;
-
 #endif
 
 namespace MarkerMetro.Unity.WinLegacy.IO
@@ -72,6 +71,24 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             {
                 return false;
             }
+#else
+            throw new NotImplementedException();
+#endif
+        }
+
+        public static void Delete(string path)
+        {
+#if NETFX_CORE
+            path = path.Replace('/', '\\');
+            var folderTask = StorageFolder.GetFolderFromPathAsync(path).AsTask<StorageFolder>();
+            folderTask.Wait();
+            var folder = folderTask.Result;
+
+            var filesTask = folder.GetFilesAsync().AsTask<IReadOnlyList<StorageFile>>();
+            if (filesTask.Result.Count > 0)
+                throw new IOException("The directory specified by path is not empty.");
+
+            folder.DeleteAsync().AsTask().Wait();            
 #else
             throw new NotImplementedException();
 #endif
