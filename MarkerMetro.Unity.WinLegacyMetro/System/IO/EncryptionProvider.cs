@@ -5,16 +5,34 @@ using Windows.Storage.Streams;
 
 namespace MarkerMetro.Unity.WinLegacy.IO
 {
-    internal static class EncryptionProvider
+    public static class EncryptionProvider
     {
-
         public static IBuffer GetMD5Hash(string key)
+        {
+            return GetHash(HashAlgorithmNames.Md5, key);
+        }
+        public static IBuffer GetSHA1Hash(string key)
+        {
+            return GetHash(HashAlgorithmNames.Md5, key);
+        }
+
+        public static string GetMD5HexString(string input)
+        {
+            return CryptographicBuffer.EncodeToHexString(GetMD5Hash(input));
+        }
+
+        public static string GetSHA1HexString(string input)
+        {
+            return CryptographicBuffer.EncodeToHexString(GetSHA1Hash(input));
+        }
+
+        private static IBuffer GetHash(string algorithm, string key)
         {
             // Convert the message string to binary data.
             IBuffer buffUtf8Msg = CryptographicBuffer.ConvertStringToBinary(key, BinaryStringEncoding.Utf8);
 
             // Create a HashAlgorithmProvider object.
-            HashAlgorithmProvider objAlgProv = HashAlgorithmProvider.OpenAlgorithm(HashAlgorithmNames.Md5);
+            HashAlgorithmProvider objAlgProv = HashAlgorithmProvider.OpenAlgorithm(algorithm);
 
             // Hash the message.
             IBuffer buffHash = objAlgProv.HashData(buffUtf8Msg);
