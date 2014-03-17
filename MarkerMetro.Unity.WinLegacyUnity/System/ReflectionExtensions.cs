@@ -379,12 +379,13 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
         {
             return GetMethod(t, name, flags, null);
         }
-#if NETFX_CORE
         public static Type GetBaseType(this Type type)
         {
+#if NETFX_CORE
             return type.GetTypeInfo().BaseType;
-        }
 #endif
+            throw new NotImplementedException();
+        }
 
         public static MethodInfo GetMethod(Type t, string name, BindingFlags flags, Type[] parameters)
         {
