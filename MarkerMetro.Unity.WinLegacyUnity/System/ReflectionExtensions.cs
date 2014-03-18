@@ -251,6 +251,11 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 #endif
         }
 
+        public static PropertyInfo[] GetProperties(this Type type, BindingFlags flags)
+        {
+            throw new NotImplementedException();
+        }
+
         public static MethodInfo[] GetMethods(this Type t, BindingFlags flags = BindingFlags.Public | BindingFlags.Instance)
         {
 #if NETFX_CORE
