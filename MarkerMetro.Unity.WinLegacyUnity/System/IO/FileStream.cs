@@ -41,6 +41,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         public FileStream(string filePath, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize)
         {
 #if NETFX_CORE
+            filePath = filePath.FixPath();
             var task = OpenFileStreamAsync(filePath, mode, access, share, bufferSize);
 
             task.Wait();
@@ -102,11 +103,6 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             return stream;
         }
 #endif
-
-        static string FixPath(string path)
-        {
-            return path.Replace('/', '\\');
-        }
 
         public override void SetLength(long value)
         {

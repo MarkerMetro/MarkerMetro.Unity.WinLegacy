@@ -17,8 +17,8 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         public static void Move(string source, string destination)
         {
 #if NETFX_CORE
-            source = FixPath(source);
-            destination = FixPath(destination);
+            source = source.FixPath();
+            destination = destination.FixPath();
 
             var thread = MoveAsync(source, destination);
             thread.Wait();
@@ -32,7 +32,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         public static bool Exists(string path)
         {
 #if NETFX_CORE
-            path = FixPath(path);
+            path = path.FixPath();
             var thread = ExistsAsync(path);
             try
             {
@@ -57,7 +57,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         public static string ReadAllText(string path)
         {
 #if NETFX_CORE
-            path = FixPath(path);
+            path = path.FixPath();
             var thread = PathIO.ReadTextAsync(path).AsTask();
             thread.Wait();
 
@@ -81,7 +81,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         public static byte[] ReadAllBytes(string path)
         {
 #if NETFX_CORE
-            path = FixPath(path);
+            path = path.FixPath();
             var thread = ReadAllBytesAsync(path);
             thread.Wait();
 
@@ -104,7 +104,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         public static void WriteAllBytes(string path, byte[] data)
         {
 #if NETFX_CORE
-            path = FixPath(path);
+            path = path.FixPath();
             var thread = PathIO.WriteBytesAsync(path, data).AsTask();
             thread.Wait();
 #elif SILVERLIGHT
@@ -120,7 +120,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         public static void WriteAllText(string path, string data)
         {
 #if NETFX_CORE
-            path = FixPath(path);
+            path = path.FixPath();
             var thread = PathIO.WriteTextAsync(path, data).AsTask();
             thread.Wait();
 #elif SILVERLIGHT
@@ -140,6 +140,8 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         public static void Copy(string sourceFileName, string destFileName, bool overwrite)
         {
 #if NETFX_CORE
+            sourceFileName = sourceFileName.FixPath();
+            destFileName = destFileName.FixPath();
             CopyAsync(sourceFileName, destFileName, overwrite).Wait();
 #else
             throw new NotImplementedException();
@@ -149,7 +151,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         public static void Delete(string path)
         {
 #if NETFX_CORE
-            path = FixPath(path);
+            path = path.FixPath();
             var thread = DeleteAsync(path);
             thread.Wait();
 #elif SILVERLIGHT
@@ -162,7 +164,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         public static System.IO.Stream Open(string path)
         {
 #if NETFX_CORE
-            path = FixPath(path);
+            path = path.FixPath();
             var thread = OpenAsync(path);
             thread.Wait();
 
@@ -185,7 +187,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         public static FileStream Create(string path)
         {
 #if NETFX_CORE
-            path = FixPath(path);
+            path = path.FixPath();
             var thread = CreateAsync(path);
             thread.Wait();
 
@@ -203,7 +205,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         public static StreamWriter CreateText(string path)
         {
 #if NETFX_CORE
-            path = FixPath(path);
+            path = path.FixPath();
             var thread = CreateTextAsync(path);
             thread.Wait();
 
@@ -221,7 +223,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         public static StreamReader OpenText(string path)
         {
 #if NETFX_CORE
-            path = FixPath(path);
+            path = path.FixPath();
             var thread = OpenTextAsync(path);
             thread.Wait();
 
@@ -240,7 +242,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         public static string StripLocalFolder(string path)
         {
 #if NETFX_CORE
-            path = path.Replace('/', '\\');
+            path = path.FixPath();
             var localPath = ApplicationData.Current.LocalFolder.Path.ToLower();
 
             if (path.ToLower().StartsWith(localPath))
@@ -278,7 +280,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 
         private static EncryptedStreamReader OpenEncryptedText(string path)
         {
-            path = FixPath(path);
+            path = path.FixPath();
             if (Exists(path))
             {
                 var thread = OpenEncryptedTextAsync(path);
@@ -298,7 +300,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         private static EncryptedStreamWriter CreateEncryptedText(string path)
         {
 
-            path = FixPath(path);
+            path = path.FixPath();
             var thread = CreateEncryptedTextAsync(path);
             thread.Wait();
 
@@ -338,11 +340,6 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 
             var stream = await file.OpenStreamForReadAsync();
             return new EncryptedStreamReader(stream);
-        }
-
-        private static string FixPath(string path)
-        {
-            return path.Replace('/', '\\');
         }
 
         /* Copy ********************************************************************/
@@ -419,9 +416,11 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             var str = await CreateAsync(path);
             return new EncryptedStreamWriter(str);
         }
-
 #endif
-
+        internal static string FixPath(this string path)
+        {
+            return path.Replace('/', '\\');
+        }
     }
 }
 
