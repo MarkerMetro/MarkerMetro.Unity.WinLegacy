@@ -16,7 +16,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         public static string[] GetFiles(string path)
         {
 #if NETFX_CORE
-            var t = GetFilesAsync(path.Replace('/', '\\'));
+            var t = GetFilesAsync(path.FixPath());
             t.Wait();
             return t.Result;
 #else
@@ -32,7 +32,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         public static string[] GetFiles(string path, string searchPattern, SearchOption searchOption)
         {
 #if NETFX_CORE || SILVERLIGHT
-            var t = GetFilesAsync(path.Replace('/', '\\'));
+            var t = GetFilesAsync(path.FixPath());
             t.Wait();
             return t.Result;
 #else
@@ -43,7 +43,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         public static bool Exists(string path)
         {
 #if NETFX_CORE
-            var t = ExistsAsync(path.Replace('/', '\\'));
+            var t = ExistsAsync(path.FixPath());
             t.Wait();
             if (t.IsCompleted)
             {
@@ -58,18 +58,44 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 #endif
         }
 
-        public static bool CreateDirectory(string path)
+        // Any and all directories specified in path are created, unless they already exist or unless 
+        // some part of path is invalid. If the directory already exists, this method does not create a 
+        // new directory.
+        // The path parameter specifies a directory path, not a file path, and it must in 
+        // the ApplicationData domain.
+        // Trailing spaces are removed from the end of the path parameter before creating the directory.
+        public static void CreateDirectory(string path)
         {
 #if NETFX_CORE
-            var t = CreateDirectoryAsync(path);
-            t.Wait();
-            if (t.IsCompleted)
+             path = path.FixPath().TrimEnd('\\');
+            StorageFolder folder = null;
+
+            foreach(var f in new StorageFolder[] {
+                ApplicationData.Current.LocalFolder, 
+                ApplicationData.Current.RoamingFolder, 
+                ApplicationData.Current.TemporaryFolder } )
             {
-                return t.Result;
+                string p = ParsePath(path, f);
+                if (f != null)
+                {
+                    path = p;
+                    folder = f;
+                    break;
+                }
             }
-            else
+
+            if(path == null)
+                throw new NotSupportedException("This method implementation doesn't support " +
+                "parameters outside paths accessible by ApplicationData.");
+
+            string[] folderNames = path.Split('\\');
+            for (int i = 0; i < folderNames.Length; i++)
             {
-                return false;
+                var task = folder.CreateFolderAsync(folderNames[i], CreationCollisionOption.OpenIfExists).AsTask();
+                task.Wait();
+                if (task.Exception != null)
+                    throw task.Exception;
+                folder = task.Result;
             }
 #else
             throw new NotImplementedException();
@@ -79,7 +105,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         public static void Delete(string path, bool recursive = false)
         {
 #if NETFX_CORE
-            path = path.Replace('/', '\\');
+            path = path.FixPath();
             var folderTask = StorageFolder.GetFolderFromPathAsync(path).AsTask<StorageFolder>();
             folderTask.Wait();
             var folder = folderTask.Result;
@@ -107,23 +133,15 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         }
 
 #if NETFX_CORE
-
-        /// <summary>
-        /// Creates a folder in local iso storage
-        /// </summary>
-        private static async Task<bool> CreateDirectoryAsync(string folderName)
+        private static string ParsePath(string path, StorageFolder folder)
         {
-            try
-            {
-                await ApplicationData.Current.LocalFolder.CreateFolderAsync(folderName, CreationCollisionOption.ReplaceExisting);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            if (path.Contains(folder.Path))
+                {
+                    path = path.Substring(path.LastIndexOf(folder.Path) + folder.Path.Length + 1);
+                    return path;
+                }
+            return null;
         }
-
 
         private static async Task<bool> ExistsAsync(string path)
         {
