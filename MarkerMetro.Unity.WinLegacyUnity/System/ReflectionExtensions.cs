@@ -362,7 +362,7 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
             FieldInfo[] fields = type.GetFields(flags);
             if (fields != null)
                 for (int i = 0; i < fields.Length; i++)
-                    if (fields[i].Equals(name))
+                    if (fields[i].Name.Equals(name))
                         return fields[i];
             return null;
 #else
