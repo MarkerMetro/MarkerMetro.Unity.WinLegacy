@@ -14,6 +14,9 @@ namespace MarkerMetro.Unity.WinLegacy.Cryptography
         {
 #if NETFX_CORE
             return CryptographicBuffer.EncodeToHexString(GetMD5Hash(input));
+
+#elif WINDOWS_PHONE
+            return MD5CryptoServiceProvider.GetMd5String(input);
 #else
             throw new System.PlatformNotSupportedException();
 #endif
@@ -23,6 +26,11 @@ namespace MarkerMetro.Unity.WinLegacy.Cryptography
         {
 #if NETFX_CORE
             return CryptographicBuffer.EncodeToHexString(GetSHA1Hash(input));
+#elif WINDOWS_PHONE
+            var sha = new System.Security.Cryptography.SHA1Managed();
+            var bytes = System.Text.Encoding.UTF8.GetBytes(input);
+            var bytesHash = sha.ComputeHash(bytes);
+            return System.Text.Encoding.UTF8.GetString(bytesHash, 0, bytesHash.Length);
 #else
             throw new System.PlatformNotSupportedException();
 #endif
