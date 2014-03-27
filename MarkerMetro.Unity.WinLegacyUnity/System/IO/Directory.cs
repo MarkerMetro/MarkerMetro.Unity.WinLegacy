@@ -53,6 +53,12 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             {
                 return false;
             }
+#elif SILVERLIGHT
+            using (System.IO.IsolatedStorage.IsolatedStorageFile appStorage = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication())
+            {
+                var dir = Path.GetDirectoryName(path);
+                return appStorage.DirectoryExists(dir);
+            }
 #else
             throw new NotImplementedException();
 #endif
