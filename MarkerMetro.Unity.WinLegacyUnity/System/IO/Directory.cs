@@ -103,6 +103,11 @@ namespace MarkerMetro.Unity.WinLegacy.IO
                     throw task.Exception;
                 folder = task.Result;
             }
+#elif SILVERLIGHT
+            using (System.IO.IsolatedStorage.IsolatedStorageFile appStorage = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication())
+            {
+                appStorage.CreateDirectory(path);
+            }
 #else
             throw new NotImplementedException();
 #endif

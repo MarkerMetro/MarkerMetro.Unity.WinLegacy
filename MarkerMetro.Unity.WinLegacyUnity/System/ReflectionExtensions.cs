@@ -347,7 +347,7 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 
         public static FieldInfo GetField(this Type type, string name)
         {
-#if NETFX_CORE
+#if NETFX_CORE || SILVERLIGHT
             var fields = type.GetFields();
             if (!fields.Any()) return null;
             return fields.FirstOrDefault(f => f.Name == name);
@@ -358,7 +358,7 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 
         public static FieldInfo GetField(this Type type, string name, BindingFlags flags)
         {
-#if NETFX_CORE
+#if NETFX_CORE || SILVERLIGHT
             FieldInfo[] fields = type.GetFields(flags);
             if (fields != null)
                 for (int i = 0; i < fields.Length; i++)
@@ -499,6 +499,16 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
             throw new NotImplementedException();
 #endif
 
+        }
+
+        public static Type GetType(this Assembly assembly)
+        {
+#if NETFX_CORE || SILVERLIGHT
+            if (assembly.DefinedTypes == null) return null;
+            return assembly.GetType();
+#else
+            throw new NotImplementedException();
+#endif
         }
 
  
