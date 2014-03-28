@@ -501,6 +501,16 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 
         }
 
+        public static Type GetType(this Assembly assembly)
+        {
+#if NETFX_CORE || SILVERLIGHT
+            if (assembly.DefinedTypes == null) return null;
+            return assembly.GetType();
+#else
+            throw new NotImplementedException();
+#endif
+        }
+
  
         public static TypeCode GetTypeCode(this Type type)
         {
