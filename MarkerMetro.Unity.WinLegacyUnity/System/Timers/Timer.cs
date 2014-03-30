@@ -69,9 +69,9 @@ namespace MarkerMetro.Unity.WinLegacy.Timers
             set { Start(); }
         }
 
-#if NETFX_CORE || WINDOWS_PHONE
+#pragma warning disable
         public event ElapsedEventHandler Elapsed;
-#endif
+#pragma warning restore
 
         public Timer() 
         {
