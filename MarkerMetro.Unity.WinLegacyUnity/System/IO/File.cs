@@ -143,6 +143,8 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             sourceFileName = sourceFileName.FixPath();
             destFileName = destFileName.FixPath();
             CopyAsync(sourceFileName, destFileName, overwrite).Wait();
+#elif SILVERLIGHT
+            System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().CopyFile(sourceFileName, destFileName, overwrite);
 #else
             throw new NotImplementedException();
 #endif
