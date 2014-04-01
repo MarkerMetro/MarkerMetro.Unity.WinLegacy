@@ -322,7 +322,7 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 
         public static FieldInfo[] GetFields(this Type t, BindingFlags flags)
         {
-#if NETFX_CORE
+#if NETFX_CORE || SILVERLIGHT
             if (!flags.HasFlag(BindingFlags.Instance) && !flags.HasFlag(BindingFlags.Static)) 
                 return null;
 
