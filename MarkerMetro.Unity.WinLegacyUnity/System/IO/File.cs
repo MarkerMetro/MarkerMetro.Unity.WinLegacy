@@ -219,6 +219,11 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             return new FileStream(path, fileMode);
         }
 
+        public static System.IO.Stream Open(string path, FileMode fileMode, FileAccess fileAccess)
+        {
+            return new FileStream(path, fileMode);
+        }
+
         public static FileStream Create(string path)
         {
 #if NETFX_CORE
