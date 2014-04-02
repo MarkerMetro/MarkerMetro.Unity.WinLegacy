@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
 #if NETFX_CORE
 using Windows.Storage;
 using System.Threading.Tasks;
 using Windows.Storage.Streams;
+using Windows.Storage;
+using Windows.Storage.FileProperties;
 using System.IO;
 #endif
-
 
 namespace MarkerMetro.Unity.WinLegacy.IO
 {
@@ -176,8 +176,28 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 #endif
         }
 
-        public static System.IO.Stream Open(string path)
+
+        public static DateTime GetLastWriteTime(string path)
         {
+#if NETFX_CORE
+            path = path.FixPath();
+            var thread = GetLastWriteTimeAsync(path); 
+            thread.Wait();
+
+            if (thread.IsCompleted)
+                return thread.Result;
+
+            throw thread.Exception;
+#elif SILVERLIGHT
+            return System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().GetLastWriteTime(path).DateTime;
+#else
+            throw new NotImplementedException();
+#endif
+        }
+
+
+        public static System.IO.Stream Open(string path)
+        {            
 #if NETFX_CORE
             path = path.FixPath();
             var thread = OpenAsync(path);
@@ -430,6 +450,14 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         {
             var str = await CreateAsync(path);
             return new EncryptedStreamWriter(str);
+        }
+
+        public static async Task<DateTime> GetLastWriteTimeAsync(string path)
+        {
+            path = path.FixPath();
+            StorageFile file = await Windows.Storage.StorageFile.GetFileFromPathAsync(path);
+            BasicProperties fileProperties = await file.GetBasicPropertiesAsync();
+            return fileProperties.DateModified.DateTime;
         }
 #endif
         internal static string FixPath(this string path)
