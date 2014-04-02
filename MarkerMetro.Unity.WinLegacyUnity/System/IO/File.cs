@@ -137,6 +137,19 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 #endif
         }
 
+        public static void Copy(string sourceFileName, string destFileName)
+        {
+#if NETFX_CORE
+            sourceFileName = sourceFileName.FixPath();
+            destFileName = destFileName.FixPath();
+            CopyAsync(sourceFileName, destFileName, true).Wait();
+#elif SILVERLIGHT
+            System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().CopyFile(sourceFileName, destFileName, true);
+#else
+            throw new NotImplementedException();
+#endif
+        }
+
         public static void Copy(string sourceFileName, string destFileName, bool overwrite)
         {
 #if NETFX_CORE
