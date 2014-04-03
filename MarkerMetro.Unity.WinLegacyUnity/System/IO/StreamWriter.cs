@@ -108,6 +108,47 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 
         //
         // Summary:
+        //     Initializes a new instance of the StreamWriter class for the specified file by using the default
+        //     encoding and buffer size. If the file exists, it will be overwritten. To append to a file, use the constructor with the append bool parameter
+        //     If the file does not exist, this constructor creates a new file.
+        //
+        // Parameters:
+        //   path:
+        //     The complete file path to write to. 
+        //
+        // Exceptions:
+        //   System.ArgumentNullException:
+        //     path is null.
+        //
+        //   System.UnauthorizedAccessException:
+        //     Access is denied.
+        //
+        //   System.ArgumentException:
+        //     path is empty.
+        //     -or-
+        //     path contains the name of a system device (com1, com2, and so on).
+        //
+        //   System.IO.DirectoryNotFoundException:
+        //     The specified path is invalid (for example, it is on an unmapped drive).
+        //
+        //   System.IO.IOException:
+        //     path includes an incorrect or invalid syntax for file name, directory name, or volume label syntax. 
+        //
+        //   System.IO.PathTooLongException:
+        //     The specified path, file name, or both exceed the system-defined maximum length. For example, on
+        //     Windows-based platforms, paths must not exceed 248 characters, and file names must not
+        //     exceed 260 characters. 
+        //
+        //   System.Security.SecurityException:
+        //     The caller does not have the required permission. 
+        public StreamWriter(string path)
+        {
+            var fileWriter = new FileStream(path, FileMode.OpenOrCreate);
+            _actual = new System.IO.StreamWriter(fileWriter);
+        }
+
+        //
+        // Summary:
         //     Initializes a new instance of the System.IO.StreamWriter class for the specified
         //     stream by using the specified encoding and buffer size.
         //
