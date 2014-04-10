@@ -23,7 +23,6 @@ Generally speaking once set up, you can push changes, run a new build via the bu
 3. Run the bat file in your project which will copy new versions into Unity plugins folders
 
 ## Building to Dependent Projects
-================================
 
 WinLegacy.proj is a helper MSBuild project to quickly build and deploy built dlls to dependant projects.
 Running following command-line: "MSBuild WinLegacy.proj" will rebuild all projects in this solution and deploy them to LitJson and JsonFx
