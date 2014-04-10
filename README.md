@@ -1,4 +1,4 @@
-MarkerMetro.Unity.WinIntegration
+MarkerMetro.Unity.WinLegacy
 ================================
 
 Unity Editor (.Net 3.5), Windows 8.1 and Windows Phone 8 plugin libraries to help with missing or changes legacy .net classes in Windows apps. 
