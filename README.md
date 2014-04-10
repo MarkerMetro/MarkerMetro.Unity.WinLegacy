@@ -16,6 +16,9 @@ This library is published on the Marker Metro NuGet Feed (https://github.com/Mar
 To update and use a NuGet plugin on a project see an example here:
 https://github.com/MarkerMetro/SportsJeopardy#marker-metro-nuget-access
 
+Always use App.xaml.cs (in both Windows 8.1 and Windows Phone to initialize the plugin's Dispatcher for marshalling threads:
+https://github.com/MarkerMetro/SportsJeopardy/blob/windows/WindowsSolution/WindowsStoreApps/Sports%20Jeopardy!/App.xaml.cs
+
 Generally speaking once set up, you can push changes, run a new build via the build server
 
 1. Push Changes
