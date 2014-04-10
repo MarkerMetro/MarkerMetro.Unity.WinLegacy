@@ -19,7 +19,7 @@ https://github.com/MarkerMetro/SportsJeopardy#marker-metro-nuget-access
 Generally speaking once set up, you can push changes, run a new build via the build server
 
 1. Push Changes
-2. Run a new build via the games build server
+2. Run a new build via the http://mmbuild1.cloudapp.net/ build server
 3. Run the bat file in your project which will copy new versions into Unity plugins folders
 
 ## Building to Dependent Projects
