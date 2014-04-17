@@ -129,7 +129,7 @@ namespace MarkerMetro.Unity.WinLegacy.Cryptography
         }
         internal static IBuffer GetSHA1Hash(string key)
         {
-            return GetHash(HashAlgorithmNames.Md5, key);
+            return GetHash(HashAlgorithmNames.Sha1, key);
         }
 
         private static IBuffer GetHash(string algorithm, string key)
