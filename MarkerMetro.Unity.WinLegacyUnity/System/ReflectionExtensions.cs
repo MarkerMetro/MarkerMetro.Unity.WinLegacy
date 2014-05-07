@@ -231,6 +231,11 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
             return props.FirstOrDefault(f => f.Name == name);
         }
 
+        public static PropertyInfo GetProperty(this Type type, string name, BindingFlags bindingAttr)
+        {
+            throw new NotImplementedException();
+        }
+
         public static PropertyInfo[] GetProperties(this Type type)
         {
             if (type == null)
