@@ -428,7 +428,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             var buffer = await PathIO.ReadBufferAsync(path);
             using (var dr = DataReader.FromBuffer(buffer))
             {
-                await dr.LoadAsync(buffer.Length);
+                // await dr.LoadAsync(buffer.Length); <- exception happening here "The operation identifier is not valid".
                 byte[] data = new byte[buffer.Length];
                 dr.ReadBytes(data);
                 return data;
