@@ -40,8 +40,8 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 
         public FileStream(string filePath, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize)
         {
-#if NETFX_CORE
             filePath = filePath.FixPath();
+#if NETFX_CORE
             var task = OpenFileStreamAsync(filePath, mode, access, share, bufferSize);
 
             task.Wait();
@@ -50,6 +50,8 @@ namespace MarkerMetro.Unity.WinLegacy.IO
                 throw task.Exception;
 
             this.stream = task.Result;
+#else
+            this.stream = new System.IO.FileStream(filePath, mode.ToSystemIO());
 #endif
         }
 
