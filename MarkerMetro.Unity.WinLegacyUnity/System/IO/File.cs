@@ -5,7 +5,6 @@ using System.Linq;
 using Windows.Storage;
 using System.Threading.Tasks;
 using Windows.Storage.Streams;
-using Windows.Storage;
 using Windows.Storage.FileProperties;
 using System.IO;
 #endif
