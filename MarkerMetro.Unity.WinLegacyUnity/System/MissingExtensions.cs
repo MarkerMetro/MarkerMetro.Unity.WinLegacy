@@ -40,6 +40,14 @@ namespace MarkerMetro.Unity.WinLegacy
             foreach (T obj in list)
                 action(obj);
         }
+
+        /**
+         * List<TOutput> ConvertAll<TOutput>(Converter<T, TOutput> converter) isn't implemented on WSA, so use this instead.
+         */
+        public static List<TOutput> ConvertAll<TSource, TOutput>(this List<TSource> list, Func<TSource, TOutput> converter)
+        {
+            return list.Select(converter).ToList();
+        }
     }
 }
 
