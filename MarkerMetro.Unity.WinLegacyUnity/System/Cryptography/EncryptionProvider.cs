@@ -77,6 +77,20 @@ namespace MarkerMetro.Unity.WinLegacy.Cryptography
                 // MetroEventSource.Log.Error(ex.Message);
                 return "";
             }
+#elif WINDOWS_PHONE
+            var encoding = new System.Text.UTF8Encoding();
+
+            byte[] Key = DESCrytography.DoPadWithString(encoding.GetBytes(key), 24, (byte)0);
+            byte[] plainText = new byte[1024];
+            plainText = DESCrytography.DoPadWithString(encoding.GetBytes(toEncrypt), 8, (byte)0);
+
+            byte[] cipherText = null;
+            DESCrytography.TripleDES(plainText, ref cipherText, Key, true);
+
+            string result = Convert.ToBase64String(cipherText);
+            result = result.Replace("+", "-").Replace("/", "_");
+
+            return result;
 #else
             throw new System.PlatformNotSupportedException();
 #endif
@@ -117,6 +131,18 @@ namespace MarkerMetro.Unity.WinLegacy.Cryptography
                 //throw;
                 return "";
             }
+#elif WINDOWS_PHONE
+            var encoding = new System.Text.UTF8Encoding();
+
+            byte[] Key = DESCrytography.DoPadWithString(encoding.GetBytes(key), 24, (byte)0);
+            byte[] plainText = Convert.FromBase64String(cipherString.Replace("-", "+").Replace("_", "/"));
+
+            byte[] cipherText = null;
+            DESCrytography.TripleDES(plainText, ref cipherText, Key, false);
+
+            string result = encoding.GetString(cipherText, 0, cipherText.Length).Replace(Convert.ToChar(0x0).ToString(), "");
+
+            return result;
 #else
             throw new System.PlatformNotSupportedException();
 #endif
