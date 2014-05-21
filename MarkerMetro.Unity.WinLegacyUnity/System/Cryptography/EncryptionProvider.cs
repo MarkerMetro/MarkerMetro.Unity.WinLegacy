@@ -166,12 +166,13 @@ namespace MarkerMetro.Unity.WinLegacy.Cryptography
         {
 #if WINDOWS_PHONE
             // Check arguments. 
-            if (plainText == null || plainText.Length <= 0)
-                throw new ArgumentNullException("plainText");
-            if (Key == null || Key.Length <= 0)
-                throw new ArgumentNullException("Key");
-            if (IV == null || IV.Length <= 0)
-                throw new ArgumentNullException("Key");
+            //if (plainText == null || plainText.Length <= 0)
+            //    throw new ArgumentNullException("plainText");
+            //if (Key == null || Key.Length <= 0)
+            //    throw new ArgumentNullException("Key");
+            //if (IV == null || IV.Length <= 0)
+            //    throw new ArgumentNullException("Key");
+
             byte[] encrypted;
             // Create an AesManaged object 
             // with the specified key and IV. 
@@ -218,12 +219,12 @@ namespace MarkerMetro.Unity.WinLegacy.Cryptography
         {
 #if WINDOWS_PHONE
             // Check arguments. 
-            if (cipherText == null || cipherText.Length <= 0)
-                throw new ArgumentNullException("cipherText");
-            if (Key == null || Key.Length <= 0)
-                throw new ArgumentNullException("Key");
-            if (IV == null || IV.Length <= 0)
-                throw new ArgumentNullException("Key");
+            //if (cipherText == null || cipherText.Length <= 0)
+            //    throw new ArgumentNullException("cipherText is null or empty");
+            //if (Key == null || Key.Length <= 0)
+            //    throw new ArgumentNullException("Key is null or empty");
+            //if (IV == null || IV.Length <= 0)
+            //    throw new ArgumentNullException("IV is null or empty");
 
             // Declare the string used to hold 
             // the decrypted text. 
