@@ -162,7 +162,7 @@ namespace MarkerMetro.Unity.WinLegacy.Cryptography
         /// <param name="Key">Encryption key</param>
         /// <param name="IV">IV</param>
         /// <returns>Encryped text</returns>
-        public static string EncryptString_AES(string plainText, byte[] Key, byte[] IV)
+        public static string Encrypt_AES(string plainText, byte[] Key, byte[] IV)
         {
 #if WINDOWS_PHONE
             // Check arguments. 
@@ -214,7 +214,7 @@ namespace MarkerMetro.Unity.WinLegacy.Cryptography
         /// <param name="Key"></param>
         /// <param name="IV"></param>
         /// <returns></returns>
-        public static string DecryptString_AES(byte[] cipherText, byte[] Key, byte[] IV)
+        public static string Decrypt_AES(byte[] cipherText, byte[] Key, byte[] IV)
         {
 #if WINDOWS_PHONE
             // Check arguments. 
