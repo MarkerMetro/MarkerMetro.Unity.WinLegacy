@@ -203,7 +203,7 @@ namespace MarkerMetro.Unity.WinLegacy.Cryptography
             // Return the encrypted bytes from the memory stream. 
             return Encoding.UTF8.GetString(encrypted, 0, encrypted.Length);
 #else
-            throw new NotImplementedException("EncryptString_AES not implemented on this platform");
+            throw new NotImplementedException("Encrypt_AES not implemented on this platform");
 #endif
         }
 
@@ -258,7 +258,60 @@ namespace MarkerMetro.Unity.WinLegacy.Cryptography
 
             return plaintext;
 #else
-            throw new NotImplementedException("EncryptString_AES not implemented on this platform");
+            throw new NotImplementedException("Decrypt_AES not implemented on this platform");
+#endif
+        }
+
+        /// <summary>
+        /// Encrypt a string to DES for Windows Phone 8
+        /// </summary>
+        /// <param name="plainMessage"></param>
+        /// <param name="Key"></param>
+        /// <returns></returns>
+        public static string Encrypt_DES(string plainMessage, byte[] Key)
+        {
+#if WINDOWS_PHONE
+            var encoding = new System.Text.UTF8Encoding();
+
+            byte[] keyBytes = DESCrytography.DoPadWithString(encoding.GetBytes(Key.ToString()), 24, (byte)0);
+            byte[] plainText = new byte[1024];
+            plainText = DESCrytography.DoPadWithString(encoding.GetBytes(plainMessage), 8, (byte)0);
+
+            byte[] cipherText = null;
+            DESCrytography.TripleDES(plainText, ref cipherText, keyBytes, true);
+
+            string result = Convert.ToBase64String(cipherText);
+            result = result.Replace("+", "-").Replace("/", "_");
+
+            return result;    
+#else
+            throw new NotImplementedException("Encrypt_DES not implemented on this platform");
+#endif
+        }
+
+        /// <summary>
+        /// Decrypt a string with DES for Windows Phone 8
+        /// </summary>
+        /// <param name="encryptedMessage"></param>
+        /// <param name="argKey"></param>
+        /// <returns></returns>
+        public static string Decrypt_DES(string encryptedMessage, byte[] argKey)
+        {
+#if WINDOWS_PHONE
+            var encoding = new System.Text.UTF8Encoding();
+
+            byte[] Key = DESCrytography.DoPadWithString(encoding.GetBytes(argKey.ToString()), 24, (byte)0);
+            byte[] plainText = Convert.FromBase64String(encryptedMessage.Replace("-", "+").Replace("_", "/"));
+
+            byte[] cipherText = null;
+            DESCrytography.TripleDES(plainText, ref cipherText, Key, false);
+
+            string result = encoding.GetString(cipherText, 0, cipherText.Length)
+                .Replace(Convert.ToChar(0x0).ToString(), "");
+
+            return result;
+#else
+            throw new NotImplementedException("Decrypt_DES not implemented on this platform");
 #endif
         }
 
