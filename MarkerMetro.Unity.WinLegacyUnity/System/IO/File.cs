@@ -135,6 +135,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 #endif
         }
 
+#if NETFX_CORE
         private static async Task _writeAllText(string fileName, string data)
         {
             var folder = ApplicationData.Current.LocalFolder;
@@ -142,6 +143,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             var file = await folder.CreateFileAsync(fileName, fileOption);
             await FileIO.WriteTextAsync(file, data);
         }
+#endif
 
         public static void Copy(string sourceFileName, string destFileName)
         {
