@@ -119,8 +119,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         public static void WriteAllText(string path, string data)
         {
 #if NETFX_CORE
-            path = path.FixPath();
-            var thread = PathIO.WriteTextAsync(path, data).AsTask();
+            var thread = _writeAllText(path, data);
             thread.Wait();
 #elif SILVERLIGHT
             using (var stream = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Create))
@@ -134,6 +133,14 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 #else
             throw new NotImplementedException();
 #endif
+        }
+
+        private static async Task _writeAllText(string fileName, string data)
+        {
+            var folder = ApplicationData.Current.LocalFolder;
+            var fileOption = CreationCollisionOption.ReplaceExisting;
+            var file = await folder.CreateFileAsync(fileName, fileOption);
+            await FileIO.WriteTextAsync(file, data);
         }
 
         public static void Copy(string sourceFileName, string destFileName)
