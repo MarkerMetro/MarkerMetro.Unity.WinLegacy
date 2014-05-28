@@ -57,13 +57,15 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         {
 #if NETFX_CORE
             path = path.FixPath();
-            var thread = PathIO.ReadTextAsync(path).AsTask();
-            thread.Wait();
+            var thread = _ReadAllText(path);
 
-            if (thread.IsCompleted)
+            if (thread != null)
+            {
+                thread.Wait();
                 return thread.Result;
+            }
 
-            throw thread.Exception;
+            return null;
 #elif SILVERLIGHT
             using (var stream = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Open))
             {
@@ -76,6 +78,21 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             throw new NotImplementedException();
 #endif
         }
+
+#if NETFX_CORE
+        public static async Task<string> _ReadAllText(string fileName)
+        {
+            var folder = ApplicationData.Current.LocalFolder;
+            StorageFile file = await folder.GetFileAsync(fileName);
+
+            if (file != null)
+            {
+                return await FileIO.ReadTextAsync(file);
+            }
+
+            return null;
+        }
+#endif
 
         public static byte[] ReadAllBytes(string path)
         {
@@ -119,7 +136,8 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         public static void WriteAllText(string path, string data)
         {
 #if NETFX_CORE
-            var thread = _writeAllText(path, data);
+            path = path.FixPath();
+            var thread = _WriteAllText(path, data);
             thread.Wait();
 #elif SILVERLIGHT
             using (var stream = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Create))
@@ -136,7 +154,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         }
 
 #if NETFX_CORE
-        private static async Task _writeAllText(string fileName, string data)
+        private static async Task _WriteAllText(string fileName, string data)
         {
             var folder = ApplicationData.Current.LocalFolder;
             var fileOption = CreationCollisionOption.ReplaceExisting;
@@ -148,7 +166,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         public static void Copy(string sourceFileName, string destFileName)
         {
 #if NETFX_CORE
-            sourceFileName = sourceFileName.FixPath();
+           sourceFileName = sourceFileName.FixPath();
             destFileName = destFileName.FixPath();
             CopyAsync(sourceFileName, destFileName, true).Wait();
 #elif SILVERLIGHT
@@ -475,9 +493,12 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 #endif
         internal static string FixPath(this string path)
         {
-            return path.Replace('/', '\\');
+            path = path.Replace('/', '\\');
+            path = path.Replace(ApplicationData.Current.LocalFolder.Path, "");
+            while (path.IndexOf('\\') == 0) {
+                path = path.Substring(1);
+            }
+            return path;        
         }
     }
 }
-
-
