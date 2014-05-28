@@ -494,10 +494,12 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         internal static string FixPath(this string path)
         {
             path = path.Replace('/', '\\');
+#if NETFX_CORE
             path = path.Replace(ApplicationData.Current.LocalFolder.Path, "");
             while (path.IndexOf('\\') == 0) {
                 path = path.Substring(1);
             }
+#endif
             return path;        
         }
     }
