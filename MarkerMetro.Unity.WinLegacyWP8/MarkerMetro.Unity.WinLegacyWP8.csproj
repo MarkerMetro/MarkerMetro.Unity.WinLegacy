@@ -112,6 +112,9 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Collections\Specialized\OrderedDictionary.cs">
       <Link>System\Collections\Specialized\OrderedDictionary.cs</Link>
     </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Cryptography\DESCryptography.cs">
+      <Link>DESCryptography.cs</Link>
+    </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Cryptography\EncryptionProvider.cs">
       <Link>System\Cryptography\EncryptionProvider.cs</Link>
     </Compile>

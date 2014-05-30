@@ -16,7 +16,8 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
         NonPublic,
         Static,
         FlattenHierarchy,
-        DeclaredOnly
+        DeclaredOnly,
+        IgnoreCase
     }
 
     public enum TypeCode
@@ -231,6 +232,24 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
             return props.FirstOrDefault(f => f.Name == name);
         }
 
+        /**
+         * Attention: This implementation does not throw AmbiguousMatchException when more than one
+         * property is found with the specified name and matching the specified binding constraints.
+         *
+         * This implementation currently ignores BindingFlags.FlattenHierarchy.
+         */
+        public static PropertyInfo GetProperty(this Type type, string name, BindingFlags bindingAttr)
+        {
+#if NETFX_CORE
+            var props = type.GetProperties(bindingAttr);
+            if (!props.Any()) return null;
+            return props.FirstOrDefault(f =>bindingAttr.HasFlag(BindingFlags.IgnoreCase) ?
+                f.Name.ToLower() == name.ToLower() : f.Name == name);
+#else
+            throw new NotImplementedException();
+#endif
+        }
+
         public static PropertyInfo[] GetProperties(this Type type)
         {
             if (type == null)
@@ -251,11 +270,26 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 #endif
         }
 
+         /**
+          * This implementation currently ignores BindingFlags.FlattenHierarchy.
+          */
         public static PropertyInfo[] GetProperties(this Type type, BindingFlags flags)
         {
+#if NETFX_CORE
+            var props = type.GetProperties();
+            var result = new List<PropertyInfo>();
+            foreach(var prop in props)
+                if(TestBindingFlags(type, prop.GetMethod, flags) || TestBindingFlags(type, prop.SetMethod, flags))
+                    result.Add(prop);
+            return result.ToArray();
+#else
             throw new NotImplementedException();
+#endif
         }
 
+        /**
+         * This implementation currently ignores BindingFlags.FlattenHierarchy.
+         */
         public static MethodInfo[] GetMethods(this Type t, BindingFlags flags = BindingFlags.Public | BindingFlags.Instance)
         {
 #if NETFX_CORE
@@ -266,16 +300,28 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
             var resultList = new List<MethodInfo>();
             foreach (var method in allMethods)
             {
-                var isValid = (flags.HasFlag(BindingFlags.Public) && method.IsPublic)
-                    || (flags.HasFlag(BindingFlags.NonPublic) && !method.IsPublic);
-                isValid &= (flags.HasFlag(BindingFlags.Static) && method.IsStatic) || (flags.HasFlag(BindingFlags.Instance) && !method.IsStatic);
-                if (flags.HasFlag(BindingFlags.DeclaredOnly))
-                    isValid &= method.DeclaringType == t;
-
-                if (isValid)
+                if(TestBindingFlags(t, method, flags))
                     resultList.Add(method);
             }
             return resultList.ToArray();
+#else
+            throw new NotImplementedException();
+#endif
+        }
+
+        /**
+         * Tests the following BindingFlags:
+         * Public, NonPublic, Static, Instance, DeclaredOnly.
+         */
+        private static bool TestBindingFlags(Type t, MethodInfo method, BindingFlags flags)
+        {
+#if NETFX_CORE
+            var isValid = (flags.HasFlag(BindingFlags.Public) && method.IsPublic)
+                || (flags.HasFlag(BindingFlags.NonPublic) && !method.IsPublic);
+            isValid &= (flags.HasFlag(BindingFlags.Static) && method.IsStatic) || (flags.HasFlag(BindingFlags.Instance) && !method.IsStatic);
+            if (flags.HasFlag(BindingFlags.DeclaredOnly))
+                isValid &= method.DeclaringType == t;
+            return isValid;
 #else
             throw new NotImplementedException();
 #endif
