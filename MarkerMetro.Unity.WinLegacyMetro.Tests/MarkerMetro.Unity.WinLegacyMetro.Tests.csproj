@@ -114,6 +114,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NameValueCollectionTests.cs" />
+    <Compile Include="IOTests.cs" />
     <Compile Include="StreamReaderExtensionsTests.cs" />
     <Compile Include="ICustomAttributeProviderTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

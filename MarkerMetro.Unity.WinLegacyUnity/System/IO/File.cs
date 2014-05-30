@@ -5,7 +5,6 @@ using System.Linq;
 using Windows.Storage;
 using System.Threading.Tasks;
 using Windows.Storage.Streams;
-using Windows.Storage;
 using Windows.Storage.FileProperties;
 using System.IO;
 #endif
@@ -14,6 +13,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 {
     public static class File
     {
+
         public static void Move(string source, string destination)
         {
 #if NETFX_CORE
@@ -24,31 +24,6 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             thread.Wait();
 #elif SILVERLIGHT
             System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().MoveFile(source, destination);
-#else
-            throw new NotImplementedException();
-#endif
-        }
-
-        public static bool Exists(string path)
-        {
-#if NETFX_CORE
-            path = path.FixPath();
-            var thread = ExistsAsync(path);
-            try
-            {
-                thread.Wait();
-
-                if (thread.IsCompleted)
-                    return thread.Result;
-                else
-                    return false;
-            }
-            catch
-            {
-                return false;
-            }
-#elif SILVERLIGHT
-            return System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().FileExists(path);
 #else
             throw new NotImplementedException();
 #endif
@@ -78,50 +53,11 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 #endif
         }
 
-        public static byte[] ReadAllBytes(string path)
-        {
-#if NETFX_CORE
-            path = path.FixPath();
-            var thread = ReadAllBytesAsync(path);
-            thread.Wait();
-
-            if (thread.IsCompleted)
-                return thread.Result;
-
-            throw thread.Exception;
-#elif SILVERLIGHT
-            using (var stream = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Open))
-            {
-                var data = new byte[stream.Length];
-                stream.Read(data, 0, (int)stream.Length);
-                return data;
-            }
-#else
-            throw new NotImplementedException();
-#endif
-        }
-
-        public static void WriteAllBytes(string path, byte[] data)
-        {
-#if NETFX_CORE
-            path = path.FixPath();
-            var thread = PathIO.WriteBytesAsync(path, data).AsTask();
-            thread.Wait();
-#elif SILVERLIGHT
-            using (var stream = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Create))
-            {
-                stream.Write(data, 0, (int)data.Length);
-            }
-#else
-            throw new NotImplementedException();
-#endif
-        }
-
         public static void WriteAllText(string path, string data)
         {
 #if NETFX_CORE
-            path = path.FixPath();
-            var thread = PathIO.WriteTextAsync(path, data).AsTask();
+            path = FixPath(path);
+            var thread = WriteAllTextAsync(path, data);
             thread.Wait();
 #elif SILVERLIGHT
             using (var stream = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Create))
@@ -162,20 +98,6 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             throw new NotImplementedException();
 #endif
         }
-
-        public static void Delete(string path)
-        {
-#if NETFX_CORE
-            path = path.FixPath();
-            var thread = DeleteAsync(path);
-            thread.Wait();
-#elif SILVERLIGHT
-            System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().DeleteFile(path);
-#else
-            throw new NotImplementedException();
-#endif
-        }
-
 
         public static DateTime GetLastWriteTime(string path)
         {
@@ -228,7 +150,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         {
 #if NETFX_CORE
             path = path.FixPath();
-            var thread = CreateAsync(path);
+            var thread = CreateFileStreamAsync(path);
             thread.Wait();
 
             if (thread.IsCompleted)
@@ -278,24 +200,10 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 #endif
         }
 
-
-        public static string StripLocalFolder(string path)
-        {
-#if NETFX_CORE
-            path = path.FixPath();
-            var localPath = ApplicationData.Current.LocalFolder.Path.ToLower();
-
-            if (path.ToLower().StartsWith(localPath))
-                path = path.Substring(localPath.Length + 1);
-            return path;
-#else
-            throw new NotImplementedException();
-#endif
-        }
-
         public static FileStream OpenRead(string path)
         {
 #if NETFX_CORE
+            path = path.FixPath();
             return new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
 #elif SILVERLIGHT
             return new FileStream(System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Open));
@@ -307,6 +215,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         public static FileStream OpenWrite(string path)
         {
 #if NETFX_CORE
+            path = path.FixPath();
             return new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
 #elif SILVERLIGHT
             return new FileStream(System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Open, System.IO.FileAccess.ReadWrite));
@@ -315,40 +224,26 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 #endif
         }
 
+        /// <summary>
+        /// Ensures we clean up unix paths with incorrect slash direction passed from Unity
+        /// </summary>
+        internal static string FixPath(this string path)
+        {
+            return path.Replace('/', '\\');
+        }
+
 #if NETFX_CORE
 
-
-        private static EncryptedStreamReader OpenEncryptedText(string path)
+        private static async Task WriteAllTextAsync(string path, string data)
         {
-            path = path.FixPath();
-            if (Exists(path))
+            bool fileExists = await ExistsAsync(path);
+            if (!fileExists)
             {
-                var thread = OpenEncryptedTextAsync(path);
-                thread.Wait();
-
-                if (thread.IsCompleted)
-                    return thread.Result;
-
-                throw thread.Exception;
+                await CreateFileAsync(path);
             }
-            else
-            {
-                return null;
-            }
+            await PathIO.WriteTextAsync(path, data);
         }
 
-        private static EncryptedStreamWriter CreateEncryptedText(string path)
-        {
-
-            path = path.FixPath();
-            var thread = CreateEncryptedTextAsync(path);
-            thread.Wait();
-
-            if (thread.IsCompleted)
-                return thread.Result;
-
-            throw thread.Exception;
-        }
 
         private static async Task MoveAsync(string source, string destination)
         {
@@ -374,19 +269,10 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             return new StreamReader(stream);
         }
 
-        private static async Task<EncryptedStreamReader> OpenEncryptedTextAsync(string path)
-        {
-            var file = await StorageFile.GetFileFromPathAsync(path);
-
-            var stream = await file.OpenStreamForReadAsync();
-            return new EncryptedStreamReader(stream);
-        }
-
-        /* Copy ********************************************************************/
-
         private static async Task CopyAsync(string sourceFileName, string destFileName, bool overwrite)
         {
-            if (!overwrite && Exists(destFileName))
+            var exists = await ExistsAsync(destFileName);
+            if (!overwrite && exists)
                 return;
 
             var sourceDirName = Path.GetDirectoryName(sourceFileName);
@@ -404,57 +290,75 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 
         private static async Task<StreamWriter> CreateTextAsync(string path)
         {
-            var str = await CreateAsync(path);
+            var str = await CreateFileStreamAsync(path);
             return new StreamWriter(str);
-        }
-
-
-        private async static void CopyInitialisationFile(string fileName)
-        {
-            var db = await StorageFile.GetFileFromApplicationUriAsync(new Uri("ms-appx:///Integration/Initialization/" + fileName, UriKind.RelativeOrAbsolute));
-
-            string localFolder = ApplicationData.Current.LocalFolder.Path;
-            await db.CopyAsync(ApplicationData.Current.LocalFolder, fileName, NameCollisionOption.ReplaceExisting);
         }
 
         private static async Task<bool> ExistsAsync(string path)
         {
-            var file = await StorageFile.GetFileFromPathAsync(path);
-            return file != null;
-        }
-
-        private static async Task<byte[]> ReadAllBytesAsync(string path)
-        {
-            var buffer = await PathIO.ReadBufferAsync(path);
-            using (var dr = DataReader.FromBuffer(buffer))
+            bool exists = false;
+            try
             {
-                await dr.LoadAsync(buffer.Length);
-                byte[] data = new byte[buffer.Length];
-                dr.ReadBytes(data);
-                return data;
+                var file = await StorageFile.GetFileFromPathAsync(path);
+                exists = true;
             }
-        }
-        private static async Task DeleteAsync(string path)
-        {
-            var file = await StorageFile.GetFileFromPathAsync(path);
-            if (file != null)
-                await file.DeleteAsync();
+            catch { }
+            return exists;
         }
 
-        private static async Task<Stream> CreateAsync(string path)
+        private static async Task<Stream> CreateFileStreamAsync(string path)
         {
-            var dirName = Path.GetDirectoryName(path);
-            var filename = Path.GetFileName(path);
-
-            var dir = await StorageFolder.GetFolderFromPathAsync(dirName);
-            var file = await dir.CreateFileAsync(filename, CreationCollisionOption.ReplaceExisting);
+            var file = await CreateFileAsync(path);
             return await file.OpenStreamForWriteAsync();
         }
 
-        private static async Task<EncryptedStreamWriter> CreateEncryptedTextAsync(string path)
+        private static async Task<StorageFile> CreateFileAsync(string path)
         {
-            var str = await CreateAsync(path);
-            return new EncryptedStreamWriter(str);
+            var localFolder = ApplicationData.Current.LocalFolder;
+
+            // strip containing local folder
+            var localFolderPath = localFolder.Path.ToLower();
+            if (path.ToLower().StartsWith(localFolderPath))
+            {
+                path = path.Substring(localFolderPath.Length + 1);
+            }
+            var filename = Path.GetFileName(path);
+            var parentFolder = ApplicationData.Current.LocalFolder;
+
+            // check sub folders if required
+            if (path != filename)
+            {
+                // strip file name from end
+                if (path.EndsWith(filename))
+                {
+                    path = path.Substring(0, path.Length - filename.Length - 1);
+                }
+
+                // get a list of all the sub folders 
+                var folderNames = path.Split('\\');
+
+                // loop through and ensure each folder exists
+                foreach (var folderName in folderNames)
+                {
+                    var folderPath = Path.Combine(parentFolder.Path, folderName);
+                    bool folderExists = false;
+                    try
+                    {
+                        await StorageFolder.GetFolderFromPathAsync(folderPath);
+                        folderExists = true;
+                    }
+                    catch { }
+                    if (!folderExists)
+                    {
+                        parentFolder = await parentFolder.CreateFolderAsync(folderName);
+                    }
+                }
+            }
+
+            // create file
+            var file = await parentFolder.CreateFileAsync(filename, CreationCollisionOption.ReplaceExisting);
+
+            return file;
         }
 
         public static async Task<DateTime> GetLastWriteTimeAsync(string path)
@@ -465,10 +369,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             return fileProperties.DateModified.DateTime;
         }
 #endif
-        internal static string FixPath(this string path)
-        {
-            return path.Replace('/', '\\');
-        }
+
     }
 }
 
