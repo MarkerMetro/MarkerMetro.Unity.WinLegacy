@@ -72,7 +72,6 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             throw new NotImplementedException();
 #endif
         }
-
         public static void Copy(string sourceFileName, string destFileName)
         {
 #if NETFX_CORE
@@ -116,7 +115,6 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             throw new NotImplementedException();
 #endif
         }
-
 
         public static System.IO.Stream Open(string path)
         {            
@@ -163,7 +161,6 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             throw new NotImplementedException();
 #endif
         }
-
         public static StreamWriter CreateText(string path)
         {
 #if NETFX_CORE
@@ -244,7 +241,6 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             await PathIO.WriteTextAsync(path, data);
         }
 
-
         private static async Task MoveAsync(string source, string destination)
         {
             var file = await StorageFile.GetFileFromPathAsync(source);
@@ -321,7 +317,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             if (path.ToLower().StartsWith(localFolderPath))
             {
                 path = path.Substring(localFolderPath.Length + 1);
-        }
+            }
             var filename = Path.GetFileName(path);
             var parentFolder = ApplicationData.Current.LocalFolder;
 
@@ -330,9 +326,9 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             {
                 // strip file name from end
                 if (path.EndsWith(filename))
-        {
+                {
                     path = path.Substring(0, path.Length - filename.Length - 1);
-        }
+                }
 
                 // get a list of all the sub folders 
                 var folderNames = path.Split('\\');
@@ -343,17 +339,17 @@ namespace MarkerMetro.Unity.WinLegacy.IO
                     var folderPath = Path.Combine(parentFolder.Path, folderName);
                     bool folderExists = false;
                     try
-        {
+                    {
                         await StorageFolder.GetFolderFromPathAsync(folderPath);
                         folderExists = true;
                     }
                     catch { }
                     if (!folderExists)
-            {
+                    {
                         parentFolder = await parentFolder.CreateFolderAsync(folderName);
+                    }
+                }
             }
-        }
-        }
 
             // create file
             var file = await parentFolder.CreateFileAsync(filename, CreationCollisionOption.ReplaceExisting);
