@@ -53,6 +53,22 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 #endif
         }
 
+        public static void WriteAllBytes(string path, byte[] data)
+        {
+#if NETFX_CORE
+            path = path.FixPath();
+            var thread = WriteAllBytesAsync(path, data);
+            thread.Wait();
+#elif SILVERLIGHT
+            using (var stream = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Create))
+            {
+                stream.Write(data, 0, (int)data.Length);
+            }
+#else
+            throw new NotImplementedException();
+#endif
+        }
+
         public static void WriteAllText(string path, string data)
         {
 #if NETFX_CORE
@@ -230,6 +246,16 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         }
 
 #if NETFX_CORE
+
+        private static async Task WriteAllBytesAsync(string path, byte[] data)
+        {
+            bool fileExists = await ExistsAsync(path);
+            if (!fileExists)
+            {
+                await CreateFileAsync(path);
+            }
+            await PathIO.WriteBytesAsync(path, data);
+        }
 
         private static async Task WriteAllTextAsync(string path, string data)
         {
