@@ -128,7 +128,7 @@ namespace MarkerMetro.Unity.WinLegacy.Cryptography
                 return "";
             }
 #elif WINDOWS_PHONE
-            var bytesToUnprotect = Encoding.UTF8.GetBytes(cipherString);
+            var bytesToUnprotect = Convert.FromBase64String(cipherString);
             var unprotectedBytes = ProtectedData.Unprotect(bytesToUnprotect, null);
             return Convert.ToBase64String(unprotectedBytes);
 #else
