@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Security.Cryptography;
+using System.Text;
 #if NETFX_CORE
 using Windows.Security.Cryptography;
 using Windows.Security.Cryptography.Core;
@@ -47,6 +49,7 @@ namespace MarkerMetro.Unity.WinLegacy.Cryptography
 #if NETFX_CORE
             try
             {
+
                 // Get the MD5 key hash (you can as well use the binary of the key string)
                 var keyHash = GetMD5Hash(key);
 
@@ -78,7 +81,9 @@ namespace MarkerMetro.Unity.WinLegacy.Cryptography
                 return "";
             }
 #else
-            throw new System.PlatformNotSupportedException();
+            var bytesToProtect = Encoding.UTF8.GetBytes(toEncrypt);
+            var protectedBytes = ProtectedData.Protect(bytesToProtect, null);
+            return Convert.ToBase64String(protectedBytes);
 #endif
         }
 
@@ -118,7 +123,9 @@ namespace MarkerMetro.Unity.WinLegacy.Cryptography
                 return "";
             }
 #else
-            throw new System.PlatformNotSupportedException();
+            var bytesToUnprotect = Encoding.UTF8.GetBytes(cipherString);
+            var unprotectedBytes = ProtectedData.Unprotect(bytesToUnprotect, null);
+            return Convert.ToBase64String(unprotectedBytes);
 #endif
         }
 
