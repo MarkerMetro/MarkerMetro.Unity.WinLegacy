@@ -40,6 +40,7 @@ namespace MarkerMetro.Unity.WinLegacy
             foreach (T obj in list)
                 action(obj);
         }
+
     }
 }
 

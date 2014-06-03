@@ -6,6 +6,11 @@ using Windows.Security.Cryptography;
 using Windows.Security.Cryptography.Core;
 using Windows.Storage.Streams;
 #endif
+using System.IO;
+#if !NETFX_CORE
+using System.Security.Cryptography;
+#endif
+using System.Text;
 
 namespace MarkerMetro.Unity.WinLegacy.Cryptography
 {
@@ -80,6 +85,20 @@ namespace MarkerMetro.Unity.WinLegacy.Cryptography
                 // MetroEventSource.Log.Error(ex.Message);
                 return "";
             }
+#elif WINDOWS_PHONE
+            var encoding = new System.Text.UTF8Encoding();
+
+            byte[] Key = DESCrytography.DoPadWithString(encoding.GetBytes(key), 24, (byte) 0);
+            byte[] plainText = new byte[1024];
+            plainText = DESCrytography.DoPadWithString(encoding.GetBytes(toEncrypt), 8, (byte) 0);
+
+            byte[] cipherText = null;
+            DESCrytography.TripleDES(plainText, ref cipherText, Key, true);
+
+            string result = Convert.ToBase64String(cipherText);
+            result = result.Replace("+", "-").Replace("/", "_");
+
+            return result;
 #else
             var bytesToProtect = Encoding.UTF8.GetBytes(toEncrypt);
             var protectedBytes = ProtectedData.Protect(bytesToProtect, null);
@@ -122,10 +141,184 @@ namespace MarkerMetro.Unity.WinLegacy.Cryptography
                 //throw;
                 return "";
             }
+#elif WINDOWS_PHONE
+            var encoding = new System.Text.UTF8Encoding();
+
+            byte[] Key = DESCrytography.DoPadWithString(encoding.GetBytes(key), 24, (byte) 0);
+            byte[] plainText = Convert.FromBase64String(cipherString.Replace("-", "+").Replace("_", "/"));
+
+            byte[] cipherText = null;
+            DESCrytography.TripleDES(plainText, ref cipherText, Key, false);
+
+            string result = encoding.GetString(cipherText, 0, cipherText.Length)
+                .Replace(Convert.ToChar(0x0).ToString(), "");
+
+            return result;
 #else
             var bytesToUnprotect = Encoding.UTF8.GetBytes(cipherString);
             var unprotectedBytes = ProtectedData.Unprotect(bytesToUnprotect, null);
             return Convert.ToBase64String(unprotectedBytes);
+#endif
+        }
+
+        /// <summary>
+        /// Encrypt a string to AES for Windows Phone 8
+        /// This is the same as Rijndael but with a fixed block size and iteration count
+        /// </summary>
+        /// <param name="plainText">String to encrypt</param>
+        /// <param name="Key">Encryption key</param>
+        /// <param name="IV">IV</param>
+        /// <returns>Encryped text</returns>
+        public static string Encrypt_AES(string plainText, byte[] Key, byte[] IV)
+        {
+#if WINDOWS_PHONE
+            // Check arguments. 
+            //if (plainText == null || plainText.Length <= 0)
+            //    throw new ArgumentNullException("plainText");
+            //if (Key == null || Key.Length <= 0)
+            //    throw new ArgumentNullException("Key");
+            //if (IV == null || IV.Length <= 0)
+            //    throw new ArgumentNullException("Key");
+
+            byte[] encrypted;
+            // Create an AesManaged object 
+            // with the specified key and IV. 
+            using (AesManaged aesAlg = new AesManaged())
+            {
+                aesAlg.Key = Key;
+                aesAlg.IV = IV;
+
+                // Create a decrytor to perform the stream transform.
+                ICryptoTransform encryptor = aesAlg.CreateEncryptor(aesAlg.Key, aesAlg.IV);
+
+                // Create the streams used for encryption. 
+                using (MemoryStream msEncrypt = new MemoryStream())
+                {
+                    using (CryptoStream csEncrypt = new CryptoStream(msEncrypt, encryptor, CryptoStreamMode.Write))
+                    {
+                        using (StreamWriter swEncrypt = new StreamWriter(csEncrypt))
+                        {
+
+                            //Write all data to the stream.
+                            swEncrypt.Write(plainText);
+                        }
+                        encrypted = msEncrypt.ToArray();
+                    }
+                }
+            }
+
+            // Return the encrypted bytes from the memory stream. 
+            return Encoding.UTF8.GetString(encrypted, 0, encrypted.Length);
+#else
+            throw new NotImplementedException("Encrypt_AES not implemented on this platform");
+#endif
+        }
+
+        /// <summary>
+        /// Decrypt a byte array encrypted with AES for Windows Phone 8
+        /// This is the same as Rijndael but with a fixed block size and iteration count
+        /// </summary>
+        /// <param name="cipherText"></param>
+        /// <param name="Key"></param>
+        /// <param name="IV"></param>
+        /// <returns></returns>
+        public static string Decrypt_AES(byte[] cipherText, byte[] Key, byte[] IV)
+        {
+#if WINDOWS_PHONE
+            // Check arguments. 
+            //if (cipherText == null || cipherText.Length <= 0)
+            //    throw new ArgumentNullException("cipherText is null or empty");
+            //if (Key == null || Key.Length <= 0)
+            //    throw new ArgumentNullException("Key is null or empty");
+            //if (IV == null || IV.Length <= 0)
+            //    throw new ArgumentNullException("IV is null or empty");
+
+            // Declare the string used to hold 
+            // the decrypted text. 
+            string plaintext = null;
+
+            // Create an AesManaged object 
+            // with the specified key and IV. 
+            using (AesManaged aesAlg = new AesManaged())
+            {
+                aesAlg.Key = Key;
+                aesAlg.IV = IV;
+
+                // Create a decrytor to perform the stream transform.
+                ICryptoTransform decryptor = aesAlg.CreateDecryptor(aesAlg.Key, aesAlg.IV);
+
+                // Create the streams used for decryption. 
+                using (MemoryStream msDecrypt = new MemoryStream(cipherText))
+                {
+                    using (CryptoStream csDecrypt = new CryptoStream(msDecrypt, decryptor, CryptoStreamMode.Read))
+                    {
+                        using (StreamReader srDecrypt = new StreamReader(csDecrypt))
+                        {
+
+                            // Read the decrypted bytes from the decrypting stream 
+                            // and place them in a string.
+                            plaintext = srDecrypt.ReadToEnd();
+                        }
+                    }
+                }
+            }
+
+            return plaintext;
+#else
+            throw new NotImplementedException("Decrypt_AES not implemented on this platform");
+#endif
+        }
+
+        /// <summary>
+        /// Encrypt a string to DES for Windows Phone 8
+        /// </summary>
+        /// <param name="plainMessage"></param>
+        /// <param name="Key"></param>
+        /// <returns></returns>
+        public static string Encrypt_DES(string plainMessage, byte[] Key)
+        {
+#if WINDOWS_PHONE
+            var encoding = new System.Text.UTF8Encoding();
+
+            byte[] keyBytes = DESCrytography.DoPadWithString(encoding.GetBytes(Key.ToString()), 24, (byte)0);
+            byte[] plainText = new byte[1024];
+            plainText = DESCrytography.DoPadWithString(encoding.GetBytes(plainMessage), 8, (byte)0);
+
+            byte[] cipherText = null;
+            DESCrytography.TripleDES(plainText, ref cipherText, keyBytes, true);
+
+            string result = Convert.ToBase64String(cipherText);
+            result = result.Replace("+", "-").Replace("/", "_");
+
+            return result;    
+#else
+            throw new NotImplementedException("Encrypt_DES not implemented on this platform");
+#endif
+        }
+
+        /// <summary>
+        /// Decrypt a string with DES for Windows Phone 8
+        /// </summary>
+        /// <param name="encryptedMessage"></param>
+        /// <param name="argKey"></param>
+        /// <returns></returns>
+        public static string Decrypt_DES(string encryptedMessage, byte[] argKey)
+        {
+#if WINDOWS_PHONE
+            var encoding = new System.Text.UTF8Encoding();
+
+            byte[] Key = DESCrytography.DoPadWithString(encoding.GetBytes(argKey.ToString()), 24, (byte)0);
+            byte[] plainText = Convert.FromBase64String(encryptedMessage.Replace("-", "+").Replace("_", "/"));
+
+            byte[] cipherText = null;
+            DESCrytography.TripleDES(plainText, ref cipherText, Key, false);
+
+            string result = encoding.GetString(cipherText, 0, cipherText.Length)
+                .Replace(Convert.ToChar(0x0).ToString(), "");
+
+            return result;
+#else
+            throw new NotImplementedException("Decrypt_DES not implemented on this platform");
 #endif
         }
 
