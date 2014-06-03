@@ -130,7 +130,7 @@ namespace MarkerMetro.Unity.WinLegacy.Cryptography
 #elif WINDOWS_PHONE
             var bytesToUnprotect = Convert.FromBase64String(cipherString);
             var unprotectedBytes = ProtectedData.Unprotect(bytesToUnprotect, null);
-            return Convert.ToBase64String(unprotectedBytes);
+            return Encoding.UTF8.GetString(unprotectedBytes, 0, unprotectedBytes.Length);
 #else
             throw new System.PlatformNotSupportedException();
 #endif
