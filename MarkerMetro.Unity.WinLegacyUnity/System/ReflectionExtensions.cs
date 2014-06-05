@@ -70,10 +70,8 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
         {
 #if NETFX_CORE
             return type.GetTypeInfo().IsValueType;
-            
 #else
-            return type.IsValueType;
-            
+            return type.IsValueType;   
 #endif
         }
 
@@ -111,7 +109,6 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
         public static object[] GetCustomAttributes(this Type type, Type attrType, bool inherit)
         {
 #if NETFX_CORE
-
             var customAttributes = type.GetTypeInfo().GetCustomAttributes(attrType, inherit);
             if (customAttributes == null) return null;
             return customAttributes.ToArray();
@@ -123,7 +120,6 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
         public static Assembly GetAssembly(this Type type)
         {
 #if NETFX_CORE
-
             return type.GetTypeInfo().Assembly;
 #else
             throw new NotImplementedException();
@@ -184,7 +180,7 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
             return type.GetTypeInfo().DeclaredConstructors.FirstOrDefault(c => !c.GetParameters().Any());
 #else
             throw new NotImplementedException();
-#endif       
+#endif
         }
 
         public static ConstructorInfo[] GetConstructors(this Type type)
@@ -208,28 +204,50 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 #if NETFX_CORE
             var interfaces = type.GetTypeInfo().ImplementedInterfaces;
 
-			foreach (var interfaceType in interfaces) 
+            foreach (var interfaceType in interfaces)
             {
-				/*We must compare against the generic type definition*/
-				var t = interfaceType.IsGenericType() ? interfaceType.GetGenericTypeDefinition () : interfaceType;
+                /*We must compare against the generic type definition*/
+                var t = interfaceType.IsGenericType() ? interfaceType.GetGenericTypeDefinition() : interfaceType;
 
-				if (t.Name.Equals(name, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal))
-					return interfaceType;
-				if (t.FullName.Equals(name, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal))
-					return interfaceType;
-			}
+                if (t.Name.Equals(name, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal))
+                    return interfaceType;
+                if (t.FullName.Equals(name, ignoreCase ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal))
+                    return interfaceType;
+            }
 
-			return null;
+            return null;
 #else
             throw new NotImplementedException();
 #endif
         }
 
-        public static PropertyInfo GetProperty(this Type type, string name)
+        public static PropertyInfo[] GetProperties(this Type type)
         {
+            if (type == null)
+                throw new NullReferenceException();
+#if NETFX_CORE
+            var members = type.GetRuntimeProperties();
+            return members == null ? null : members.ToArray();
+#else
+            throw new NotImplementedException();
+#endif
+        }
+
+        /**
+        * This implementation currently ignores BindingFlags.FlattenHierarchy.
+        */
+        public static PropertyInfo[] GetProperties(this Type type, BindingFlags flags)
+        {
+#if NETFX_CORE
             var props = type.GetProperties();
-            if (!props.Any()) return null;
-            return props.FirstOrDefault(f => f.Name == name);
+            var result = new List<PropertyInfo>();
+            foreach (var prop in props)
+                if (TestBindingFlags(type, prop.GetMethod, flags) || TestBindingFlags(type, prop.SetMethod, flags))
+                    result.Add(prop);
+            return result.ToArray();
+#else
+            throw new NotImplementedException();
+#endif
         }
 
         /**
@@ -243,45 +261,27 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 #if NETFX_CORE
             var props = type.GetProperties(bindingAttr);
             if (!props.Any()) return null;
-            return props.FirstOrDefault(f =>bindingAttr.HasFlag(BindingFlags.IgnoreCase) ?
+            return props.FirstOrDefault(f => bindingAttr.HasFlag(BindingFlags.IgnoreCase) ?
                 f.Name.ToLower() == name.ToLower() : f.Name == name);
 #else
             throw new NotImplementedException();
 #endif
         }
 
-        public static PropertyInfo[] GetProperties(this Type type)
+        public static PropertyInfo GetProperty(this Type type, string name)
+        {
+            var props = type.GetProperties();
+            if (!props.Any()) return null;
+            return props.FirstOrDefault(f => f.Name == name);
+        }
+
+        public static MethodInfo[] GetMethods(this Type type)
         {
             if (type == null)
                 throw new NullReferenceException();
-
 #if NETFX_CORE
-            var list = new List<PropertyInfo>();
-            while (type != null)
-            {
-                list.AddRange(type.GetTypeInfo().DeclaredProperties);
-
-                type = type.GetBaseType();
-            }
-
-            return list.ToArray();
-#else
-            throw new NotImplementedException();
-#endif
-        }
-
-         /**
-          * This implementation currently ignores BindingFlags.FlattenHierarchy.
-          */
-        public static PropertyInfo[] GetProperties(this Type type, BindingFlags flags)
-        {
-#if NETFX_CORE
-            var props = type.GetProperties();
-            var result = new List<PropertyInfo>();
-            foreach(var prop in props)
-                if(TestBindingFlags(type, prop.GetMethod, flags) || TestBindingFlags(type, prop.SetMethod, flags))
-                    result.Add(prop);
-            return result.ToArray();
+            var members = type.GetRuntimeMethods();
+            return members == null ? null : members.ToArray();
 #else
             throw new NotImplementedException();
 #endif
@@ -295,12 +295,11 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 #if NETFX_CORE
             if (!flags.HasFlag(BindingFlags.Instance) && !flags.HasFlag(BindingFlags.Static)) return null;
 
-            var ti = t.GetTypeInfo();
-            var allMethods = ti.DeclaredMethods;
+            var allMethods = t.GetMethods();
             var resultList = new List<MethodInfo>();
             foreach (var method in allMethods)
             {
-                if(TestBindingFlags(t, method, flags))
+                if (TestBindingFlags(t, method, flags))
                     resultList.Add(method);
             }
             return resultList.ToArray();
@@ -326,16 +325,28 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
             throw new NotImplementedException();
 #endif
         }
+        public static MemberInfo[] GetMembers(this Type type)
+        {
+            if (type == null)
+                throw new NullReferenceException();
+#if NETFX_CORE
+            var ti = type.GetTypeInfo();
+            var result = new List<MemberInfo>();
+            if (ti.DeclaredMembers != null)
+            {
+                result.AddRange(ti.DeclaredMembers);
+            }
+            return result.ToArray();
+#else
+            throw new NotImplementedException();
+#endif
+        }
 
         public static MemberInfo[] GetMembers(this Type t, BindingFlags flags)
         {
 #if NETFX_CORE
             if (!flags.HasFlag(BindingFlags.Instance) && !flags.HasFlag(BindingFlags.Static)) return null;
-
-            var ti = t.GetTypeInfo();
-            var result = new List<MemberInfo>();
-            result.AddRange(ti.DeclaredMembers);
-            return result.ToArray();
+            return t.GetMembers();
 #else
             throw new NotImplementedException();
 #endif
@@ -347,8 +358,8 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
             if (binder != null || target != null)
                 throw new ArgumentException("doesn't support binder or target when invoking");
             // We only support invoking a normal method, not a field/property/other member
-            var ti = t.GetTypeInfo();
-            foreach (var m in ti.DeclaredMethods)
+            var members = t.GetMethods();
+            foreach (var m in members)
             {
                 if (m.Name.Equals(name))
                 {
@@ -363,17 +374,21 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 
         public static FieldInfo[] GetFields(this Type type)
         {
-            return GetFields(type, BindingFlags.Default | BindingFlags.Public | BindingFlags.Instance);
+#if NETFX_CORE
+            var fields = type.GetRuntimeFields();
+            return fields == null ? null : fields.ToArray();
+#else
+            throw new NotImplementedException();
+#endif
         }
 
         public static FieldInfo[] GetFields(this Type t, BindingFlags flags)
         {
 #if NETFX_CORE || SILVERLIGHT
-            if (!flags.HasFlag(BindingFlags.Instance) && !flags.HasFlag(BindingFlags.Static)) 
+            if (!flags.HasFlag(BindingFlags.Instance) && !flags.HasFlag(BindingFlags.Static))
                 return null;
 
-            var ti = t.GetTypeInfo();
-            var origFields = ti.DeclaredFields;
+            var origFields = t.GetFields();
             var results = new List<FieldInfo>();
             foreach (var field in origFields)
             {
@@ -441,8 +456,7 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
         public static MethodInfo GetMethod(Type t, string name, BindingFlags flags, Type[] parameters)
         {
 #if NETFX_CORE
-            var ti = t.GetTypeInfo();
-            var methods = ti.GetDeclaredMethods(name);
+            var methods = t.GetMethods();
             foreach (var m in methods)
             {
                 var plist = m.GetParameters();
@@ -464,7 +478,6 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 #else
             throw new NotImplementedException();
 #endif
-
         }
 
         public static Type[] GetGenericArguments(this Type t)
@@ -526,11 +539,9 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 #endif
         }
 
-
         public static Type[] GetTypes(this Assembly assembly)
         {
 #if NETFX_CORE
-
             if (assembly.DefinedTypes == null) return null;
             if (assembly.DefinedTypes.Count() == 0) return new Type[0];
             var typeInfos = assembly.DefinedTypes.ToArray();
@@ -544,7 +555,6 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 #else
             throw new NotImplementedException();
 #endif
-
         }
 
         public static Type GetType(this Assembly assembly)
@@ -557,7 +567,6 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 #endif
         }
 
- 
         public static TypeCode GetTypeCode(this Type type)
         {
             if (type == null)
@@ -575,7 +584,5 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
         }
 
     }
-
-
 
 }
