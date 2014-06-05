@@ -108,6 +108,7 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 
         public static object[] GetCustomAttributes(this Type type, Type attrType, bool inherit)
         {
+            
 #if NETFX_CORE
             var customAttributes = type.GetTypeInfo().GetCustomAttributes(attrType, inherit);
             if (customAttributes == null) return null;
@@ -508,23 +509,13 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 #endif
         }
 
-        public static bool IsPrimitive(this Type current)
+        public static bool IsPrimitive(this Type type)
         {
-            if (current == typeof(Boolean)) return true;
-            if (current == typeof(Byte)) return true;
-            if (current == typeof(SByte)) return true;
-            if (current == typeof(Int16)) return true;
-            if (current == typeof(UInt16)) return true;
-            if (current == typeof(Int32)) return true;
-            if (current == typeof(UInt32)) return true;
-            if (current == typeof(Int64)) return true;
-            if (current == typeof(UInt64)) return true;
-            if (current == typeof(IntPtr)) return true;
-            if (current == typeof(UIntPtr)) return true;
-            if (current == typeof(Char)) return true;
-            if (current == typeof(Double)) return true;
-            if (current == typeof(Single)) return true;
-            return false;
+#if NETFX_CORE
+            return type.GetTypeInfo().IsPrimitive;
+#else
+            return type.IsPrimitive;
+#endif
         }
 
         /**

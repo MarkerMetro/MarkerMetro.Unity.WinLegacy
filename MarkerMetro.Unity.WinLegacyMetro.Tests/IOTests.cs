@@ -15,7 +15,31 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection.Tests
     {
 
         [TestMethod]
-        public void File_WriteAllText_RootFile_Success()
+        public void Metro_File_CreateText_RootFile_Success()
+        {
+            bool success = false;
+            string error = String.Empty;
+            var localFolder = ApplicationData.Current.LocalFolder;
+            string path = Path.Combine(localFolder.Path, @"File.txt");
+            try
+            {
+                using (var sw = File.CreateText(path))
+                {
+                    sw.WriteLine("Hello");
+                    sw.WriteLine("And");
+                    sw.WriteLine("Welcome");
+                };
+                success = true;
+            }
+            catch (Exception ex)
+            {
+                error = ex.Message;
+            }
+            Assert.IsTrue(success);
+        }
+
+        [TestMethod]
+        public void Metro_File_WriteAllText_RootFile_Success()
         {
             bool success = false;
             string error = String.Empty;
@@ -34,7 +58,7 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection.Tests
         }
 
         [TestMethod]
-        public void File_WriteAllText_SubFoldersAndFile_Success()
+        public void Metro_File_WriteAllText_SubFoldersAndFile_Success()
         {
             bool success = false;
             string error = String.Empty;
