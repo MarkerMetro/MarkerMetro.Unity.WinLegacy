@@ -363,17 +363,19 @@ namespace MarkerMetro.Unity.WinLegacy.IO
                 foreach (var folderName in folderNames)
                 {
                     var folderPath = Path.Combine(parentFolder.Path, folderName);
+                    StorageFolder newParentFolder = null;
                     bool folderExists = false;
                     try
                     {
-                        await StorageFolder.GetFolderFromPathAsync(folderPath);
+                        newParentFolder = await StorageFolder.GetFolderFromPathAsync(folderPath);
                         folderExists = true;
                     }
                     catch { }
                     if (!folderExists)
                     {
-                        parentFolder = await parentFolder.CreateFolderAsync(folderName);
+                        newParentFolder = await parentFolder.CreateFolderAsync(folderName);
                     }
+                    parentFolder = newParentFolder;
                 }
             }
 
