@@ -69,6 +69,35 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 #endif
         }
 
+        public static string[] ReadAllLines(string path)
+        {     
+#if NETFX_CORE
+               path = path.FixPath();
+            var thread = PathIO.ReadLinesAsync(path).AsTask();
+            thread.Wait();
+
+            if (thread.IsCompleted)
+                return thread.Result.ToArray();
+
+            throw thread.Exception;
+#elif SILVERLIGHT
+            List<string> lines = new List<string>();
+            using (var stream = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Open))
+            {
+                using (var streamReader = new StreamReader(stream))
+                {
+                    string line;
+                    while ((line = streamReader.ReadLine()) != null)
+                        lines.Add(line);
+                }
+            }
+            return lines.ToArray();
+#else
+            throw new NotImplementedException();
+#endif
+
+        }
+
         public static void WriteAllText(string path, string data)
         {
 #if NETFX_CORE
