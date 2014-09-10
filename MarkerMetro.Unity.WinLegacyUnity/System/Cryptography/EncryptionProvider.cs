@@ -15,6 +15,22 @@ namespace MarkerMetro.Unity.WinLegacy.Cryptography
     public static class EncryptionProvider
     {
 
+        public static byte[] ComputeMD5(byte[] input)
+        {
+#if NETFX_CORE
+            var key = CryptographicBuffer.CreateFromByteArray(input);
+            var result = GetHashBytes(HashAlgorithmNames.Md5, key);
+            byte[] resultBytes;
+            CryptographicBuffer.CopyToByteArray(result, out resultBytes);
+            return resultBytes;
+#elif WINDOWS_PHONE
+            using (var md5 = MD5CryptoServiceProvider.Create())
+                return md5.ComputeHash(input);
+#else
+            throw new System.PlatformNotSupportedException();
+#endif
+        }
+
         public static string GetMD5HexString(string input)
         {
 #if NETFX_CORE
@@ -147,16 +163,13 @@ namespace MarkerMetro.Unity.WinLegacy.Cryptography
             return GetHash(HashAlgorithmNames.Sha1, key);
         }
 
-        private static IBuffer GetHash(string algorithm, string key)
+        private static IBuffer GetHashBytes(string algorithm, IBuffer key)
         {
-            // Convert the message string to binary data.
-            IBuffer buffUtf8Msg = CryptographicBuffer.ConvertStringToBinary(key, BinaryStringEncoding.Utf8);
-
             // Create a HashAlgorithmProvider object.
             HashAlgorithmProvider objAlgProv = HashAlgorithmProvider.OpenAlgorithm(algorithm);
 
             // Hash the message.
-            IBuffer buffHash = objAlgProv.HashData(buffUtf8Msg);
+            IBuffer buffHash = objAlgProv.HashData(key);
 
             // Verify that the hash length equals the length specified for the algorithm.
             if (buffHash.Length != objAlgProv.HashLength)
@@ -165,6 +178,14 @@ namespace MarkerMetro.Unity.WinLegacy.Cryptography
             }
 
             return buffHash;
+        }
+
+        private static IBuffer GetHash(string algorithm, string key)
+        {
+            // Convert the message string to binary data.
+            IBuffer buffUtf8Msg = CryptographicBuffer.ConvertStringToBinary(key, BinaryStringEncoding.Utf8);
+
+            return GetHashBytes(algorithm, buffUtf8Msg);
         }
 #endif
     }
