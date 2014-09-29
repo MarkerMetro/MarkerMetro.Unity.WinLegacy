@@ -58,6 +58,8 @@
     <Compile Include="System\IO\BinaryReaderExtensions.cs" />
     <Compile Include="System\IO\BinaryWriterExtensions.cs" />
     <Compile Include="System\IO\FileAccess.cs" />
+    <Compile Include="System\IO\DirectoryInfo.cs" />
+    <Compile Include="System\IO\FileInfo.cs" />
     <Compile Include="System\IO\FileMode.cs" />
     <Compile Include="System\IO\FileShare.cs" />
     <Compile Include="System\IO\FileStream.cs" />

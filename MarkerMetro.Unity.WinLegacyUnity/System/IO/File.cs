@@ -53,6 +53,77 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 #endif
         }
 
+        /// <summary>
+        /// Used only internally, use UnityEngine.Windows.File within Unity
+        /// </summary>
+        internal static bool Exists(string path)
+        {
+#if NETFX_CORE
+            path = path.FixPath();
+            var thread = ExistsAsync(path);
+            try
+            {
+                thread.Wait();
+
+                if (thread.IsCompleted)
+                    return thread.Result;
+                else
+                    return false;
+            }
+            catch
+            {
+                return false;
+            }
+#elif SILVERLIGHT
+            return System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().FileExists(path);
+#else
+            throw new NotImplementedException();
+#endif
+        }
+
+        /// <summary>
+        /// Used only internally, use UnityEngine.Windows.File within Unity
+        /// </summary>
+        internal static void Delete(string path)
+        {
+#if NETFX_CORE
+            path = path.FixPath();
+            var thread = DeleteAsync(path);
+            thread.Wait();
+#elif SILVERLIGHT
+            System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().DeleteFile(path);
+#else
+            throw new NotImplementedException();
+#endif
+        }
+
+        /// <summary>
+        /// Used only internally, use UnityEngine.Windows.File within Unity
+        /// </summary>
+        internal static byte[] ReadAllBytes(string path)
+        {
+#if NETFX_CORE
+            path = path.FixPath();
+            var thread = ReadAllBytesAsync(path);
+            thread.Wait();
+
+            if (thread.IsCompleted)
+                return thread.Result;
+
+            throw thread.Exception;
+#elif SILVERLIGHT
+            using (var stream = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Open))
+            {
+                var data = new byte[stream.Length];
+                stream.Read(data, 0, (int)stream.Length);
+                return data;
+            }
+#else
+            throw new NotImplementedException();
+#endif
+        }
+
+
         public static void WriteAllBytes(string path, byte[] data)
         {
 #if NETFX_CORE
@@ -345,6 +416,18 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             return new StreamWriter(str);
         }
 
+        private static async Task<byte[]> ReadAllBytesAsync(string path)
+        {
+            var buffer = await PathIO.ReadBufferAsync(path);
+            using (var dr = DataReader.FromBuffer(buffer))
+            {
+                // await dr.LoadAsync(buffer.Length); <- exception happening here "The operation identifier is not valid".
+                byte[] data = new byte[buffer.Length];
+                dr.ReadBytes(data);
+                return data;
+            }
+        }
+
         private static async Task<bool> ExistsAsync(string path)
         {
             bool exists = false;
@@ -355,6 +438,13 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             }
             catch { }
             return exists;
+        }
+
+        private static async Task DeleteAsync(string path)
+        {
+            var file = await StorageFile.GetFileFromPathAsync(path);
+            if (file != null)
+                await file.DeleteAsync();
         }
 
         private static async Task<Stream> CreateFileStreamAsync(string path)

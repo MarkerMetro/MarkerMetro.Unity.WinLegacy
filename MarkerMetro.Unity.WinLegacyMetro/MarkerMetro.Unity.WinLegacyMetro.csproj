@@ -157,6 +157,9 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\FileAccess.cs">
       <Link>System\IO\FileAccess.cs</Link>
     </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\FileInfo.cs">
+      <Link>System\IO\FileInfo.cs</Link>
+    </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\FileMode.cs">
       <Link>System\IO\FileMode.cs</Link>
     </Compile>
