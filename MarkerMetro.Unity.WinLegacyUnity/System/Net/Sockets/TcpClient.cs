@@ -34,6 +34,7 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
             }
             catch (Exception ex)
             {
+                _socket = null;
                 // If this is an unknown status it means that the error is fatal and retry will likely fail.
                 if (SocketError.GetStatus(ex.HResult) == SocketErrorStatus.Unknown)
                 {
@@ -72,6 +73,18 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
         }
 #endif
 
+        public bool Connected
+        {
+            get
+            {
+#if NETFX_CORE || WINDOWS_PHONE
+                return _socket != null;
+#else
+                throw new NotImplementedException();
+#endif
+            }
+        }
+
         public int SendTimeout { get; set; }
         public int ReceiveTimeout { get; set; }
 
@@ -108,9 +121,11 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
         public void Close()
         {
 #if NETFX_CORE || WINDOWS_PHONE
+   
             if (_socket != null)
             {
                 _socket.Dispose();
+                _socket = null;
             }
 #else
             throw new NotImplementedException();
