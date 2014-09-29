@@ -123,8 +123,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 #endif
         }
 
-
-        public static void WriteAllBytes(string path, byte[] data)
+        internal static void WriteAllBytes(string path, byte[] data)
         {
 #if NETFX_CORE
             path = path.FixPath();

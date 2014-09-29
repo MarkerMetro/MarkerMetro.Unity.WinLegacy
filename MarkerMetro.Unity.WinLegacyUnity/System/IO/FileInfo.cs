@@ -107,13 +107,16 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 #endif
         }
 
-        public bool Exists()
+        public bool Exists
         {
+            get
+            {
 #if NETFX_CORE
             return File.Exists(_path);
 #else
             throw new PlatformNotSupportedException("FileInfo.Exists");
 #endif
+            }
         }
 
         public void Delete()
