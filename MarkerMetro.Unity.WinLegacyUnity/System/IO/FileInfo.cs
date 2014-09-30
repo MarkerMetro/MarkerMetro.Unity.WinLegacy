@@ -5,6 +5,7 @@ using System.Text;
 #if NETFX_CORE
 using Windows.Storage;
 using System.Threading.Tasks;
+using System.Collections;
 #endif
 
 namespace MarkerMetro.Unity.WinLegacy.IO

@@ -172,6 +172,9 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Threading\Thread.cs">
       <Link>System\Threading\Thread.cs</Link>
     </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Threading\ThreadPool.cs">
+      <Link>System\Threading\ThreadPool.cs</Link>
+    </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Timers\Timer.cs">
       <Link>System\Timers\Timer.cs</Link>
     </Compile>
