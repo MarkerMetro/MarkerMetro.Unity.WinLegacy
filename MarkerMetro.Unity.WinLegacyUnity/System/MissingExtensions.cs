@@ -41,6 +41,11 @@ namespace MarkerMetro.Unity.WinLegacy
                 action(obj);
         }
 
+        public static string ToShortDateString(this DateTime dateTime)
+        {
+            return dateTime.ToString(System.Globalization.DateTimeFormatInfo.CurrentInfo.ShortDatePattern);
+        }
+
     }
 }
 
