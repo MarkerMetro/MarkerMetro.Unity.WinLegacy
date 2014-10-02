@@ -106,9 +106,6 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\Dispatcher.cs">
       <Link>Dispatcher.cs</Link>
     </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\AppDomain.cs">
-      <Link>System\AppDomain.cs</Link>
-    </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\ApplicationException.cs">
       <Link>System\ApplicationException.cs</Link>
     </Compile>
