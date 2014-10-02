@@ -65,6 +65,7 @@
     <Compile Include="System\IO\FileShare.cs" />
     <Compile Include="System\IO\FileStream.cs" />
     <Compile Include="System\IO\MemoryStreamExtensions.cs" />
+    <Compile Include="System\IO\ReadWriteStream.cs" />
     <Compile Include="System\IO\SearchOption.cs" />
     <Compile Include="System\IO\StreamExtensions.cs" />
     <Compile Include="System\IO\StreamReader.cs" />
@@ -80,6 +81,7 @@
     <Compile Include="System\Net\WebRequest.cs" />
     <Compile Include="System\ReflectionExtensions.cs" />
     <Compile Include="System\Reflection\TargetException.cs" />
+    <Compile Include="System\Runtime\Remoting\Messaging\AsyncResult.cs" />
     <Compile Include="System\Threading\ThreadPool.cs" />
     <Compile Include="System\Threading\Thread.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

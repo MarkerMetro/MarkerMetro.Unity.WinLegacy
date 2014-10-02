@@ -10,20 +10,24 @@ using System.Threading.Tasks;
 using Windows.Networking;
 using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
+using MarkerMetro.Unity.WinLegacy.Runtime.Remoting.Messaging;
+using MarkerMetro.Unity.WinLegacy.IO;
 #else
 using System.Net.Sockets;
 using System.Threading;
 #endif
-
 
 namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
 {
 
     public class TcpClient
     {
+   
 #if NETFX_CORE || WINDOWS_PHONE
         private StreamSocket _socket = null;
         DataWriter _writer;
+        bool _isConnected = false;
+        ReadWriteStream _readWriteStream = null;
 
         private async Task EnsureSocket(string hostName, int port)
         {
@@ -32,10 +36,12 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
                 var host = new HostName(hostName);
                 _socket = new StreamSocket();
                 await _socket.ConnectAsync(host, port.ToString(), SocketProtectionLevel.SslAllowNullEncryption);
+                _readWriteStream = new ReadWriteStream(_socket.InputStream.AsStreamForRead(), _socket.OutputStream.AsStreamForWrite());
+                _isConnected = true;
             }
             catch (Exception ex)
             {
-                _socket = null;
+                Close();
                 // If this is an unknown status it means that the error is fatal and retry will likely fail.
                 if (SocketError.GetStatus(ex.HResult) == SocketErrorStatus.Unknown)
                 {
@@ -44,6 +50,108 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
                 }
             }
         }
+#endif
+        public bool Connected
+        {
+            get
+            {
+#if NETFX_CORE || WINDOWS_PHONE
+                return _socket != null && _isConnected;
+#else
+                throw new NotImplementedException();
+#endif
+            }
+        }
+
+        public int SendTimeout { get; set; }
+        public int ReceiveTimeout { get; set; }
+
+        public void Connect(string hostName, int port)
+        {
+#if NETFX_CORE
+            var thread = EnsureSocket(hostName, port);
+            thread.Wait();
+#else
+            throw new PlatformNotSupportedException();
+#endif
+        }
+
+        public IAsyncResult BeginConnect(string host, int port, AsyncCallback requestCallback, object state)
+        {
+#if NETFX_CORE || WINDOWS_PHONE
+
+            AsyncResult res = new AsyncResult();
+            res.AsyncState = state;
+            res.IsCompleted = false;
+
+            var task = EnsureSocket(host, port);
+            
+            task.ContinueWith((t) =>
+            {
+                res.IsCompleted = true;
+                requestCallback(res);
+            });
+
+            return res;
+#else
+            throw new PlatformNotSupportedException();
+#endif
+        }
+
+        public void EndConnect(IAsyncResult result)
+        {
+#if NETFX_CORE || WINDOWS_PHONE
+            // Nothing needed
+            return;
+#else
+            throw new PlatformNotSupportedException();
+#endif
+        }
+
+        public Stream GetStream()
+        {
+#if NETFX_CORE || WINDOWS_PHONE
+            if (_socket == null || !_isConnected) return null;
+            return _readWriteStream;
+#else
+            throw new PlatformNotSupportedException();
+#endif
+        }
+
+        public void Close()
+        {
+#if NETFX_CORE || WINDOWS_PHONE  
+            _isConnected = false;
+            if (_socket != null)
+            {
+                _socket.Dispose();
+                _socket = null;
+            }
+            if (_readWriteStream != null)
+            {
+                _readWriteStream.Dispose();
+                _readWriteStream = null;
+            }
+#else
+            throw new PlatformNotSupportedException();
+#endif
+        }
+
+        /// <summary>
+        /// Helper method to allow easy writing of bytes to the socket stream
+        /// </summary>
+        /// <param name="bytes"></param>
+        public void WriteToOutputStream(byte[] bytes)
+        {
+#if NETFX_CORE || WINDOWS_PHONE
+            var thread = WriteToOutputStreamAsync(bytes);
+            thread.Wait();
+#else
+            throw new PlatformNotSupportedException();
+#endif
+        }
+
+#if NETFX_CORE || WINDOWS_PHONE
 
         private async Task WriteToOutputStreamAsync(byte[] bytes)
         {
@@ -72,115 +180,8 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
                 }
             }
         }
+
 #endif
-
-        public bool Connected
-        {
-            get
-            {
-#if NETFX_CORE || WINDOWS_PHONE
-                return _socket != null;
-#else
-                throw new NotImplementedException();
-#endif
-            }
-        }
-
-        public int SendTimeout { get; set; }
-        public int ReceiveTimeout { get; set; }
-
-        public void Connect(string hostName, int port)
-        {
-#if NETFX_CORE
-            var thread = EnsureSocket(hostName, port);
-            thread.Wait();
-#else
-            throw new NotImplementedException();
-#endif
-        }
-
-        public IAsyncResult BeginConnect(string host, int port, AsyncCallback requestCallback, object state)
-        {
-#if NETFX_CORE || WINDOWS_PHONE
-            Task task = EnsureSocket(host, port);
-            AsyncResult res = new AsyncResult();
-            res.AsyncState = state;
-            res.IsCompleted = false;
-
-            task.ContinueWith((t) =>
-            {
-                res.IsCompleted = true;
-                requestCallback(res);
-            });
-
-            return res;
-#else
-            throw new NotImplementedException();
-#endif
-        }
-
-        public void EndConnect(IAsyncResult result)
-        {
-#if NETFX_CORE || WINDOWS_PHONE
-            // Nothing needed
-            return;
-#else
-            throw new NotImplementedException();
-#endif
-        }
-
-        public class AsyncResult : IAsyncResult
-        {
-            public object AsyncState { get; set; }
-            public System.Threading.WaitHandle AsyncWaitHandle { get { return null; } }
-            public bool CompletedSynchronously { get { return false; } }
-            public bool IsCompleted { get; set; }
-        }
-
-        public Stream GetStream()
-        {
-#if NETFX_CORE || WINDOWS_PHONE
-            if (_socket == null) return null;
-            return _socket.InputStream.AsStreamForRead();
-#else
-            throw new NotImplementedException();
-#endif
-        }
-
-        public Stream GetOutputStream()
-        {
-#if NETFX_CORE || WINDOWS_PHONE
-            if (_socket == null) return null;
-            return _socket.OutputStream.AsStreamForWrite();
-#else
-            throw new NotImplementedException();
-#endif
-        }
-
-        public void Close()
-        {
-#if NETFX_CORE || WINDOWS_PHONE
-   
-            if (_socket != null)
-            {
-                _socket.Dispose();
-                _socket = null;
-            }
-#else
-            throw new NotImplementedException();
-#endif
-        }
-
-        public void WriteToOutputStream(byte[] bytes)
-        {
-#if NETFX_CORE || WINDOWS_PHONE
-            var thread = WriteToOutputStreamAsync(bytes);
-            thread.Wait();
-#else
-            throw new NotImplementedException();
-#endif
-        }
-
 
     }
 }

@@ -46,6 +46,18 @@ namespace MarkerMetro.Unity.WinLegacy
             return dateTime.ToString(System.Globalization.DateTimeFormatInfo.CurrentInfo.ShortDatePattern);
         }
 
+        public static string ToLongDateString(this DateTime dateTime)
+        {
+            return dateTime.ToString(System.Globalization.DateTimeFormatInfo.CurrentInfo.LongDatePattern);
+        }
+
+#if (NETFX_CORE && WINDOWS_PHONE)
+        public static void Close(this System.IO.Stream stream)
+        {
+            stream.Dispose();
+        }
+#endif
+
     }
 }
 
