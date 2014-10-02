@@ -54,7 +54,7 @@ namespace MarkerMetro.Unity.WinLegacy
 
         public static void Close(this System.IO.Stream stream)
         {
-#if (NETFX_CORE || WINDOWS_PHONE)
+#if (NETFX_CORE)
             stream.Dispose();
 #else 
             throw new PlatformNotSupportedException("stream.Close()");
