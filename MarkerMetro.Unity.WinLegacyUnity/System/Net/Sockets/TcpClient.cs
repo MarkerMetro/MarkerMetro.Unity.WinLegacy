@@ -12,6 +12,7 @@ using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
 #else
 using System.Net.Sockets;
+using System.Threading;
 #endif
 
 
@@ -96,6 +97,44 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
 #else
             throw new NotImplementedException();
 #endif
+        }
+
+        public IAsyncResult BeginConnect(string host, int port, AsyncCallback requestCallback, object state)
+        {
+#if NETFX_CORE || WINDOWS_PHONE
+            Task task = EnsureSocket(host, port);
+            AsyncResult res = new AsyncResult();
+            res.AsyncState = state;
+            res.IsCompleted = false;
+
+            task.ContinueWith((t) =>
+            {
+                res.IsCompleted = true;
+                requestCallback(res);
+            });
+
+            return res;
+#else
+            throw new NotImplementedException();
+#endif
+        }
+
+        public void EndConnect(IAsyncResult result)
+        {
+#if NETFX_CORE || WINDOWS_PHONE
+            // Nothing needed
+            return;
+#else
+            throw new NotImplementedException();
+#endif
+        }
+
+        public class AsyncResult : IAsyncResult
+        {
+            public object AsyncState { get; set; }
+            public System.Threading.WaitHandle AsyncWaitHandle { get { return null; } }
+            public bool CompletedSynchronously { get { return false; } }
+            public bool IsCompleted { get; set; }
         }
 
         public Stream GetStream()

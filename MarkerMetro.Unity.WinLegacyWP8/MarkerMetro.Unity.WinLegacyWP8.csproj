@@ -88,6 +88,9 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\Dispatcher.cs">
       <Link>Dispatcher.cs</Link>
     </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\AppDomain.cs">
+      <Link>System\AppDomain.cs</Link>
+    </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Collections\ArrayList.cs">
       <Link>System\Collections\ArrayList.cs</Link>
     </Compile>
@@ -113,7 +116,7 @@
       <Link>System\Collections\Specialized\OrderedDictionary.cs</Link>
     </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Cryptography\DESCryptography.cs">
-      <Link>DESCryptography.cs</Link>
+      <Link>System\Cryptography\DESCryptography.cs</Link>
     </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Cryptography\EncryptionProvider.cs">
       <Link>System\Cryptography\EncryptionProvider.cs</Link>
