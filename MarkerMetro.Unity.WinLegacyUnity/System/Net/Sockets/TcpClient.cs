@@ -22,6 +22,7 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
 
     public class TcpClient
     {
+        public bool UsePlainSocket { get; set; }
    
 #if NETFX_CORE || WINDOWS_PHONE
         private StreamSocket _socket = null;
@@ -29,7 +30,6 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
         bool _isConnected = false;
         ReadWriteStream _readWriteStream = null;
 
-        public bool UsePlainSocket { get; set; }
 
         private async Task EnsureSocket(string hostName, int port)
         {
