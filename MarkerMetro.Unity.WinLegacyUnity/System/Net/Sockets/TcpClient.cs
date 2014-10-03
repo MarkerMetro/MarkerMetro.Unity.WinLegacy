@@ -29,13 +29,15 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
         bool _isConnected = false;
         ReadWriteStream _readWriteStream = null;
 
+        public bool UsePlainSocket { get; set; }
+
         private async Task EnsureSocket(string hostName, int port)
         {
             try
             {
                 var host = new HostName(hostName);
                 _socket = new StreamSocket();
-                await _socket.ConnectAsync(host, port.ToString(), SocketProtectionLevel.SslAllowNullEncryption);
+                await _socket.ConnectAsync(host, port.ToString(), UsePlainSocket ? SocketProtectionLevel.PlainSocket : SocketProtectionLevel.SslAllowNullEncryption);
                 _readWriteStream = new ReadWriteStream(_socket.InputStream.AsStreamForRead(), _socket.OutputStream.AsStreamForWrite());
                 _isConnected = true;
             }
@@ -85,7 +87,7 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
             res.IsCompleted = false;
 
             var task = EnsureSocket(host, port);
-            
+
             task.ContinueWith((t) =>
             {
                 res.IsCompleted = true;
