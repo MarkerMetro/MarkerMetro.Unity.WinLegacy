@@ -151,6 +151,9 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\Directory.cs">
       <Link>System\IO\Directory.cs</Link>
     </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\DirectoryInfo.cs">
+      <Link>System\IO\DirectoryInfo.cs</Link>
+    </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\File.cs">
       <Link>System\IO\File.cs</Link>
     </Compile>

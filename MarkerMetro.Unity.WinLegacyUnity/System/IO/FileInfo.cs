@@ -98,6 +98,18 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 #endif
             }
         }
+        public DirectoryInfo Directory
+        {
+            get
+            {
+#if NETFX_CORE
+                return new DirectoryInfo(System.IO.Path.GetDirectoryName(_path));
+#else
+                throw new PlatformNotSupportedException("FileInfo.Directory");
+#endif
+            }
+        }
+
 
         public FileStream OpenRead()
         {
