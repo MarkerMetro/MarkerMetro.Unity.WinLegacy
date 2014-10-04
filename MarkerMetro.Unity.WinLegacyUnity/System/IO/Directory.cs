@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-#if NETFX_CORE || SILVERLIGHT
+#if NETFX_CORE || WINDOWS_PHONE
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.ApplicationModel;
@@ -20,7 +20,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             t.Wait();
             return t.Result;
 #else
-            throw new NotImplementedException();
+            throw new PlatformNotSupportedException();
 #endif
         }
 
@@ -31,12 +31,12 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 
         public static string[] GetFiles(string path, string searchPattern, SearchOption searchOption)
         {
-#if NETFX_CORE || SILVERLIGHT
+#if NETFX_CORE || WINDOWS_PHONE
             var t = GetFilesAsync(path.FixPath());
             t.Wait();
             return t.Result;
 #else
-            throw new NotImplementedException();
+            throw new PlatformNotSupportedException();
 #endif
         }
 
@@ -53,14 +53,14 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             {
                 return false;
             }
-#elif SILVERLIGHT
+#elif WINDOWS_PHONE
             using (System.IO.IsolatedStorage.IsolatedStorageFile appStorage = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication())
             {
                 var dir = Path.GetDirectoryName(path);
                 return appStorage.DirectoryExists(dir);
             }
 #else
-            throw new NotImplementedException();
+            throw new PlatformNotSupportedException();
 #endif
         }
 
@@ -103,13 +103,13 @@ namespace MarkerMetro.Unity.WinLegacy.IO
                     throw task.Exception;
                 folder = task.Result;
             }
-#elif SILVERLIGHT
+#elif WINDOWS_PHONE
             using (System.IO.IsolatedStorage.IsolatedStorageFile appStorage = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication())
             {
                 appStorage.CreateDirectory(path);
             }
 #else
-            throw new NotImplementedException();
+            throw new PlatformNotSupportedException();
 #endif
         }
 
@@ -128,9 +128,11 @@ namespace MarkerMetro.Unity.WinLegacy.IO
                     throw new IOException("The directory specified by path is not empty.");
             }
 
-            folder.DeleteAsync().AsTask().Wait();            
+            folder.DeleteAsync().AsTask().Wait();  
+#elif WINDOWS_PHONE
+            System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().DeleteDirectory(path);
 #else
-            throw new NotImplementedException();
+            throw new PlatformNotSupportedException();
 #endif
         }
 
@@ -139,7 +141,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 #if NETFX_CORE
             return Package.Current.InstalledLocation.Path;
 #else
-            throw new NotImplementedException();
+            throw new PlatformNotSupportedException();
 #endif
         }
 
@@ -169,7 +171,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 
 #endif
 
-#if NETFX_CORE || SILVERLIGHT
+#if NETFX_CORE || WINDOWS_PHONE
         private static async Task<string[]> GetFilesAsync(string path)
         {
             try

@@ -22,10 +22,10 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 
             var thread = MoveAsync(source, destination);
             thread.Wait();
-#elif SILVERLIGHT
+#elif WINDOWS_PHONE
             System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().MoveFile(source, destination);
 #else
-            throw new NotImplementedException();
+            throw new PlatformNotSupportedException();
 #endif
         }
 
@@ -40,7 +40,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
                 return thread.Result;
 
             throw thread.Exception;
-#elif SILVERLIGHT
+#elif WINDOWS_PHONE
             using (var stream = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Open))
             {
                 using (var streamReader = new StreamReader(stream))
@@ -49,7 +49,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
                 }
             }
 #else
-            throw new NotImplementedException();
+            throw new PlatformNotSupportedException();
 #endif
         }
 
@@ -74,10 +74,10 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             {
                 return false;
             }
-#elif SILVERLIGHT
+#elif WINDOWS_PHONE
             return System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().FileExists(path);
 #else
-            throw new NotImplementedException();
+            throw new PlatformNotSupportedException();
 #endif
         }
 
@@ -90,10 +90,10 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             path = path.FixPath();
             var thread = DeleteAsync(path);
             thread.Wait();
-#elif SILVERLIGHT
+#elif WINDOWS_PHONE
             System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().DeleteFile(path);
 #else
-            throw new NotImplementedException();
+            throw new PlatformNotSupportedException();
 #endif
         }
 
@@ -111,7 +111,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
                 return thread.Result;
 
             throw thread.Exception;
-#elif SILVERLIGHT
+#elif WINDOWS_PHONE
             using (var stream = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Open))
             {
                 var data = new byte[stream.Length];
@@ -119,7 +119,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
                 return data;
             }
 #else
-            throw new NotImplementedException();
+            throw new PlatformNotSupportedException();
 #endif
         }
 
@@ -129,13 +129,13 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             path = path.FixPath();
             var thread = WriteAllBytesAsync(path, data);
             thread.Wait();
-#elif SILVERLIGHT
+#elif WINDOWS_PHONE
             using (var stream = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Create))
             {
                 stream.Write(data, 0, (int)data.Length);
             }
 #else
-            throw new NotImplementedException();
+            throw new PlatformNotSupportedException();
 #endif
         }
 
@@ -150,7 +150,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
                 return thread.Result.ToArray();
 
             throw thread.Exception;
-#elif SILVERLIGHT
+#elif WINDOWS_PHONE
             List<string> lines = new List<string>();
             using (var stream = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Open))
             {
@@ -163,7 +163,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             }
             return lines.ToArray();
 #else
-            throw new NotImplementedException();
+            throw new PlatformNotSupportedException();
 #endif
 
         }
@@ -174,7 +174,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             path = FixPath(path);
             var thread = WriteAllTextAsync(path, data);
             thread.Wait();
-#elif SILVERLIGHT
+#elif WINDOWS_PHONE
             using (var stream = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Create))
             {
                 using (var sw = new StreamWriter(stream))
@@ -184,7 +184,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
                 }
             }
 #else
-            throw new NotImplementedException();
+            throw new PlatformNotSupportedException();
 #endif
         }
         public static void Copy(string sourceFileName, string destFileName)
@@ -193,10 +193,10 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             sourceFileName = sourceFileName.FixPath();
             destFileName = destFileName.FixPath();
             CopyAsync(sourceFileName, destFileName, true).Wait();
-#elif SILVERLIGHT
+#elif WINDOWS_PHONE
             System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().CopyFile(sourceFileName, destFileName, true);
 #else
-            throw new NotImplementedException();
+            throw new PlatformNotSupportedException();
 #endif
         }
 
@@ -206,10 +206,10 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             sourceFileName = sourceFileName.FixPath();
             destFileName = destFileName.FixPath();
             CopyAsync(sourceFileName, destFileName, overwrite).Wait();
-#elif SILVERLIGHT
+#elif WINDOWS_PHONE
             System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().CopyFile(sourceFileName, destFileName, overwrite);
 #else
-            throw new NotImplementedException();
+            throw new PlatformNotSupportedException();
 #endif
         }
 
@@ -224,10 +224,10 @@ namespace MarkerMetro.Unity.WinLegacy.IO
                 return thread.Result;
 
             throw thread.Exception;
-#elif SILVERLIGHT
+#elif WINDOWS_PHONE
             return System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().GetLastWriteTime(path).DateTime;
 #else
-            throw new NotImplementedException();
+            throw new PlatformNotSupportedException();
 #endif
         }
 
@@ -242,10 +242,10 @@ namespace MarkerMetro.Unity.WinLegacy.IO
                 return thread.Result;
 
             throw thread.Exception;
-#elif SILVERLIGHT
+#elif WINDOWS_PHONE
             return System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Open);
 #else
-            throw new NotImplementedException();
+            throw new PlatformNotSupportedException();
 #endif
         }
 
@@ -270,10 +270,10 @@ namespace MarkerMetro.Unity.WinLegacy.IO
                 return new FileStream(thread.Result);
 
             throw thread.Exception;
-#elif SILVERLIGHT
+#elif WINDOWS_PHONE
             return new FileStream(System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().CreateFile(path));
 #else
-            throw new NotImplementedException();
+            throw new PlatformNotSupportedException();
 #endif
         }
         public static StreamWriter CreateText(string path)
@@ -287,10 +287,10 @@ namespace MarkerMetro.Unity.WinLegacy.IO
                 return thread.Result;
 
             throw thread.Exception;
-#elif SILVERLIGHT
+#elif WINDOWS_PHONE
             return new StreamWriter(System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().CreateFile(path));
 #else
-            throw new NotImplementedException();
+            throw new PlatformNotSupportedException();
 #endif
         }
 
@@ -305,10 +305,10 @@ namespace MarkerMetro.Unity.WinLegacy.IO
                 return thread.Result;
 
             throw thread.Exception;
-#elif SILVERLIGHT
+#elif WINDOWS_PHONE
             return new StreamReader(System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Open));
 #else
-            throw new NotImplementedException();
+            throw new PlatformNotSupportedException();
 #endif
         }
 
@@ -317,10 +317,10 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 #if NETFX_CORE
             path = path.FixPath();
             return new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read);
-#elif SILVERLIGHT
+#elif WINDOWS_PHONE
             return new FileStream(System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Open));
 #else
-            throw new NotImplementedException();
+            throw new PlatformNotSupportedException();
 #endif
         }
 
@@ -329,10 +329,10 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 #if NETFX_CORE
             path = path.FixPath();
             return new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write, FileShare.None);
-#elif SILVERLIGHT
+#elif WINDOWS_PHONE
             return new FileStream(System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Open, System.IO.FileAccess.ReadWrite));
 #else
-            throw new NotImplementedException();
+            throw new PlatformNotSupportedException();
 #endif
         }
 
@@ -503,7 +503,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             return file;
         }
 
-        public static async Task<DateTime> GetLastWriteTimeAsync(string path)
+        private static async Task<DateTime> GetLastWriteTimeAsync(string path)
         {
             path = path.FixPath();
             StorageFile file = await Windows.Storage.StorageFile.GetFileFromPathAsync(path);
