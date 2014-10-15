@@ -39,6 +39,9 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection.Tests
 
             string destPath = Path.Combine(localFolder.Path, @"SubFolder1\SubFolder2\FileNew.txt");
 
+            // ensure directory exists, will fail otherwise
+            Directory.CreateDirectory(Path.GetDirectoryName(destPath));
+
             try
             {
                 File.Move(path, destPath);
@@ -52,8 +55,45 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection.Tests
 
             Assert.IsTrue(success);
 
+        }
 
+        public void Metro_File_MoveToSubFolder_NotExists_Failure()
+        {
+            bool success = false;
+            string error = String.Empty;
+            var localFolder = ApplicationData.Current.LocalFolder;
 
+            // create a file
+            string path = Path.Combine(localFolder.Path, @"File.txt");
+            try
+            {
+                using (var sw = File.CreateText(path))
+                {
+                    sw.WriteLine("Hello");
+                    sw.WriteLine("And");
+                    sw.WriteLine("Welcome");
+                };
+            }
+            catch (Exception ex)
+            {
+                error = ex.Message;
+            }
+
+            string destPath = Path.Combine(localFolder.Path, @"SubFolder1\SubFolder2\FileNew.txt");
+
+            // the destination does not exist and so should fail
+
+            try
+            {
+                File.Move(path, destPath);
+                success = true;
+            }
+            catch (Exception ex)
+            {
+                error = ex.Message;
+            }
+
+            Assert.IsFalse(success);
         }
 
         [TestMethod]
