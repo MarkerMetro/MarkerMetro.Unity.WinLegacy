@@ -15,6 +15,48 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection.Tests
     {
 
         [TestMethod]
+        public void Metro_File_MoveToSubFolder_Success()
+        {
+            bool success = false;
+            string error = String.Empty;
+            var localFolder = ApplicationData.Current.LocalFolder;
+
+            // create a file
+            string path = Path.Combine(localFolder.Path, @"File.txt");
+            try
+            {
+                using (var sw = File.CreateText(path))
+                {
+                    sw.WriteLine("Hello");
+                    sw.WriteLine("And");
+                    sw.WriteLine("Welcome");
+                };
+            }
+            catch (Exception ex)
+            {
+                error = ex.Message;
+            }
+
+            string destPath = Path.Combine(localFolder.Path, @"SubFolder1\SubFolder2\FileNew.txt");
+
+            try
+            {
+                File.Move(path, destPath);
+                File.Open(destPath);
+                success = true;
+            }
+            catch (Exception ex)
+            {
+                error = ex.Message;
+            }
+
+            Assert.IsTrue(success);
+
+
+
+        }
+
+        [TestMethod]
         public void Metro_File_CreateText_RootFile_Success()
         {
             bool success = false;

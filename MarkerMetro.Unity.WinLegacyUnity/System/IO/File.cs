@@ -366,14 +366,14 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             await PathIO.WriteTextAsync(path, data);
         }
 
-        private static async Task MoveAsync(string source, string destination)
+        private static async Task MoveAsync(string sourceFileName, string destFileName)
         {
-            var file = await StorageFile.GetFileFromPathAsync(source);
-            var destinatinoFolder = await StorageFolder.GetFolderFromPathAsync(destination);
-            if (file != null && destinatinoFolder != null)
-            {
-                await file.MoveAsync(destinatinoFolder);
-            }
+            var sourceFile = await StorageFile.GetFileFromPathAsync(sourceFileName);
+            var destDirName = Path.GetDirectoryName(destFileName);
+            if (!Directory.Exists(destDirName))
+                Directory.CreateDirectory(destDirName);
+            var destDir = await StorageFolder.GetFolderFromPathAsync(destDirName);
+            await sourceFile.MoveAsync(destDir, Path.GetFileName(destFileName), NameCollisionOption.FailIfExists);
         }
 
         private static async Task<Stream> OpenAsync(string path)
@@ -398,6 +398,9 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 
             var sourceDirName = Path.GetDirectoryName(sourceFileName);
             var destDirName = Path.GetDirectoryName(destFileName);
+
+            if (!Directory.Exists(destDirName))
+                Directory.CreateDirectory(destDirName);
 
             var sourceDir = await StorageFolder.GetFolderFromPathAsync(sourceDirName);
             var destDir = await StorageFolder.GetFolderFromPathAsync(destDirName);
