@@ -70,7 +70,7 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
 
         public void Connect(string hostName, int port)
         {
-#if NETFX_CORE
+#if NETFX_CORE || WINDOWS_PHONE
             var thread = EnsureSocket(hostName, port);
             thread.Wait();
 #else
