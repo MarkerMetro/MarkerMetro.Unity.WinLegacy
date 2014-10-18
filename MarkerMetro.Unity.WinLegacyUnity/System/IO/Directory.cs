@@ -44,12 +44,12 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         {
 #if NETFX_CORE
             var t = ExistsAsync(path.FixPath());
-            t.Wait();
-            if (t.IsCompleted)
+            try
             {
+                t.Wait();
                 return t.Result;
             }
-            else
+            catch
             {
                 return false;
             }
@@ -99,8 +99,6 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             {
                 var task = folder.CreateFolderAsync(folderNames[i], CreationCollisionOption.OpenIfExists).AsTask();
                 task.Wait();
-                if (task.Exception != null)
-                    throw task.Exception;
                 folder = task.Result;
             }
 #elif WINDOWS_PHONE

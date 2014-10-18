@@ -22,20 +22,12 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         public FileInfo(string path)
         {
 #if NETFX_CORE
-            try
-            {
-                _path = path.FixPath();
-                var thread = GetFileAsync(_path);
-                thread.Wait();
-
-                if (thread.IsCompleted)
-                    _file = thread.Result;
-
-                throw thread.Exception;
-            }
-            catch { }
+            _path = path.FixPath();
+            var thread = GetFileAsync(_path);
+            thread.Wait();
+            _file = thread.Result;
 #else
-                throw new PlatformNotSupportedException("new FileInfo");
+            throw new PlatformNotSupportedException("new FileInfo");
 #endif
         }
 
@@ -46,11 +38,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 #if NETFX_CORE
                 var thread = GetSizeAsync(_file);
                 thread.Wait();
-
-                if (thread.IsCompleted)
-                    return Convert.ToInt64(thread.Result);
-
-                throw thread.Exception;
+                return Convert.ToInt64(thread.Result);
 #else
                 throw new PlatformNotSupportedException("FileInfo.Length");
 #endif
@@ -88,11 +76,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 #if NETFX_CORE
                 var thread = GetDateModifiedAsync(_file);
                 thread.Wait();
-
-                if (thread.IsCompleted)
-                    return thread.Result.DateTime;
-
-                throw thread.Exception;
+                return thread.Result.DateTime;
 #else
                 throw new PlatformNotSupportedException("FileInfo.LastWriteTime");
 #endif
@@ -109,7 +93,6 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 #endif
             }
         }
-
 
         public FileStream OpenRead()
         {
@@ -151,7 +134,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         private async Task<StorageFile> GetFileAsync(string path)
         {
             bool fileExists = File.Exists(path);
-            if (!fileExists)
+            if (fileExists)
             {
                 return await StorageFile.GetFileFromPathAsync(path);
             }

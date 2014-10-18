@@ -35,11 +35,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             path = path.FixPath();
             var thread = PathIO.ReadTextAsync(path).AsTask();
             thread.Wait();
-
-            if (thread.IsCompleted)
-                return thread.Result;
-
-            throw thread.Exception;
+            return thread.Result;
 #elif WINDOWS_PHONE
             using (var stream = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Open))
             {
@@ -64,11 +60,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             try
             {
                 thread.Wait();
-
-                if (thread.IsCompleted)
-                    return thread.Result;
-                else
-                    return false;
+                return thread.Result;
             }
             catch
             {
@@ -106,11 +98,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             path = path.FixPath();
             var thread = ReadAllBytesAsync(path);
             thread.Wait();
-
-            if (thread.IsCompleted)
-                return thread.Result;
-
-            throw thread.Exception;
+            return thread.Result;
 #elif WINDOWS_PHONE
             using (var stream = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Open))
             {
@@ -142,14 +130,10 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         public static string[] ReadAllLines(string path)
         {     
 #if NETFX_CORE
-               path = path.FixPath();
+            path = path.FixPath();
             var thread = PathIO.ReadLinesAsync(path).AsTask();
             thread.Wait();
-
-            if (thread.IsCompleted)
-                return thread.Result.ToArray();
-
-            throw thread.Exception;
+            return thread.Result.ToArray();
 #elif WINDOWS_PHONE
             List<string> lines = new List<string>();
             using (var stream = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Open))
@@ -219,11 +203,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             path = path.FixPath();
             var thread = GetLastWriteTimeAsync(path); 
             thread.Wait();
-
-            if (thread.IsCompleted)
-                return thread.Result;
-
-            throw thread.Exception;
+            return thread.Result;
 #elif WINDOWS_PHONE
             return System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().GetLastWriteTime(path).DateTime;
 #else
@@ -237,11 +217,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             path = path.FixPath();
             var thread = OpenAsync(path);
             thread.Wait();
-
-            if (thread.IsCompleted)
-                return thread.Result;
-
-            throw thread.Exception;
+            return thread.Result;
 #elif WINDOWS_PHONE
             return System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Open);
 #else
@@ -265,11 +241,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             path = path.FixPath();
             var thread = CreateFileStreamAsync(path);
             thread.Wait();
-
-            if (thread.IsCompleted)
-                return new FileStream(thread.Result);
-
-            throw thread.Exception;
+            return new FileStream(thread.Result);
 #elif WINDOWS_PHONE
             return new FileStream(System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().CreateFile(path));
 #else
@@ -282,11 +254,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             path = path.FixPath();
             var thread = CreateTextAsync(path);
             thread.Wait();
-
-            if (thread.IsCompleted)
-                return thread.Result;
-
-            throw thread.Exception;
+            return thread.Result;
 #elif WINDOWS_PHONE
             return new StreamWriter(System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().CreateFile(path));
 #else
@@ -300,11 +268,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             path = path.FixPath();
             var thread = OpenTextAsync(path);
             thread.Wait();
-
-            if (thread.IsCompleted)
-                return thread.Result;
-
-            throw thread.Exception;
+            return thread.Result;
 #elif WINDOWS_PHONE
             return new StreamReader(System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().OpenFile(path, System.IO.FileMode.Open));
 #else

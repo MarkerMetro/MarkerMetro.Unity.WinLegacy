@@ -15,6 +15,45 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection.Tests
     {
 
         [TestMethod]
+        public void Metro_FileInfo_Constructor_Success()
+        {
+            // create a file
+            string error = String.Empty;
+            var localFolder = ApplicationData.Current.LocalFolder;
+
+            // create a file
+            string path = Path.Combine(localFolder.Path, @"File.txt");
+            try
+            {
+                using (var sw = File.CreateText(path))
+                {
+                    sw.WriteLine("Hello");
+                    sw.WriteLine("And");
+                    sw.WriteLine("Welcome");
+                };
+            }
+            catch (Exception ex)
+            {
+                error = ex.Message;
+            }
+
+            var fileInfo = new FileInfo(path);
+
+            Assert.IsTrue(fileInfo != null && fileInfo.Length > 0);
+
+        }
+
+        [TestMethod]
+        public void Metro_FileInfo_Constructor_NotFound_Failure()
+        {
+            string error = String.Empty;
+            var localFolder = ApplicationData.Current.LocalFolder;
+            string path = Path.Combine(localFolder.Path, @"FileNotFound.txt");
+            var fileInfo = new FileInfo(path);
+            Assert.IsFalse(fileInfo.Exists);
+        }
+
+        [TestMethod]
         public void Metro_File_MoveToSubFolder_Success()
         {
             bool success = false;
@@ -56,7 +95,7 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection.Tests
             Assert.IsTrue(success);
 
         }
-
+   
         public void Metro_File_MoveToSubFolder_NotExists_Failure()
         {
             bool success = false;

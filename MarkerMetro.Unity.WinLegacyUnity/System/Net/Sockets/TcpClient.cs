@@ -157,7 +157,6 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
 
         private async Task WriteToOutputStreamAsync(byte[] bytes)
         {
-
             if (_socket == null) return;
             _writer = new DataWriter(_socket.OutputStream);
             _writer.WriteBytes(bytes);
