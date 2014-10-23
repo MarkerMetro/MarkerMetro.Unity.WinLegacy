@@ -18,7 +18,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 #if NETFX_CORE
             var t = GetFilesAsync(path.FixPath());
             t.Wait();
-            return t.Result;
+            return t.Result == null ? new string[0] : t.Result;
 #else
             throw new PlatformNotSupportedException();
 #endif
@@ -34,7 +34,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 #if NETFX_CORE || WINDOWS_PHONE
             var t = GetFilesAsync(path.FixPath());
             t.Wait();
-            return t.Result;
+            return t.Result == null ? new string[0] : t.Result;
 #else
             throw new PlatformNotSupportedException();
 #endif

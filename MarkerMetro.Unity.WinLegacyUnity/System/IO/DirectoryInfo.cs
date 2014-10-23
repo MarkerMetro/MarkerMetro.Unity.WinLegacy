@@ -47,7 +47,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             {
                 return files.Select(x => new FileInfo(x)).ToArray();
             }
-            return null;
+            return new FileInfo[0];
         }
     }
 
