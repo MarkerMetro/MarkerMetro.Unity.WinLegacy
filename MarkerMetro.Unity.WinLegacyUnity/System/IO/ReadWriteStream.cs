@@ -1,4 +1,5 @@
 ﻿#if NETFX_CORE || WINDOWS_PHONE
+using MarkerMetro.Unity.WinLegacy.Runtime.Remoting.Messaging;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -93,6 +94,19 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         public override void SetLength(long value)
         {
             writeStream.SetLength(value);
+        }
+
+        public new void BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state = null)
+        {
+            AsyncResult res = new AsyncResult();
+            res.AsyncState = state;
+            res.IsCompleted = false;
+            var task = readStream.ReadAsync(buffer, offset, count);
+            task.ContinueWith((t) =>
+            {
+                res.IsCompleted = true;
+                callback(res);
+            });
         }
 
         public override void Write(byte[] buffer, int offset, int count)
