@@ -12,6 +12,7 @@ using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
 using MarkerMetro.Unity.WinLegacy.Runtime.Remoting.Messaging;
 using MarkerMetro.Unity.WinLegacy.IO;
+using Windows.Foundation;
 #else
 using System.Net.Sockets;
 using System.Threading;
@@ -138,6 +139,42 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
             throw new PlatformNotSupportedException();
 #endif
         }
+
+        public void ReadFromInputStreamAsync(int size, Action<byte[]> callback)
+        {
+#if NETFX_CORE || WINDOWS_PHONE
+            var task = ReadFromInputStreamAsyncInner(size);
+            task.ContinueWith((t) =>
+            {
+                if (callback != null)
+                {
+                    callback(t.Result);
+                }
+            });
+#else
+            throw new PlatformNotSupportedException("TcpClient.ReadFromInputStream");
+#endif
+        }
+
+#if NETFX_CORE || WINDOWS_PHONE
+
+        private async Task<byte[]> ReadFromInputStreamAsyncInner(int size)
+        {
+            if (_socket == null) return null;
+            DataReader reader = new DataReader(_socket.InputStream);
+            reader.InputStreamOptions = InputStreamOptions.Partial;
+            var count = await reader.LoadAsync((uint)size);
+            byte[] bytesRead = null;
+            if (count > 0)
+            {
+                bytesRead = new byte[count];
+                reader.ReadBytes(bytesRead);
+            }
+            reader.DetachStream();
+            reader.Dispose();
+            return bytesRead;
+        }
+#endif
 
         /// <summary>
         /// Helper method to allow easy writing of bytes to the socket stream
