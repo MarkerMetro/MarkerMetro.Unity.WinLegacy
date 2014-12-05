@@ -12,7 +12,7 @@ namespace MarkerMetro.Unity.WinLegacyUnity.Tests
     [TestClass]
     public class TcpClientTests
     {
-        [TestMethod]
+        //[TestMethod]
 #if NETFX_CORE
         public void Metro_TcpClient_ReadFromInputStreamAsync_Exception()
 #elif WINDOWS_PHONE
@@ -30,7 +30,7 @@ namespace MarkerMetro.Unity.WinLegacyUnity.Tests
                       
                     });
             }
-            catch (Exception ex)
+            catch (AggregateException ex)
             {
                 exception = true;
             }

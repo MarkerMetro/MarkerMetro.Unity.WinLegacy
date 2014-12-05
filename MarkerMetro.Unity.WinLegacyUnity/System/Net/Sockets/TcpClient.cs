@@ -163,7 +163,6 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
 
         private async Task<byte[]> ReadFromInputStreamAsyncInner(int size)
         {
-            throw new Exception("boo");
             if (_socket == null) return null;
             DataReader reader = new DataReader(_socket.InputStream);
             reader.InputStreamOptions = InputStreamOptions.Partial;
