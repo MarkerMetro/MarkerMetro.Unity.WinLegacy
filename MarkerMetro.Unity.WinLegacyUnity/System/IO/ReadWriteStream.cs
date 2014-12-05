@@ -96,19 +96,6 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             writeStream.SetLength(value);
         }
 
-        public new void BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state = null)
-        {
-            AsyncResult res = new AsyncResult();
-            res.AsyncState = state;
-            res.IsCompleted = false;
-            var task = readStream.ReadAsync(buffer, offset, count);
-            task.ContinueWith((t) =>
-            {
-                res.IsCompleted = true;
-                callback(res);
-            });
-        }
-
         public override void Write(byte[] buffer, int offset, int count)
         {
             writeStream.Write(buffer, offset, count);

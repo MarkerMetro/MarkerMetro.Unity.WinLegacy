@@ -40,7 +40,6 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             res.IsCompleted = false;
 
             var task = stream.ReadAsync(buffer, offset, count);
-
             task.ContinueWith((t) =>
             {
                 res.IsCompleted = true;
@@ -49,6 +48,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
                 readResults[stream][res] = t.Result;
                 callback(res);
             });
+            task.Start();
             return res;
 #else
             throw new PlatformNotSupportedException("Stream.BeginRead");

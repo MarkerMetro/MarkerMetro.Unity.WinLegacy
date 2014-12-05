@@ -116,6 +116,9 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\ReflectionTests.cs">
       <Link>ReflectionTests.cs</Link>
     </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\TcpClientTests.cs">
+      <Link>TcpClientTests.cs</Link>
+    </Compile>
     <Compile Include="NameValueCollectionTests.cs" />
     <Compile Include="IOTests.cs" />
     <Compile Include="StreamReaderExtensionsTests.cs" />

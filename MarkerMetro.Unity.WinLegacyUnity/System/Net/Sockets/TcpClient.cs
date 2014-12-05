@@ -13,6 +13,7 @@ using Windows.Storage.Streams;
 using MarkerMetro.Unity.WinLegacy.Runtime.Remoting.Messaging;
 using MarkerMetro.Unity.WinLegacy.IO;
 using Windows.Foundation;
+using System.Runtime.ExceptionServices;
 #else
 using System.Net.Sockets;
 using System.Threading;
@@ -94,6 +95,7 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
                 res.IsCompleted = true;
                 requestCallback(res);
             });
+            task.Start();
 
             return res;
 #else
@@ -151,6 +153,7 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
                     callback(t.Result);
                 }
             });
+            task.Start();        
 #else
             throw new PlatformNotSupportedException("TcpClient.ReadFromInputStream");
 #endif
@@ -160,6 +163,7 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
 
         private async Task<byte[]> ReadFromInputStreamAsyncInner(int size)
         {
+            throw new Exception("boo");
             if (_socket == null) return null;
             DataReader reader = new DataReader(_socket.InputStream);
             reader.InputStreamOptions = InputStreamOptions.Partial;
