@@ -12,7 +12,7 @@ namespace MarkerMetro.Unity.WinLegacyUnity.Tests
     [TestClass]
     public class TcpClientTests
     {
-        //[TestMethod]
+        //[TestMethod] Need to manually add throw in TcpClient.ReadFromInputStreamAsyncInner before enabling at moment
 #if NETFX_CORE
         public void Metro_TcpClient_ReadFromInputStreamAsync_Exception()
 #elif WINDOWS_PHONE
