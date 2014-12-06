@@ -92,10 +92,10 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
 
             task.ContinueWith((t) =>
             {
+                // TODO deal with task.IsFaulted
                 res.IsCompleted = true;
                 requestCallback(res);
             });
-            task.Start();
 
             return res;
 #else
@@ -142,7 +142,7 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
 #endif
         }
 
-        public void ReadFromInputStreamAsync(int size, Action<byte[]> callback)
+        public void ReadFromInputStreamAsync(int size, Action<byte[], Exception> callback)
         {
 #if NETFX_CORE || WINDOWS_PHONE
             var task = ReadFromInputStreamAsyncInner(size);
@@ -150,10 +150,13 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
             {
                 if (callback != null)
                 {
-                    callback(t.Result);
+                    if (t.IsFaulted)
+                        callback(null, t.Exception);
+                    else
+                        callback(t.Result, null);
                 }
             });
-            task.Start();        
+            
 #else
             throw new PlatformNotSupportedException("TcpClient.ReadFromInputStream");
 #endif

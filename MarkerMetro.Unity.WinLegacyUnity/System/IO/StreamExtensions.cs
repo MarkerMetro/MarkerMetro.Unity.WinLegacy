@@ -42,13 +42,13 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             var task = stream.ReadAsync(buffer, offset, count);
             task.ContinueWith((t) =>
             {
+                // TODO deal with task.IsFaulted
                 res.IsCompleted = true;
                 if (!readResults.ContainsKey(stream))
                     readResults[stream] = new Dictionary<IAsyncResult, int>();
                 readResults[stream][res] = t.Result;
                 callback(res);
             });
-            task.Start();
             return res;
 #else
             throw new PlatformNotSupportedException("Stream.BeginRead");

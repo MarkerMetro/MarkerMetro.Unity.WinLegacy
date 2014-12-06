@@ -12,7 +12,7 @@ namespace MarkerMetro.Unity.WinLegacyUnity.Tests
     [TestClass]
     public class TcpClientTests
     {
-        //[TestMethod] Need to manually add throw in TcpClient.ReadFromInputStreamAsyncInner before enabling at moment
+        //[TestMethod] //Need to manually add throw in TcpClient.ReadFromInputStreamAsyncInner before enabling at moment
 #if NETFX_CORE
         public void Metro_TcpClient_ReadFromInputStreamAsync_Exception()
 #elif WINDOWS_PHONE
@@ -23,18 +23,11 @@ namespace MarkerMetro.Unity.WinLegacyUnity.Tests
         {
             bool exception = false;
             TcpClient tcpClient = new TcpClient();
-            try
-            { 
-                tcpClient.ReadFromInputStreamAsync(1021, b =>
-                    {
-                      
-                    });
-            }
-            catch (AggregateException ex)
-            {
-                exception = true;
-            }
-            Assert.IsTrue(exception, "no exception found");
+            tcpClient.ReadFromInputStreamAsync(1021, (b, e) =>
+                {
+                    Assert.IsNotNull(e);
+                });
+            
         }
     }
 }
