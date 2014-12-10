@@ -139,19 +139,16 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
 #endif
         }
 
-        public void ReadFromInputStreamAsync(int size, Action<byte[], Exception> callback)
+        public void ReadFromInputStreamAsync(int size, Action<byte[]> successCallback, Action<Exception> failureCallback)
         {
 #if NETFX_CORE || WINDOWS_PHONE
             var task = ReadFromInputStreamAsyncInner(size);
             task.ContinueWith((t) =>
             {
-                if (callback != null)
-                {
-                    if (t.IsFaulted)
-                        callback(null, t.Exception);
-                    else
-                        callback(t.Result, null);
-                }
+                if (t.IsFaulted && failureCallback != null)
+                    failureCallback(t.Exception);
+                else if (!t.IsFaulted && successCallback != null)
+                    successCallback(t.Result);
             });
             
 #else
@@ -179,23 +176,34 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
         }
 #endif
 
-        /// <summary>
-        /// Helper method to allow easy writing of bytes to the socket stream
-        /// </summary>
-        /// <param name="bytes"></param>
         public void WriteToOutputStream(byte[] bytes)
         {
 #if NETFX_CORE || WINDOWS_PHONE
-            var thread = WriteToOutputStreamAsync(bytes);
+            var thread = WriteToOutputStreamAsyncInner(bytes);
             thread.Wait();
 #else
             throw new PlatformNotSupportedException();
 #endif
         }
 
+        public void WriteToOutputStreamAsync(byte[] bytes, Action successCallback, Action<Exception> failureCallback)
+        {
 #if NETFX_CORE || WINDOWS_PHONE
+            var task = WriteToOutputStreamAsyncInner(bytes);
+            task.ContinueWith((t) =>
+            {
+                if (t.IsFaulted && failureCallback != null)
+                    failureCallback(t.Exception);
+                else if (!t.IsFaulted && successCallback != null)
+                    successCallback();
+            });
+#else
+            throw new PlatformNotSupportedException();
+#endif
+        }
 
-        private async Task WriteToOutputStreamAsync(byte[] bytes)
+#if NETFX_CORE || WINDOWS_PHONE
+        private async Task WriteToOutputStreamAsyncInner(byte[] bytes)
         {
             if (_socket == null) return;
             _writer = new DataWriter(_socket.OutputStream);
@@ -221,7 +229,6 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
                 }
             }
         }
-
 #endif
 
     }

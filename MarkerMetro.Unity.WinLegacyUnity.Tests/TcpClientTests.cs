@@ -22,11 +22,26 @@ namespace MarkerMetro.Unity.WinLegacyUnity.Tests
 #endif
         {
             TcpClient tcpClient = new TcpClient();
-            tcpClient.ReadFromInputStreamAsync(1021, (b, e) =>
+            tcpClient.ReadFromInputStreamAsync(1021, null, (e) =>
                 {
                     Assert.IsNotNull(e);
-                });
-            
+                });   
+        }
+
+        //[TestMethod]
+#if NETFX_CORE
+        public void Metro_TcpClient_WriteToOutputStreamAsync_Exception()
+#elif WINDOWS_PHONE
+        public void WP8_TcpClient_WriteToOutputStreamAsync_Exception()
+#else
+        public void TcpClient_WriteToOutputStreamAsync_Exception()
+#endif
+        {
+            TcpClient tcpClient = new TcpClient();
+            tcpClient.WriteToOutputStreamAsync(new byte[1], null, (e) =>
+            {
+                Assert.IsNotNull(e);
+            });
         }
 
         //[TestMethod]
