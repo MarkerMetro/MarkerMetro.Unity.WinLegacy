@@ -84,16 +84,11 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
         {
 #if NETFX_CORE || WINDOWS_PHONE
 
-            AsyncResult res = new AsyncResult();
-            res.AsyncState = state;
-            res.IsCompleted = false;
-
             var task = EnsureSocket(host, port);
+            TaskStateAsyncResult res = new TaskStateAsyncResult(task, state);
 
             task.ContinueWith((t) =>
             {
-                // TODO deal with task.IsFaulted
-                res.IsCompleted = true;
                 requestCallback(res);
             });
 
@@ -106,7 +101,9 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
         public void EndConnect(IAsyncResult result)
         {
 #if NETFX_CORE || WINDOWS_PHONE
-            // Nothing needed
+            var ar = (TaskStateAsyncResult)result;
+            if (ar.InnerTask.IsFaulted)
+                throw ar.InnerTask.Exception;
             return;
 #else
             throw new PlatformNotSupportedException();

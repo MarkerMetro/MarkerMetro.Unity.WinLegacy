@@ -12,12 +12,6 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 {
     public static class StreamExtensions
     {
-
-#if NETFX_CORE
-        private static ConcurrentDictionary<Stream, Dictionary<IAsyncResult, int>> readResults =
-            new ConcurrentDictionary<Stream, Dictionary<IAsyncResult, int>>();
-#endif
-
         public static byte[] ToArray(this Stream stream)
         {
             var buffer = new byte[16 * 1024];
@@ -35,21 +29,14 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         public static IAsyncResult BeginRead(this Stream stream, byte[] buffer, int offset, int count, AsyncCallback callback, object state = null)
         {
 #if NETFX_CORE
-            AsyncResult res = new AsyncResult();
-            res.AsyncState = state;
-            res.IsCompleted = false;
-
             var task = stream.ReadAsync(buffer, offset, count);
-            task.ContinueWith((t) =>
-            {
-                // TODO deal with task.IsFaulted
-                res.IsCompleted = true;
-                if (!readResults.ContainsKey(stream))
-                    readResults[stream] = new Dictionary<IAsyncResult, int>();
-                readResults[stream][res] = t.Result;
-                callback(res);
-            });
-            return res;
+            var ar = new TaskStateAsyncResult<int>(task, state);
+            if (callback != null)
+                task.ContinueWith((t) =>
+                {
+                    callback(ar);
+                });
+            return ar;
 #else
             throw new PlatformNotSupportedException("Stream.BeginRead");
 #endif
@@ -58,19 +45,8 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         public static int EndRead(this Stream stream, IAsyncResult res)
         {
 #if NETFX_CORE
-            if (!readResults.ContainsKey(stream) || !readResults[stream].ContainsKey(res))
-                throw new InvalidOperationException("Pending read operation did not originate from this stream.");
-            var result = readResults[stream][res];
-            Dictionary<IAsyncResult, int> dictValue = null;
-            if (readResults[stream].Count == 1)
-            {
-                readResults.TryRemove(stream, out dictValue);
-            }
-            else
-            {
-                readResults[stream].Remove(res);
-            }
-            return result;
+            var ar = (TaskStateAsyncResult<int>)res;
+            return ar.InnerTask.Result;
 #else
             throw new PlatformNotSupportedException("Stream.EndRead");
 #endif

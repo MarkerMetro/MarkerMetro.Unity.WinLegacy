@@ -21,5 +21,15 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection.Tests
                 }
             }
         }
+
+        [TestMethod]
+        public void Metro_StreamReaderExtensions_BeginEndRead_Exception ()
+        {
+            System.IO.Stream readStream = new System.IO.MemoryStream();
+            System.IO.Stream writeStream = new System.IO.MemoryStream();
+            ReadWriteStream rwStream = new ReadWriteStream(readStream, writeStream);
+            IAsyncResult ar = rwStream.BeginRead(new byte[1], 0, 0, null);
+            rwStream.EndRead(ar);
+        }
     }
 }
