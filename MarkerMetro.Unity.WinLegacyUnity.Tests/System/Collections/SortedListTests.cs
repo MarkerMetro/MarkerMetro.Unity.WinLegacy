@@ -1,11 +1,18 @@
 ﻿using System;
+#if NETFX_CORE || WINDOWS_PHONE
+using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+#else
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+#endif
 
 namespace MarkerMetro.Unity.WinLegacyUnity.Tests
 {
     [TestClass]
     public class SortedListTests
     {
+
+#if !(NETFX_CORE || WINDOWS_PHONE)
+
         [TestMethod]
         public void IntegerSortedList_ShouldBehaveSame()
         {
@@ -39,5 +46,8 @@ namespace MarkerMetro.Unity.WinLegacyUnity.Tests
 
             Assert.AreEqual(sysList.GetByIndex(1), mmList.GetByIndex(1));
         }
+
+#endif
     }
+
 }

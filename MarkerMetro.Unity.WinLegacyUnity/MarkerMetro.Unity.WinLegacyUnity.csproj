@@ -79,7 +79,7 @@
     <Compile Include="System\Net\Sockets\TcpClient.cs" />
     <Compile Include="System\Net\WebHeaderCollection.cs" />
     <Compile Include="System\Net\WebRequest.cs" />
-    <Compile Include="System\ReflectionExtensions.cs" />
+    <Compile Include="System\Reflection\ReflectionExtensions.cs" />
     <Compile Include="System\Reflection\TargetException.cs" />
     <Compile Include="System\Runtime\Remoting\Messaging\AsyncResult.cs" />
     <Compile Include="System\Runtime\Remoting\Messaging\TaskStateAsyncResult.cs" />
