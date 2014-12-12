@@ -25,7 +25,7 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection.Tests
 #endif
         {
             var dict = new Dictionary<string, ReflectionTests>();
-            var actual = dict.GetType().GetInterface("System.Collections.Generic.IDictionary`2");
+            var actual = dict.GetType().GetInterface("System.Collections.Generic.IDictionary`2", true);
 
             Assert.IsNotNull(actual, "Must find generic IDictionary");
         }
@@ -40,7 +40,6 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection.Tests
 #endif
         {
             var actual = typeof(DerivedClass).GetProperties();
-
             Assert.AreEqual(2, actual.Length);
         }
 
