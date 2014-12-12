@@ -175,8 +175,8 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Net\WebRequest.cs">
       <Link>System\Net\WebRequest.cs</Link>
     </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\ReflectionExtensions.cs">
-      <Link>System\ReflectionExtensions.cs</Link>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Reflection\ReflectionExtensions.cs">
+      <Link>System\Reflection\ReflectionExtensions.cs</Link>
     </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Runtime\Remoting\Messaging\AsyncResult.cs">
       <Link>System\Runtime\Remoting\Messaging\AsyncResult.cs</Link>

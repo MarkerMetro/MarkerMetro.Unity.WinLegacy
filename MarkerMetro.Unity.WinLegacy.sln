@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkerMetro.Unity.WinLegacyUnity", "MarkerMetro.Unity.WinLegacyUnity\MarkerMetro.Unity.WinLegacyUnity.csproj", "{02F383C2-3484-4183-8DD4-B201D41B74D5}"
 EndProject
@@ -27,6 +27,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkerMetro.Unity.WinLegacyUnity.Tests", "MarkerMetro.Unity.WinLegacyUnity.Tests\MarkerMetro.Unity.WinLegacyUnity.Tests.csproj", "{0ABF88C5-3EB7-473A-BB68-9EA7EB9D7D5E}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WACKTest.App", "WACKTest.App\WACKTest.App.csproj", "{C380C8EE-6BE5-455D-BE61-9706ACDE2385}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MarkerMetro.Unity.WinLegacyWP8.Tests", "MarkerMetro.Unity.WinLegacyWP8.Tests\MarkerMetro.Unity.WinLegacyWP8.Tests.csproj", "{13DB3F3B-5643-4220-9C5F-4388306CB36D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -240,6 +242,42 @@ Global
 		{C380C8EE-6BE5-455D-BE61-9706ACDE2385}.Release|x86.ActiveCfg = Release|x86
 		{C380C8EE-6BE5-455D-BE61-9706ACDE2385}.Release|x86.Build.0 = Release|x86
 		{C380C8EE-6BE5-455D-BE61-9706ACDE2385}.Release|x86.Deploy.0 = Release|x86
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Debug|Any CPU.Build.0 = Debug|x86
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Debug|ARM.ActiveCfg = Debug|ARM
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Debug|ARM.Build.0 = Debug|ARM
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Debug|ARM.Deploy.0 = Debug|ARM
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Debug|Mixed Platforms.Build.0 = Debug|x86
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Debug|Mixed Platforms.Deploy.0 = Debug|x86
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Debug|x64.ActiveCfg = Debug|x86
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Debug|x86.ActiveCfg = Debug|x86
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Debug|x86.Build.0 = Debug|x86
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Debug|x86.Deploy.0 = Debug|x86
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Master|Any CPU.ActiveCfg = Release|x86
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Master|Any CPU.Build.0 = Release|x86
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Master|ARM.ActiveCfg = Release|ARM
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Master|ARM.Build.0 = Release|ARM
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Master|ARM.Deploy.0 = Release|ARM
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Master|Mixed Platforms.ActiveCfg = Release|x86
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Master|Mixed Platforms.Build.0 = Release|x86
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Master|Mixed Platforms.Deploy.0 = Release|x86
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Master|x64.ActiveCfg = Release|x86
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Master|x86.ActiveCfg = Release|x86
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Master|x86.Build.0 = Release|x86
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Master|x86.Deploy.0 = Release|x86
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Release|Any CPU.ActiveCfg = Release|x86
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Release|Any CPU.Build.0 = Release|x86
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Release|ARM.ActiveCfg = Release|ARM
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Release|ARM.Build.0 = Release|ARM
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Release|ARM.Deploy.0 = Release|ARM
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Release|Mixed Platforms.ActiveCfg = Release|x86
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Release|Mixed Platforms.Build.0 = Release|x86
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Release|Mixed Platforms.Deploy.0 = Release|x86
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Release|x64.ActiveCfg = Release|x86
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Release|x86.ActiveCfg = Release|x86
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Release|x86.Build.0 = Release|x86
+		{13DB3F3B-5643-4220-9C5F-4388306CB36D}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
