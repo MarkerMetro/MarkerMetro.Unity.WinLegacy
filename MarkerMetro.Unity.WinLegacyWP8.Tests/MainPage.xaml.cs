@@ -21,6 +21,7 @@ namespace MarkerMetro.Unity.WinLegacyWP8.Tests
         // Constructor
         public MainPage()
         {
+            BLAH!
             InitializeComponent();
 
             var wrapper = new TestExecutorServiceWrapper();
