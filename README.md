@@ -11,31 +11,15 @@ Where this is the case, we have implemented this plugin to help
 
 How?
 ================================
-This library is published on the Marker Metro NuGet Feed (https://github.com/MarkerMetro/MarkerMetro.ProcessAutomation/wiki)
+The latest stable version of this library is published on Nuget and tagged on this repo (TODO public link).
 
-To update and use a NuGet plugin on a project see an example here:
-https://github.com/MarkerMetro/SportsJeopardy#marker-metro-nuget-access
+We recommend you look at MarkerMetro.Unity.WinShared (TODO link). This has Unity menu integration allowing you to get the latest from NuGet automatically as well as use local versions of this plugin by specifying the repository root on your local PC. 
 
-Always remember to initialize the plugin's Dispatcher for marshalling threads:
+If you are not using WinShared, simply ensure you initialize the plugin's Dispatcher for marshalling threads:
 
 You can use the App.xaml.cs for Windows 8.1 when AppCallbacks has been initialized:
 https://github.com/MarkerMetro/SportsJeopardy/blob/windows/WindowsSolution/WindowsStoreApps/Sports%20Jeopardy!/App.xaml.cs
 
 And in Windows Phone 8, you can use Mainpage.xaml.cs in the Unity_Loaded handler:
 https://github.wdig.com/MarkerMetro/BlockSumProduction/blob/windows/WindowsSolution/WindowsStoreApps/LostLight/MainPage.xaml.cs
-
-Generally speaking once set up, you can push changes, run a new build via the build server
-
-1. Push Changes
-2. Run a new build via the http://mmbuild1.cloudapp.net/ build server
-3. Run the bat file in your project which will copy new versions into Unity plugins folders
-
-## Building to Dependent Projects
-
-WinLegacy.proj is a helper MSBuild project to quickly build and deploy built dlls to dependant projects.
-Running following command-line: "MSBuild WinLegacy.proj" will rebuild all projects in this solution and deploy them to LitJson and JsonFx
-sub-projects, provided that they are on the same level as root of this project.
-
-Running "MSBuild WinLegacy.proj /p:PublishDir=C:\Test" will build & publish to C:\Test (assuming that that folder contains standard
-References/[Platform] sub-structure). 
 
