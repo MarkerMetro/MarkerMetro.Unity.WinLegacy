@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 namespace MarkerMetro.Unity.WinLegacy.Collections
 {
     /**
-     * Implement Hashtable like it exists in .NET 2.0... or at least the part I'm using
+     * Implement Hashtable like it exists in .NET 2.0... or at least the part I'm using.
      * 
      * This will trick the compiler into compiling any existing plug-ins that use System.Collections.Hashtable
      * as long as the plug-in is not a DLL.  This is another reason to prefer plug-ins that give you source code
@@ -17,6 +17,9 @@ namespace MarkerMetro.Unity.WinLegacy.Collections
      *
      * The reason this code looks so complex is I'm [trying to deal] with the enumerators properly (foreach loops over a Hashtable object).
      */
+    /// <summary>
+    /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.collections.hashtable.aspx.
+    /// </summary>
     public class Hashtable : global::System.Collections.Generic.Dictionary<object, object>, IEnumerable, IDictionary
     {
         /**

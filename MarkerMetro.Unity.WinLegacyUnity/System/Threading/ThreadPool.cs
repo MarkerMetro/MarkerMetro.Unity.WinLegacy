@@ -9,7 +9,9 @@ using Windows.System.Threading;
 
 namespace MarkerMetro.Unity.WinLegacy.Threading
 {
-    
+    /// <summary>
+    /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.threading.threadpool.aspx.
+    /// </summary>
     public class ThreadPool
     {
         public static bool QueueUserWorkItem(Action waitCallback)

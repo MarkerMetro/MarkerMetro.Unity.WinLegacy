@@ -5,6 +5,9 @@ using System.Text;
 
 namespace MarkerMetro.Unity.WinLegacy.Collections
 {
+    /// <summary>
+    /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.collections.sortedlist.aspx.
+    /// </summary>
     public class SortedList : SortedDictionary<object, object>
     {
         public virtual object GetByIndex(int index)

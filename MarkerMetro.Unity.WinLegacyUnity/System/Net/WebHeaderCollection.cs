@@ -5,6 +5,9 @@ using System.Text;
 
 namespace MarkerMetro.Unity.WinLegacy.Net
 {
+    /// <summary>
+    /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.net.webheadercollection.aspx.
+    /// </summary>
     public class WebHeaderCollection : MarkerMetro.Unity.WinLegacy.Collections.Specialized.NameValueCollection 
     {
         readonly System.Net.WebHeaderCollection _actual;

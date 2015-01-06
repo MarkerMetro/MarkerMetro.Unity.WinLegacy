@@ -21,7 +21,9 @@ using System.Threading;
 
 namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
 {
-
+    /// <summary>
+    /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.net.sockets.tcpclient.aspx.
+    /// </summary>
     public class TcpClient
     {
         public bool UsePlainSocket { get; set; }

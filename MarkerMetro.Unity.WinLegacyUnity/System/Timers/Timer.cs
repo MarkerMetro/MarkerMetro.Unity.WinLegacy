@@ -6,6 +6,10 @@ using Windows.System.Threading;
 namespace MarkerMetro.Unity.WinLegacy.Timers
 {
     public delegate void ElapsedEventHandler(Object sender,	ElapsedEventArgs e);
+
+    /// <summary>
+    /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.timers.timer.aspx.
+    /// </summary>
     public class Timer
     {
 #if NETFX_CORE || WINDOWS_PHONE
@@ -32,8 +36,10 @@ namespace MarkerMetro.Unity.WinLegacy.Timers
             set
             {
                 if (value <= 0 || value > Int32.MaxValue)
+                {
                     throw new ArgumentException("The value of the interval parameter is" +
                         " less than or equal to zero, or greater than Int32.MaxValue.");
+                }
 
                 if (!timeSpanSet)
                 {
@@ -41,8 +47,10 @@ namespace MarkerMetro.Unity.WinLegacy.Timers
                     timeSpanSet = true;
                 }
                 else
+                {
                     throw new NotImplementedException(
                         "Trying to set interval for the second time is not implemented.");
+                }
             }
         }
 
@@ -66,7 +74,17 @@ namespace MarkerMetro.Unity.WinLegacy.Timers
         public bool Enabled
         {
             get { return enabled; }
-            set { Start(); }
+            set
+            {
+                if (value)
+                {
+                    Start();
+                }
+                else
+                {
+                    Stop();
+                }
+            }
         }
 
 #pragma warning disable
@@ -98,14 +116,18 @@ namespace MarkerMetro.Unity.WinLegacy.Timers
                 TimerElapsedHandler handler = (t) =>
                 {
                     if (AutoReset)
+                    {
                         throw new NotImplementedException("If autoreset == true and enabled == true," +
                             " the timer is supposed to restart.");
+                    }
                     if (Enabled)
+                    {
                         Elapsed(null, new ElapsedEventArgs());
+                    }
                 };
 
                 timer = ThreadPoolTimer.CreatePeriodicTimer(handler, timeSpan);
-                    running = true;
+                running = true;
             }
 #else
             throw new PlatformNotSupportedException();
@@ -119,6 +141,9 @@ namespace MarkerMetro.Unity.WinLegacy.Timers
 
     }
 
+    /// <summary>
+    /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.timers.elapsedeventargs.aspx.
+    /// </summary>
     public class ElapsedEventArgs : EventArgs
     {
         public DateTime SignalTime { get { throw new NotImplementedException(); } }

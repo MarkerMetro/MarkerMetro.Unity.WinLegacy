@@ -11,6 +11,9 @@ using Windows.Storage.Search;
 
 namespace MarkerMetro.Unity.WinLegacy.IO
 {
+    /// <summary>
+    /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.io.directory.aspx.
+    /// </summary>
     public static class Directory
     {
         public static string[] GetFiles(string path)

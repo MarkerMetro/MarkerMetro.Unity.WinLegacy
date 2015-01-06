@@ -11,6 +11,9 @@ using System.IO;
 
 namespace MarkerMetro.Unity.WinLegacy.IO
 {
+    /// <summary>
+    /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.io.file.aspx.
+    /// </summary>
     public static class File
     {
 
@@ -50,7 +53,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         }
 
         /// <summary>
-        /// Used only internally, use UnityEngine.Windows.File within Unity
+        /// Used only internally, use UnityEngine.Windows.File within Unity.
         /// </summary>
         internal static bool Exists(string path)
         {
@@ -74,7 +77,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         }
 
         /// <summary>
-        /// Used only internally, use UnityEngine.Windows.File within Unity
+        /// Used only internally, use UnityEngine.Windows.File within Unity.
         /// </summary>
         internal static void Delete(string path)
         {
@@ -90,7 +93,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         }
 
         /// <summary>
-        /// Used only internally, use UnityEngine.Windows.File within Unity
+        /// Used only internally, use UnityEngine.Windows.File within Unity.
         /// </summary>
         internal static byte[] ReadAllBytes(string path)
         {
@@ -301,7 +304,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         }
 
         /// <summary>
-        /// Ensures we clean up unix paths with incorrect slash direction passed from Unity
+        /// Ensures we clean up unix paths with incorrect slash direction passed from Unity.
         /// </summary>
         internal static string FixPath(this string path)
         {

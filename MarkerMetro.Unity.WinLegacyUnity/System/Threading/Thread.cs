@@ -10,13 +10,16 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
 {
     public delegate void ParameterizedThreadStart(object target);
     public delegate void ThreadStart();
-    
+
+    /// <summary>
+    /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.threading.thread.aspx.
+    /// </summary>
     public class Thread
     {
 
         /*
-         * pretty sure Task.Start doesn't always spin up a new thread (depends on synccontext)
-         * pretty sure that we'll need try/catching as tasks can throw exceptions when their state isn't as expected (e.g. waiting on a completed task?)
+         * pretty sure Task.Start doesn't always spin up a new thread (depends on synccontext).
+         * pretty sure that we'll need try/catching as tasks can throw exceptions when their state isn't as expected (e.g. waiting on a completed task?).
          * */
 
 #if NETFX_CORE
@@ -27,7 +30,7 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
 #endif
 
         /// <summary>
-        /// Currently this value is ignored, not sure how to implement this
+        /// Currently this value is ignored, not sure how to implement this.
         /// </summary>
         public bool IsBackground
         {
@@ -43,7 +46,7 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
         }
 
         /// <summary>
-        /// Determine if the thread is Alive, not implemented
+        /// Determine if the thread is Alive, not implemented.
         /// </summary>
         public bool IsAlive
         {

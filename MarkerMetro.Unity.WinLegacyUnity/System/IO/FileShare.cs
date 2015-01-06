@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace MarkerMetro.Unity.WinLegacy.IO
 {
+    /// <summary>
+    /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.io.fileshare.aspx.
+    /// </summary>
     public enum FileShare
     {
         Delete,
