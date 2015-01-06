@@ -3,9 +3,9 @@
 using System.Diagnostics;
 #endif // #if DEBUG
 
-namespace MarkerMetro.Unity.WinLegacy.Cryptography
+namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
 {
-    public static class DESCrytography
+    public static class DESCryptography
     {
 
         /////////////////////////////////////////////////////////////

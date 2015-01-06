@@ -2,8 +2,11 @@
 using System.IO;
 using System.Text;
 
-namespace MarkerMetro.Unity.WinLegacy.Cryptography
+namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
 {
+    /// <summary>
+    /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.security.cryptography.md5cryptoserviceprovider.aspx.
+    /// </summary>
     public class MD5CryptoServiceProvider : MD5
     {
         public MD5CryptoServiceProvider()
@@ -11,8 +14,9 @@ namespace MarkerMetro.Unity.WinLegacy.Cryptography
         {
         }
     }
+
     /// <summary>
-    /// Summary description for MD5.
+    /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.security.cryptography.md5.aspx.
     /// </summary>
     public class MD5 : IDisposable
     {

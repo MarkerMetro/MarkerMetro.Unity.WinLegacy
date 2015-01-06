@@ -10,7 +10,7 @@ using System.Text;
 #endif
 
 
-namespace MarkerMetro.Unity.WinLegacy.Cryptography
+namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
 {
     public static class EncryptionProvider
     {

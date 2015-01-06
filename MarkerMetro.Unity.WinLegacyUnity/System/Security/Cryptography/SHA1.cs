@@ -6,8 +6,11 @@ using Windows.Storage.Streams;
 
 using System;
 
-namespace MarkerMetro.Unity.WinLegacy.Cryptography
+namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
 {
+    /// <summary>
+    /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.security.cryptography.sha1.aspx.
+    /// </summary>
     public class SHA1 : IDisposable
     {
 
@@ -16,7 +19,7 @@ namespace MarkerMetro.Unity.WinLegacy.Cryptography
             return new SHA1();
         }
 
-        public void Dispose() { }
+        public void Dispose() {}
 
 #if NETFX_CORE        
         private HashAlgorithmProvider hap;
