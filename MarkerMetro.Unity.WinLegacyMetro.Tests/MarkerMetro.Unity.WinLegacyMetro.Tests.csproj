@@ -114,20 +114,54 @@
     <SDKReference Include="TestPlatform, Version=11.0" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\System\Collections\ArrayListTests.cs">
+      <Link>System\Collections\ArrayListTests.cs</Link>
+    </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\System\Collections\CollectionsExtensionsTests.cs">
+      <Link>System\Collections\CollectionsExtensionsTests.cs</Link>
+    </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\System\Collections\HashTableTests.cs">
+      <Link>System\Collections\HashTableTests.cs</Link>
+    </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\System\Collections\QueueTests.cs">
+      <Link>System\Collections\QueueTests.cs</Link>
+    </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\System\Collections\SortedListTests.cs">
       <Link>System\Collections\SortedListTests.cs</Link>
     </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\System\IO\IOTests.cs">
-      <Link>System\IO\IOTests.cs</Link>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\System\Collections\Specialized\NameValueCollectionTests.cs">
+      <Link>System\Collections\Specialized\NameValueCollectionTests.cs</Link>
+    </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\System\Collections\Specialized\OrderedDictionaryTests.cs">
+      <Link>System\Collections\Specialized\OrderedDictionaryTests.cs</Link>
+    </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\System\IO\DirectoryTests.cs">
+      <Link>System\IO\DirectoryTests.cs</Link>
+    </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\System\IO\FileTests.cs">
+      <Link>System\IO\FileTests.cs</Link>
+    </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\System\IO\StreamReaderExtensionsTests.cs">
+      <Link>System\IO\StreamReaderExtensionsTests.cs</Link>
     </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\System\Net\Sockets\TcpClientTests.cs">
       <Link>System\Net\Sockets\TcpClientTests.cs</Link>
     </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\System\Net\WebRequestTests.cs">
+      <Link>System\Net\WebRequestTests.cs</Link>
+    </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\System\Reflection\ReflectionTests.cs">
       <Link>System\Reflection\ReflectionTests.cs</Link>
     </Compile>
-    <Compile Include="NameValueCollectionTests.cs" />
-    <Compile Include="StreamReaderExtensionsTests.cs" />
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\System\Security\Cryptography\CryptographyTests.cs">
+      <Link>System\Security\Cryptography\CryptographyTests.cs</Link>
+    </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\System\Threading\ThreadingTests.cs">
+      <Link>System\Threading\ThreadingTests.cs</Link>
+    </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\System\Timers\TimerTests.cs">
+      <Link>System\Timers\TimerTests.cs</Link>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

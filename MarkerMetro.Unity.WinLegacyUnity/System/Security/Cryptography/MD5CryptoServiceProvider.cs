@@ -23,9 +23,13 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
         static public MD5 Create(string hashName)
         {
             if (hashName == "MD5")
+            {
                 return new MD5();
+            }
             else
+            {
                 throw new NotSupportedException();
+            }
         }
 
         static public string GetMd5String(String source)
@@ -46,7 +50,9 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
 
             StringBuilder sb = new StringBuilder();
             foreach (byte b in hash)
+            {
                 sb.Append(b.ToString("x2"));
+            }
             return sb.ToString();
         }
 
@@ -553,7 +559,9 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
         protected virtual void Dispose(bool disposing)
         {
             if (!disposing)
+            {
                 Initialize();
+            }
         }
         public void Dispose()
         {

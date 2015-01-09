@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 #endif
 
-namespace MarkerMetro.Unity.WinLegacyUnity.Tests
+namespace MarkerMetro.Unity.WinLegacy.Collections.Tests
 {
     [TestClass]
     public class SortedListTests
@@ -31,7 +31,7 @@ namespace MarkerMetro.Unity.WinLegacyUnity.Tests
         }
 
         [TestMethod]
-        public void IntegerSortedList_SecondEleemntByIndex_ShouldBeTheSame()
+        public void IntegerSortedList_SecondElementByIndex_ShouldBeTheSame()
         {
             var sysList = new System.Collections.SortedList();
             var mmList = new MarkerMetro.Unity.WinLegacy.Collections.SortedList();

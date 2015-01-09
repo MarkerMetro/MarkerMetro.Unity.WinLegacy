@@ -9,7 +9,7 @@ namespace MarkerMetro.Unity.WinLegacy.Net
     /// <summary>
     /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.net.webrequest.aspx.
     /// </summary>
-    public class WebRequest // : System.Net.WebRequest
+    public class WebRequest
     {
         readonly System.Net.WebRequest _actual;
 
