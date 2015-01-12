@@ -116,7 +116,7 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets.Tests
             try
             {
                 TcpClient tcpClient = new TcpClient();
-                TaskStateAsyncResult ar = (TaskStateAsyncResult)tcpClient.BeginConnect("127.0.0.0.0.0", 80, null, null);
+                TaskStateAsyncResult ar = (TaskStateAsyncResult)tcpClient.BeginConnect(null, 80, null, null);
 
                 while (!ar.IsCompleted) ;
 
