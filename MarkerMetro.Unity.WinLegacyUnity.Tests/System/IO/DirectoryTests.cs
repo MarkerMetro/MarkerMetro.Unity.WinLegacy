@@ -112,7 +112,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO.Tests
 #if NETFX_CORE
         public void MetroDirectoryCreateDirectory_SubDirectory_Succeed()
 #else
-        public void MP8DirectoryCreateDirectory_SubDirectory_Succeed()
+        public void WP8DirectoryCreateDirectory_SubDirectory_Succeed()
 #endif
         {
             string destPath = Path.Combine(localFolder.Path, @"SubFolder1\SubFolder2\");
