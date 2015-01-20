@@ -126,11 +126,6 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 
 #if NETFX_CORE
 
-        private async Task<StorageFolder> GetParentAsync(StorageFile file)
-        {
-            return await file.GetParentAsync();
-        }
-
         private async Task<StorageFile> GetFileAsync(string path)
         {
             bool fileExists = File.Exists(path);
