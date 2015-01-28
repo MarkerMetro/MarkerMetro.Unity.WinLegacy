@@ -5,6 +5,9 @@ using System.Text;
 
 namespace MarkerMetro.Unity.WinLegacy.IO
 {
+    /// <summary>
+    /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.io.directoryinfo.aspx.
+    /// </summary>
     public class DirectoryInfo
     {
         private readonly string path;
@@ -29,7 +32,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 
         public void Refresh()
         {
-            // No need to do anything
+            // No need to do anything.
         }
 
         public bool Exists

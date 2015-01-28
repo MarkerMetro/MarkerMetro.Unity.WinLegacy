@@ -7,6 +7,9 @@ using System.Text;
 
 namespace MarkerMetro.Unity.WinLegacy.Collections.Specialized
 {
+    /// <summary>
+    /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.collections.specialized.namevaluecollection.aspx.
+    /// </summary>
     public class NameValueCollection : IEnumerable
     {
         IDictionary<string, string> _collection;

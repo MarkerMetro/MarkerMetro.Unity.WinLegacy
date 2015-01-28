@@ -12,6 +12,9 @@ using System.Diagnostics;
 
 namespace MarkerMetro.Unity.WinLegacy.IO
 {
+    /// <summary>
+    /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.io.filestream.aspx.
+    /// </summary>
     public class FileStream : global::System.IO.Stream
     {
         readonly System.IO.Stream stream;

@@ -8,7 +8,8 @@ namespace MarkerMetro.Unity.WinLegacy.IO
     /// <summary>
     /// We need this to prevent WACK failures due to Unity 3D constructor re-writting.
     /// This will add new .ctor with UIntPtr dummy parameter in every StreamWriter descendant
-    /// that will be calling default .ctr in StreamWriter (not supported in WinRT/NetFxCore)
+    /// that will be calling default .ctr in StreamWriter (not supported in WinRT/NetFxCore).
+    /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.io.streamwriter.aspx.
     /// </summary>
     public class StreamWriter : System.IO.TextWriter
     {

@@ -10,8 +10,11 @@ using System.Runtime.InteropServices;
 namespace MarkerMetro.Unity.WinLegacy.Collections
 {
     /**
-     * An ArrayList is just a dynamic array of generic objects... very close to List<> which is supported in Metro
+     * An ArrayList is just a dynamic array of generic objects... very close to List<> which is supported in Metro.
      */
+    /// <summary>
+    /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.collections.arraylist.aspx.
+    /// </summary>
     public class ArrayList : List<object>
     {
         public global::System.Array ToArray(global::System.Type elementType)

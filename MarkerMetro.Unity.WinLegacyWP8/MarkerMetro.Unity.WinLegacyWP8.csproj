@@ -115,12 +115,6 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Collections\Specialized\OrderedDictionary.cs">
       <Link>System\Collections\Specialized\OrderedDictionary.cs</Link>
     </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Cryptography\DESCryptography.cs">
-      <Link>System\Cryptography\DESCryptography.cs</Link>
-    </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Cryptography\EncryptionProvider.cs">
-      <Link>System\Cryptography\EncryptionProvider.cs</Link>
-    </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Diagnostics\StackFrame.cs">
       <Link>System\Diagnostics\StackFrame.cs</Link>
     </Compile>
@@ -184,6 +178,18 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Runtime\Remoting\Messaging\TaskStateAsyncResult.cs">
       <Link>System\Runtime\Remoting\Messaging\TaskStateAsyncResult.cs</Link>
     </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Security\Cryptography\DESCryptography.cs">
+      <Link>System\Security\Cryptography\DESCryptography.cs</Link>
+    </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Security\Cryptography\EncryptionProvider.cs">
+      <Link>System\Security\Cryptography\EncryptionProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Security\Cryptography\MD5CryptoServiceProvider.cs">
+      <Link>System\Security\Cryptography\MD5CryptoServiceProvider.cs</Link>
+    </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Security\Cryptography\SHA1.cs">
+      <Link>System\Security\Cryptography\SHA1.cs</Link>
+    </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Threading\Thread.cs">
       <Link>System\Threading\Thread.cs</Link>
     </Compile>
@@ -194,8 +200,6 @@
       <Link>System\Timers\Timer.cs</Link>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="System\Cryptography\MD5CryptoServiceProvider.cs" />
-    <Compile Include="System\Cryptography\SHA1.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />

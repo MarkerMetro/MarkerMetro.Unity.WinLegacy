@@ -8,7 +8,9 @@ using System.Runtime.InteropServices;
 
 namespace MarkerMetro.Unity.WinLegacy.Collections.Specialized
 {
-
+    /// <summary>
+    /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.collections.specialized.iordereddictionary.aspx.
+    /// </summary>
 	public interface IOrderedDictionary : IDictionary, ICollection, IEnumerable {
 		
 		Object this[int index] { get; set; }

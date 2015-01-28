@@ -5,6 +5,9 @@ using System.Text;
 
 namespace MarkerMetro.Unity.WinLegacy.IO
 {
+    /// <summary>
+    /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.io.streamreader.aspx.
+    /// </summary>
     public class StreamReader : System.IO.TextReader
     {
         readonly System.IO.StreamReader _actual;

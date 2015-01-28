@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace MarkerMetro.Unity.WinLegacy.IO
 {
     /// <summary>
-    /// Single stream supporting reading and writing (used as part of TcpClient implementation)
+    /// Single stream supporting reading and writing (used as part of TcpClient implementation).
     /// </summary>
     public class ReadWriteStream : Stream
     {
@@ -30,12 +30,12 @@ namespace MarkerMetro.Unity.WinLegacy.IO
         public override bool CanWrite { get { return writeStream.CanWrite; } }
 
         /// <summary>
-        /// Length (uses internal read stream)
+        /// Length (uses internal read stream).
         /// </summary>
         public override long Length { get { return readStream.Length; } }
 
         /// <summary>
-        /// Position (uses internal read stream)
+        /// Position (uses internal read stream).
         /// </summary>
         public override long Position
         {

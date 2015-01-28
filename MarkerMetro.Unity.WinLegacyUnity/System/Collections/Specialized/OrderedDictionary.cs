@@ -12,7 +12,6 @@ using System.Linq;
  */
 namespace MarkerMetro.Unity.WinLegacy.Collections.Specialized
 {
-
     public interface IOrderedDictionary<TKey, TValue> : IDictionary<TKey, TValue>, IOrderedDictionary {
         new TValue this[int index] { get; set; }
         new TValue this[TKey key] { get; set; }

@@ -2,8 +2,11 @@
 using System.IO;
 using System.Text;
 
-namespace MarkerMetro.Unity.WinLegacy.Cryptography
+namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
 {
+    /// <summary>
+    /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.security.cryptography.md5cryptoserviceprovider.aspx.
+    /// </summary>
     public class MD5CryptoServiceProvider : MD5
     {
         public MD5CryptoServiceProvider()
@@ -11,17 +14,22 @@ namespace MarkerMetro.Unity.WinLegacy.Cryptography
         {
         }
     }
+
     /// <summary>
-    /// Summary description for MD5.
+    /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.security.cryptography.md5.aspx.
     /// </summary>
     public class MD5 : IDisposable
     {
         static public MD5 Create(string hashName)
         {
             if (hashName == "MD5")
+            {
                 return new MD5();
+            }
             else
+            {
                 throw new NotSupportedException();
+            }
         }
 
         static public string GetMd5String(String source)
@@ -42,7 +50,9 @@ namespace MarkerMetro.Unity.WinLegacy.Cryptography
 
             StringBuilder sb = new StringBuilder();
             foreach (byte b in hash)
+            {
                 sb.Append(b.ToString("x2"));
+            }
             return sb.ToString();
         }
 
@@ -549,7 +559,9 @@ namespace MarkerMetro.Unity.WinLegacy.Cryptography
         protected virtual void Dispose(bool disposing)
         {
             if (!disposing)
+            {
                 Initialize();
+            }
         }
         public void Dispose()
         {

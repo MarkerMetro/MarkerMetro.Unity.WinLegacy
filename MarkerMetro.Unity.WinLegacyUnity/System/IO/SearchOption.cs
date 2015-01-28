@@ -5,9 +5,10 @@ using System.Text;
 
 namespace MarkerMetro.Unity.WinLegacy.IO
 {
-    // Summary:
-    //     Specifies whether to search the current directory, or the current directory
-    //     and all subdirectories.
+    /// <summary>
+    /// Specifies whether to search the current directory, or the current directory and all subdirectories.
+    /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.io.searchoption.aspx.
+    /// </summary>
 #if !NETFX_CORE && !WINDOWS_PHONE
     [Serializable]
 #endif

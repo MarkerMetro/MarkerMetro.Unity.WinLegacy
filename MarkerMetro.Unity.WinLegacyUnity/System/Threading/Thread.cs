@@ -10,13 +10,16 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
 {
     public delegate void ParameterizedThreadStart(object target);
     public delegate void ThreadStart();
-    
+
+    /// <summary>
+    /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.threading.thread.aspx.
+    /// </summary>
     public class Thread
     {
 
         /*
-         * pretty sure Task.Start doesn't always spin up a new thread (depends on synccontext)
-         * pretty sure that we'll need try/catching as tasks can throw exceptions when their state isn't as expected (e.g. waiting on a completed task?)
+         * pretty sure Task.Start doesn't always spin up a new thread (depends on synccontext).
+         * pretty sure that we'll need try/catching as tasks can throw exceptions when their state isn't as expected (e.g. waiting on a completed task?).
          * */
 
 #if NETFX_CORE
@@ -27,12 +30,12 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
 #endif
 
         /// <summary>
-        /// Currently this value is ignored, not sure how to implement this
+        /// Currently this value is ignored, not sure how to implement this.
         /// </summary>
         public bool IsBackground
         {
             get { return true; }
-            set 
+            set
             {
 #if NETFX_CORE
                 Debug.WriteLine("Thread.IsBackground ignored.");
@@ -43,11 +46,11 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
         }
 
         /// <summary>
-        /// Determine if the thread is Alive, not implemented
+        /// Determine if the thread is Alive, not implemented.
         /// </summary>
         public bool IsAlive
         {
-            get 
+            get
             {
 #if NETFX_CORE
                 return _task != null && !_task.IsCompleted;
@@ -64,7 +67,7 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
             _taskCancellationTokenSource = new CancellationTokenSource();
             _threadStart = start;
 #else
-                throw new PlatformNotSupportedException();
+            throw new PlatformNotSupportedException();
 #endif
         }
 
@@ -74,7 +77,7 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
             _taskCancellationTokenSource = new CancellationTokenSource();
             _paramThreadStart = start;
 #else
-                throw new PlatformNotSupportedException();
+            throw new PlatformNotSupportedException();
 #endif
         }
 
@@ -88,7 +91,7 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
                 _taskCancellationTokenSource.Cancel();
             }
 #else
-                throw new PlatformNotSupportedException();
+            throw new PlatformNotSupportedException();
 #endif
         }
 
@@ -98,7 +101,7 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
             EnsureTask();
             return _task.Wait(ms, _taskCancellationTokenSource.Token);
 #else
-                throw new PlatformNotSupportedException();
+            throw new PlatformNotSupportedException();
 #endif
         }
 
@@ -108,7 +111,7 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
             EnsureTask();
             _task.Start(TaskScheduler.Default);
 #else
-                throw new PlatformNotSupportedException();
+            throw new PlatformNotSupportedException();
 #endif
         }
 
@@ -118,13 +121,13 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
             EnsureTask(param);
             _task.Start(TaskScheduler.Default);
 #else
-                throw new PlatformNotSupportedException();
+            throw new PlatformNotSupportedException();
 #endif
         }
 
 #if NETFX_CORE
         /// <summary>
-        /// Ensures the underlying Task is created and initialized correctly
+        /// Ensures the underlying Task is created and initialized correctly.
         /// </summary>
         /// <param name="paramThreadStartParam"></param>
         private void EnsureTask(object paramThreadStartParam = null)
@@ -149,16 +152,25 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
         }
     }
 
+    /// <summary>
+    /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.threading.threadabortexception.aspx.
+    /// </summary>
     public class ThreadAbortException : Exception
     {
-        
+
     }
 
+    /// <summary>
+    /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.threading.eventwaithandle.aspx.
+    /// </summary>
     public class EventWaitHandle : WaitHandle
     {
 
     }
 
+    /// <summary>
+    /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.threading.autoresetevent.aspx.
+    /// </summary>
     public class AutoResetEvent : EventWaitHandle
     {
 

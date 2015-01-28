@@ -10,6 +10,9 @@ using System.Collections;
 
 namespace MarkerMetro.Unity.WinLegacy.IO
 {
+    /// <summary>
+    /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.io.fileinfo.aspx.
+    /// </summary>
     public class FileInfo
     {
         
