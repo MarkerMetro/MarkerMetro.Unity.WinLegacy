@@ -3,12 +3,12 @@
   <metadata>
     <id>MarkerMetro.Unity.WinLegacy</id>
     <version>$version$</version>
-    <title>MarkerMetro's Unity WinLegacy Library</title>
-    <description>MarkerMetro's Library to help with porting Unity projects to WinRT and Windows Phone 8</description>
+    <title>MarkerMetro.Unity.WinLegacy</title>
+    <description>WinLegacy Windows Store and Windows Phone Unity Plugin - Implements missing .Net APIs</description>
     <authors>MarkerMetro</authors>
     <owners>MarkerMetro</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <copyright>Copyright MarkerMetro© 2013</copyright>
+    <copyright>Copyright MarkerMetro © 2015</copyright>
     <projectUrl>https://github.com/MarkerMetro/MarkerMetro.Unity.WinLegacy</projectUrl>
     <dependencies/>
   </metadata>
