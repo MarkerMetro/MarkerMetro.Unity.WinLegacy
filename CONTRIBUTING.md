@@ -16,6 +16,10 @@ button from the main project site, or run this command in the Git Shell:
 
 `git clone https://github.com/MarkerMetro/MarkerMetro.Unity.WinLegacy.git WinLegacy`
 
+Make sure you have the correct line endings set on Windows
+
+`git config --global core.autocrlf true`
+
 If you want to make contributions to the project,
 [forking the project](https://help.github.com/articles/fork-a-repo) is the
 easiest way to do this. You can then clone down your fork instead:
