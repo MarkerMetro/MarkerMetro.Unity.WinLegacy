@@ -4,6 +4,8 @@ Unity Plugin for Windows 8.1 (including Windows Universal) and Windows Phone 8.0
 
 Not all unsupported WinRT/Windows Phone APIS are implemented, or implemented well by Unity. Where this is the case, we have implemented this plugin to help. 
 
+See the [Unity FAQ on Universal Apps](http://docs.unity3d.com/Manual/WindowsUniversalApps-faq.html) which contains a complete breakdown of the platform conditional compilation you can use with Windows Apps and also broad guidance around the special plugin folders on Windows apps.
+
 ## Prerequisites
 
 - Visual Studio 2013
