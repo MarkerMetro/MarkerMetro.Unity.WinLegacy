@@ -2,13 +2,14 @@
 
 Unity Plugin for Windows 8.1 (including Windows Universal) and Windows Phone 8.0 used when porting existing code bases which have used Mono/.Net APIs not supported by WinRT. 
 
-Not all unsupported WinRT/Windows Phone APIS are implemented, or implemented well by Unity. Where this is the case, we have implemented this plugin to help. If they are supported by Unity.
+Not all unsupported WinRT/Windows Phone APIS are implemented, or implemented well by Unity. Where this is the case, we have implemented this plugin to help. 
 
 ## Prerequisites
-Visual Studio 2013
-Unity 4.6.1f1 (tested only on this version but should work on other 4.x builds)
 
-##Building Latest
+- Visual Studio 2013
+- Unity 4.6.1f1 (tested only on this version but should work on other 4.x builds)
+
+## Building Latest
 
 We recommend using the latest stable tagged release.
 
