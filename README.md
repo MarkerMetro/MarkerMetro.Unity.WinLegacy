@@ -1,6 +1,6 @@
 ## Getting Started
 
-Unity Plugin for Windows 8.1 (including Windows Universal) and Windows Phone 8.0 used when porting existing code bases which have used Mono/.Net APIs not supported by WinRT. 
+Unity Plugin for Windows Universal 8.1, Windows 8.1and Windows Phone 8.0 used when porting existing code bases which have used Mono/.Net APIs not supported by WinRT. 
 
 Not all unsupported WinRT/Windows Phone APIS are implemented, or implemented well by Unity. Where this is the case, we have implemented this plugin to help. 
 
