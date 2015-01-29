@@ -17,13 +17,15 @@ Configure the solution to Release | Any CPU and Rebuild.
 
 You can then simply copy the outputted dlls to the following folders in Unity
 
-MarkerMetro.Unity.WinLegacyMetro > /Assets/Plugins/Metro
-MarkerMetro.Unity.WinLegacyUnity > /Assets/Plugins
-MarkerMetro.Unity.WinLegacyWP8 > /Assets/Plugins/WP8
+- MarkerMetro.Unity.WinLegacyMetro project output > /Assets/Plugins/Metro/MarkerMetro.Unity.WinLegacy.dll
+- MarkerMetro.Unity.WinLegacyUnity project output > /Assets/Plugins/MarkerMetro.Unity.WinLegacy.dll
+- MarkerMetro.Unity.WinLegacyWP8 project output > /Assets/Plugins/WP8/MarkerMetro.Unity.WinLegacy.dll
+
+Note: The Metro output will work fine for Universal projects with both Windows 8.1 and Windows Phone 8.1
 
 ## Initialize the Plugins
 
-Without your Windows application, just need to ensure you initialize the plugin appropriately with examples as follows:
+Within your Windows application, just need to ensure you initialize the plugin appropriately with examples as follows:
 
 For Windows Universal Apps (Windows 8.1/Windows Phone 8.1):
 https://github.com/MarkerMetro/MarkerMetro.Unity.WinShared/blob/master/WindowsSolutionUniversal/UnityProject/UnityProject.Shared/App.xaml.cs#L204
@@ -38,7 +40,11 @@ https://github.com/MarkerMetro/MarkerMetro.Unity.WinShared/blob/master/WindowsSo
 
 If you are starting a new port and/or you want the best ongoing Unity integration with WinLegacy and related plugins, consider [MarkerMetro.Unity.WinShared[(https://github.com/MarkerMetro/MarkerMetro.Unity.WinShared). 
 
-This will provide features such as Unity menu integration allowing you to get the latest plugins automatically from Nuget as well as allowing you to easily use and debug forked versions of WinLegacy for yourself. It'll automatic copy your build output into the right Unity plugin folders automatically, what's not to like?
+This will provide features such as:
+
+- Initialization included sample Windows projects provided
+- Unity menu integration allowing you to get the latest stable plugins automatically from (Nuget)[https://www.nuget.org/packages/MarkerMetro.Unity.WinLegacy/]
+- Unity menu integration for using local solution with automatic copy o build output into right Unity plugin folders automatically
 
 
 
