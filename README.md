@@ -38,13 +38,13 @@ https://github.com/MarkerMetro/MarkerMetro.Unity.WinShared/blob/master/WindowsSo
 
 ## Use WinShared to make things easier
 
-If you are starting a new port and/or you want the best ongoing Unity integration with WinLegacy and related plugins, consider [MarkerMetro.Unity.WinShared[(https://github.com/MarkerMetro/MarkerMetro.Unity.WinShared). 
+If you are starting a new port and/or you want the best ongoing Unity integration with WinLegacy and related plugins, consider [MarkerMetro.Unity.WinShared](https://github.com/MarkerMetro/MarkerMetro.Unity.WinShared). 
 
 This will provide features such as:
 
-- Initialization included sample Windows projects provided
-- Unity menu integration allowing you to get the latest stable plugins automatically from (Nuget)[https://www.nuget.org/packages/MarkerMetro.Unity.WinLegacy/]
-- Unity menu integration for using local solution with automatic copy o build output into right Unity plugin folders automatically
+- Initialization included within Windows projects provided
+- Unity menu integration allowing you to get the latest stable version automatically from (Nuget)[https://www.nuget.org/packages/MarkerMetro.Unity.WinLegacy/]
+- Unity menu integration for using local solution with automatic copy of build output into correct Unity plugin folders
 
 
 
