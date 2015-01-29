@@ -9,7 +9,9 @@ Not all unsupported WinRT/Windows Phone APIS are implemented, or implemented wel
 - Visual Studio 2013
 - Unity 4.6.1f1 (tested only on this version but should work on other 4.x builds)
 
-## Build Latest from Source
+## Getting Latest
+
+### Build Latest from Source
 
 We recommend using the latest stable tagged release, or you can build straight off the head if you are brave.
 
@@ -21,9 +23,9 @@ You can then copy the folder contents as follows:
 - /MarkerMetro.Unity.WinLegacyUnity/bin/Release > /Assets/Plugins/
 - /MarkerMetro.Unity.WinLegacyWP8/bin/Release > /Assets/Plugins/WP8/
 
-## Download Latest Stable Binaries
+### Download Latest Stable Binaries
 
-Download latest from [Nuget](https://www.nuget.org/api/v2/package/MarkerMetro.Unity.WinLegacy)
+Alternatively, you can download latest from [Nuget](https://www.nuget.org/api/v2/package/MarkerMetro.Unity.WinLegacy)
 
 Extract the files from the package and copy the folder contents as follows:
 
