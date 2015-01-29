@@ -29,7 +29,7 @@ Extract the files from the package and copy the folder contents as follows:
 
 - /lib/netcore45/ > /Assets/Plugins/Metro/
 - /lib/net35 > /Assets/Plugins/
-- /lib/windowsphone8 > /Assets/Plugins/
+- /lib/windowsphone8 > /Assets/Plugins/WP8/
 
 Note: The Metro output will work fine for Universal projects with both Windows 8.1 and Windows Phone 8.1
 
