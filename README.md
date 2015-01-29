@@ -9,17 +9,27 @@ Not all unsupported WinRT/Windows Phone APIS are implemented, or implemented wel
 - Visual Studio 2013
 - Unity 4.6.1f1 (tested only on this version but should work on other 4.x builds)
 
-## Building Latest
+## Build Latest from Source
 
-We recommend using the latest stable tagged release.
+We recommend using the latest stable tagged release, or you can build straight off the head if you are brave.
 
 Configure the solution to Release | Any CPU and Rebuild.
 
-You can then simply copy the outputted dlls to the following folders in Unity
+You can then copy the folder contents as follows:
 
-- MarkerMetro.Unity.WinLegacyMetro project output > /Assets/Plugins/Metro/MarkerMetro.Unity.WinLegacy.dll
-- MarkerMetro.Unity.WinLegacyUnity project output > /Assets/Plugins/MarkerMetro.Unity.WinLegacy.dll
-- MarkerMetro.Unity.WinLegacyWP8 project output > /Assets/Plugins/WP8/MarkerMetro.Unity.WinLegacy.dll
+- /MarkerMetro.Unity.WinLegacyMetro/bin/Release > /Assets/Plugins/Metro/
+- /MarkerMetro.Unity.WinLegacyUnity/bin/Release > /Assets/Plugins/
+- /MarkerMetro.Unity.WinLegacyWP8/bin/Release > /Assets/Plugins/WP8/
+
+## Download Latest Stable Binaries
+
+Download latest from [Nuget](https://www.nuget.org/api/v2/package/MarkerMetro.Unity.WinLegacy)
+
+Extract the files from the package and copy the folder contents as follows:
+
+- /lib/netcore45/ > /Assets/Plugins/Metro/
+- /lib/net35 > /Assets/Plugins/
+- /lib/windowsphone8 > /Assets/Plugins/
 
 Note: The Metro output will work fine for Universal projects with both Windows 8.1 and Windows Phone 8.1
 
