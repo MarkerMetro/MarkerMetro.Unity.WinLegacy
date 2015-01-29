@@ -48,6 +48,20 @@ https://github.com/MarkerMetro/MarkerMetro.Unity.WinShared/blob/master/WindowsSo
 For Windows Phone 8.0 Apps:
 https://github.com/MarkerMetro/MarkerMetro.Unity.WinShared/blob/master/WindowsSolution/WindowsPhone/UnityProject/MainPage.xaml.cs#L106
 
+## Guidance for Usage
+
+Wherever possible you want to minimize the changes to existing code, therefore we recommend applying a using statement for the platforms you need to provide support for. The following example ensures support for TcpClient for all Windows platform outputs
+
+```c#
+#if (UNITY_WINRT && UNITY_EDITOR)
+using TcpClient = MarkerMetro.Unity.WinLegacy.Net.Sockets.TcpClient;
+#else
+using TcpClient = System.Net.Sockets.TcpClient;
+#endif
+```
+
+You can replace namespaces, files and use the extension classes provided as required. The general approach is to mimic the underlying .Net namespaces and implenentation as much as possible so there is minimal change required to legacy code bases when porting.
+
 ## Use WinShared to make things easier
 
 If you are starting a new port and/or you want the best ongoing Unity integration with WinLegacy and related plugins, consider [MarkerMetro.Unity.WinShared](https://github.com/MarkerMetro/MarkerMetro.Unity.WinShared). 
