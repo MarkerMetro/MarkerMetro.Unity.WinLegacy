@@ -58,5 +58,9 @@ This will provide features such as:
 - Unity menu integration allowing you to get the latest stable version automatically from (Nuget)[https://www.nuget.org/packages/MarkerMetro.Unity.WinLegacy/]
 - Unity menu integration for using local solution with automatic copy of build output into correct Unity plugin folders
 
+## Please Contribute
+
+We're open source, so please help everyone out by [contributing](CONTRIBUTING.md) as much as you can.
+
 
 
