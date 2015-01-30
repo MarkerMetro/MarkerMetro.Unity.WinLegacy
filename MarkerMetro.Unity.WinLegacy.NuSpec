@@ -8,8 +8,10 @@
     <authors>MarkerMetro</authors>
     <owners>MarkerMetro</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <copyright>Copyright MarkerMetro © 2015</copyright>
+    <copyright>Copyright Marker Metro © 2015</copyright>
     <projectUrl>https://github.com/MarkerMetro/MarkerMetro.Unity.WinLegacy</projectUrl>
+	<iconUrl>http://www.markermetro.com/wp-content/uploads/2015/01/mm-boxlogo-128px.png</iconUrl>
+	<licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>	
     <dependencies/>
   </metadata>
   <files>
