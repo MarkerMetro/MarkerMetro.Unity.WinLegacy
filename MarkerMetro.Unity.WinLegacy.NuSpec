@@ -11,7 +11,7 @@
     <copyright>Copyright Marker Metro © 2015</copyright>
     <projectUrl>https://github.com/MarkerMetro/MarkerMetro.Unity.WinLegacy</projectUrl>
 	<iconUrl>http://www.markermetro.com/wp-content/uploads/2015/01/mm-boxlogo-128px.png</iconUrl>
-	<licenseUrl>http://opensource.org/licenses/MIT</licenseUrl>	
+	<licenseUrl>https://raw.githubusercontent.com/MarkerMetro/MarkerMetro.Unity.WinLegacy/master/LICENSE</licenseUrl>	
     <dependencies/>
   </metadata>
   <files>
