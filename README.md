@@ -37,18 +37,58 @@ Extract the files from the package and copy the folder contents as follows:
 
 Note: The Metro output will work fine for Universal projects with both Windows 8.1 and Windows Phone 8.1
 
-## Initialize the Plugins
+## Initialize the Plugin
 
 Within your Windows application, just need to ensure you initialize the plugin appropriately with examples as follows:
 
-For Windows Universal Apps (Windows 8.1/Windows Phone 8.1):
-https://github.com/MarkerMetro/MarkerMetro.Unity.WinShared/blob/master/WindowsSolutionUniversal/UnityProject/UnityProject.Shared/App.xaml.cs#L204
+For Windows Universal and Windows 8.1 Apps add the following method to App.xaml.cs and call it after the call to appCallbacks.InitializeD3DXAML().
 
-For Windows 8.1 Apps:
-https://github.com/MarkerMetro/MarkerMetro.Unity.WinShared/blob/master/WindowsSolution/WindowsStore/UnityProject/App.xaml.cs#L130
+For Windows Phone 8.0 add the following method to MainPage.xaml.cs at the end of DrawingSurfaceBackground_Loaded method within the if (!_unityStartedLoading) code branch at the bottom.
 
-For Windows Phone 8.0 Apps:
-https://github.com/MarkerMetro/MarkerMetro.Unity.WinShared/blob/master/WindowsSolution/WindowsPhone/UnityProject/MainPage.xaml.cs#L106
+```csharp
+
+void InitializePlugins()
+{
+    // wire up dispatcher for plugin
+    MarkerMetro.Unity.WinLegacy.Dispatcher.InvokeOnAppThread = InvokeOnAppThread;
+    MarkerMetro.Unity.WinLegacy.Dispatcher.InvokeOnUIThread = InvokeOnUIThread;
+}
+
+```
+For Windows Universal and Windows 8.1 Apps the handlers should be as follows:
+
+```csharp
+public void InvokeOnAppThread(Action callback)
+{
+    appCallbacks.InvokeOnAppThread(() => callback(), false);
+}
+
+public void InvokeOnUIThread(Action callback)
+{
+    appCallbacks.InvokeOnUIThread(() => callback(), false);
+}
+```
+
+For Windows Phone 8.0 Apps the handlers should be as follows:
+
+```csharp
+
+public void InvokeOnAppThread(System.Action callback)
+{
+    UnityApp.BeginInvoke(() => callback());
+}
+
+public void InvokeOnUIThread(System.Action callback)
+{
+    Dispatcher.BeginInvoke(() => callback());
+}
+```
+
+You can see existing implementations in [WinShared](https://github.com/MarkerMetro/MarkerMetro.Unity.WinShared) here:
+
+- [Windows Universal](https://github.com/MarkerMetro/MarkerMetro.Unity.WinShared/blob/master/WindowsSolutionUniversal/UnityProject/UnityProject.Shared/App.xaml.cs) 
+- [Windows 8.1](https://github.com/MarkerMetro/MarkerMetro.Unity.WinShared/blob/master/WindowsSolution/WindowsStore/UnityProject/App.xaml.cs)
+- [Windows Phone 8.0](https://github.com/MarkerMetro/MarkerMetro.Unity.WinShared/blob/master/WindowsSolution/WindowsPhone/UnityProject/MainPage.xaml.cs)
 
 ## Guidance for Usage
 
