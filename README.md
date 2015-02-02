@@ -90,6 +90,15 @@ You can see existing implementations in [WinShared](https://github.com/MarkerMet
 - [Windows 8.1](https://github.com/MarkerMetro/MarkerMetro.Unity.WinShared/blob/master/WindowsSolution/WindowsStore/UnityProject/App.xaml.cs)
 - [Windows Phone 8.0](https://github.com/MarkerMetro/MarkerMetro.Unity.WinShared/blob/master/WindowsSolution/WindowsPhone/UnityProject/MainPage.xaml.cs)
 
+## Debugging locally
+
+You can easily debug a particular Windows Store or Windows Phone plugin project as follows:
+
+1. Add the platform specific WinLegacy project to your solution (e.g. MarkerMetro.Unity.WinWinLegacyMetro)
+2. Build platform specific WinLegacy project in Debug and copy output to Unity(e.g. /Assets/Plugins/Metro)
+3. Build from Unity
+4. Set breakpoints in your platform specific WinLegacy plugin project and then F5 on your app
+
 ## Guidance for Usage
 
 Wherever possible you want to minimize the changes to existing code, therefore we recommend applying a using statement for the platforms you need to provide support for. The following example ensures support for TcpClient for all Windows platform outputs
