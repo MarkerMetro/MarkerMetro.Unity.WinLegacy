@@ -10,8 +10,8 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <copyright>Copyright Marker Metro © 2015</copyright>
     <projectUrl>https://github.com/MarkerMetro/MarkerMetro.Unity.WinLegacy</projectUrl>
-	<iconUrl>http://www.markermetro.com/wp-content/uploads/2015/01/mm-boxlogo-128px.png</iconUrl>
-	<licenseUrl>https://raw.githubusercontent.com/MarkerMetro/MarkerMetro.Unity.WinLegacy/master/LICENSE</licenseUrl>	
+    <iconUrl>http://www.markermetro.com/img/logos/square/120.png</iconUrl>
+    <licenseUrl>https://raw.githubusercontent.com/MarkerMetro/MarkerMetro.Unity.WinLegacy/master/LICENSE</licenseUrl>	
     <dependencies/>
   </metadata>
   <files>
