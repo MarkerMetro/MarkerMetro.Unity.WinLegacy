@@ -104,7 +104,7 @@ You can easily debug a particular Windows Store or Windows Phone plugin project 
 Wherever possible you want to minimize the changes to existing code, therefore we recommend applying a using statement for the platforms you need to provide support for. The following example ensures support for TcpClient for all Windows platform outputs
 
 ```c#
-#if (UNITY_WINRT && UNITY_EDITOR)
+#if (UNITY_WINRT && !UNITY_EDITOR)
 using TcpClient = MarkerMetro.Unity.WinLegacy.Net.Sockets.TcpClient;
 #else
 using TcpClient = System.Net.Sockets.TcpClient;
