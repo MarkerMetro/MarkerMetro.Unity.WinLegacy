@@ -1,6 +1,6 @@
 ## Getting Started
 
-Unity Plugin for Windows Universal 8.1, Windows 8.1 and Windows Phone 8.0 used when porting existing code bases which have used Mono/.Net APIs not supported by WinRT. 
+Unity Plugin for Windows Universal 8.1 (Windows 8.1 and Windows Phone 8.1) used when porting existing code bases which have used Mono/.Net APIs not supported by WinRT. 
 
 Not all unsupported WinRT/Windows Phone APIS are implemented, or implemented well by Unity. Where this is the case, we have implemented this plugin to help. 
 
@@ -9,7 +9,7 @@ See the [Unity FAQ on Universal Apps](http://docs.unity3d.com/Manual/WindowsUniv
 ## Prerequisites
 
 - Visual Studio 2013
-- Unity 4.6.1f1 (tested only on this version but should work on other 4.x builds)
+- Unity 5.0.0p2 (tested only on this version but should work on other 5.x builds)
 
 ## Getting Latest
 
@@ -23,7 +23,7 @@ You can then copy the folder contents as follows:
 
 - /MarkerMetro.Unity.WinLegacyMetro/bin/Release > /Assets/Plugins/Metro/
 - /MarkerMetro.Unity.WinLegacyUnity/bin/Release > /Assets/Plugins/
-- /MarkerMetro.Unity.WinLegacyWP8/bin/Release > /Assets/Plugins/WP8/
+- /MarkerMetro.Unity.WinLegacyMetro/bin/Release > /Assets/Plugins/WindowsPhone81/
 
 ### Download Latest Stable Binaries
 
@@ -32,8 +32,8 @@ Alternatively, you can download latest from [Nuget](https://www.nuget.org/api/v2
 Extract the files from the package and copy the folder contents as follows:
 
 - /lib/netcore45/ > /Assets/Plugins/Metro/
+- /lib/netcore45/ > /Assets/Plugins/Metro/WindowsPhone81/
 - /lib/net35 > /Assets/Plugins/
-- /lib/windowsphone8 > /Assets/Plugins/WP8/
 
 Note: The Metro output will work fine for Universal projects with both Windows 8.1 and Windows Phone 8.1
 
@@ -43,7 +43,6 @@ Within your Windows application, just need to ensure you initialize the plugin a
 
 For Windows Universal and Windows 8.1 Apps add the following method to App.xaml.cs and call it after the call to appCallbacks.InitializeD3DXAML().
 
-For Windows Phone 8.0 add the following method to MainPage.xaml.cs at the end of DrawingSurfaceBackground_Loaded method within the if (!_unityStartedLoading) code branch at the bottom.
 
 ```csharp
 
@@ -69,27 +68,9 @@ public void InvokeOnUIThread(Action callback)
 }
 ```
 
-For Windows Phone 8.0 Apps the handlers should be as follows:
-
-```csharp
-
-public void InvokeOnAppThread(System.Action callback)
-{
-    UnityApp.BeginInvoke(() => callback());
-}
-
-public void InvokeOnUIThread(System.Action callback)
-{
-    Dispatcher.BeginInvoke(() => callback());
-}
-```
-
 You can see existing implementations in [WinShared](https://github.com/MarkerMetro/MarkerMetro.Unity.WinShared) here:
 
 - [Windows Universal](https://github.com/MarkerMetro/MarkerMetro.Unity.WinShared/blob/master/WindowsSolutionUniversal/UnityProject/UnityProject.Shared/App.xaml.cs) 
-- [Windows 8.1](https://github.com/MarkerMetro/MarkerMetro.Unity.WinShared/blob/master/WindowsSolution/WindowsStore/UnityProject/App.xaml.cs)
-- [Windows Phone 8.0](https://github.com/MarkerMetro/MarkerMetro.Unity.WinShared/blob/master/WindowsSolution/WindowsPhone/UnityProject/MainPage.xaml.cs)
-
 ## Debugging locally
 
 You can easily debug a particular Windows Store or Windows Phone plugin project as follows:
