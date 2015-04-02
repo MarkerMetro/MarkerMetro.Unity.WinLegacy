@@ -94,10 +94,10 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
 
                 return strEncrypted;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // MetroEventSource.Log.Error(ex.Message);
-                return "";
+                System.Diagnostics.Debug.WriteLine(ex.Message);
+                throw;
             }
 #elif WINDOWS_PHONE
             var bytesToProtect = Encoding.UTF8.GetBytes(toEncrypt);
@@ -137,11 +137,10 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
 
                 return strDecrypted;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                // MetroEventSource.Log.Error(ex.Message);
-                //throw;
-                return "";
+               System.Diagnostics.Debug.WriteLine(ex.Message);
+               throw;
             }
 #elif WINDOWS_PHONE
             var bytesToUnprotect = Convert.FromBase64String(cipherString);
