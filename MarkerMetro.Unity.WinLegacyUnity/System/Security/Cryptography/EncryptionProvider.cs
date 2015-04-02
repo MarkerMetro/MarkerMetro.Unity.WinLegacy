@@ -97,7 +97,7 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine(ex.Message);
-                throw;
+                throw new Exception("[EncryptionProvider] Error Encrypting a string");
             }
 #elif WINDOWS_PHONE
             var bytesToProtect = Encoding.UTF8.GetBytes(toEncrypt);
@@ -140,7 +140,7 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
             catch (Exception ex)
             {
                System.Diagnostics.Debug.WriteLine(ex.Message);
-               throw;
+               throw new Exception("[EncryptionProvider] Error Decrypting a string");
             }
 #elif WINDOWS_PHONE
             var bytesToUnprotect = Convert.FromBase64String(cipherString);
