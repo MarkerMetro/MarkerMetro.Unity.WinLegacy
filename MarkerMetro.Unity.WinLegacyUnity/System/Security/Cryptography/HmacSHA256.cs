@@ -58,7 +58,9 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
             return ComputeHash(Encoding.UTF8.GetBytes(value), cryptSecret);
         }
 #else
-        public byte[] ComputeHash(byte[] buffer) { throw new System.NotImplementedException(); }
+        public byte[] ComputeHash(byte[] buffer, string cryptSecret) { throw new System.NotImplementedException(); }
+        public byte[] ComputeHash(string value, string cryptSecret) { throw new System.NotImplementedException(); }
+
 #endif
     }
 }
