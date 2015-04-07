@@ -21,7 +21,7 @@ namespace MarkerMetro.Unity.WinLegacy.Net
 
         public override void Add(string name, string value)
         {
-#if WINDOWS_PHONE || NETFX_CORE
+#if NETFX_CORE
             _actual[name] = value;
 #else
             _actual.Add(name, value);
@@ -35,7 +35,7 @@ namespace MarkerMetro.Unity.WinLegacy.Net
 
         public override void Clear()
         {
-#if WINDOWS_PHONE || NETFX_CORE
+#if NETFX_CORE
             throw new PlatformNotSupportedException();
 #else
             _actual.Clear();
@@ -44,7 +44,7 @@ namespace MarkerMetro.Unity.WinLegacy.Net
 
         public override string Get(int index)
         {
-#if WINDOWS_PHONE || NETFX_CORE
+#if NETFX_CORE
             throw new PlatformNotSupportedException();
 #else
             return _actual.Get(index);
@@ -53,7 +53,7 @@ namespace MarkerMetro.Unity.WinLegacy.Net
 
         public override string Get(string name)
         {
-#if WINDOWS_PHONE || NETFX_CORE
+#if NETFX_CORE
             return _actual[name];
 #else
             return _actual.Get(name);
@@ -62,7 +62,7 @@ namespace MarkerMetro.Unity.WinLegacy.Net
 
         public override string GetKey(int index)
         {
-#if WINDOWS_PHONE || NETFX_CORE
+#if NETFX_CORE
             throw new PlatformNotSupportedException();
 #else
             return _actual.GetKey(index);
@@ -71,7 +71,7 @@ namespace MarkerMetro.Unity.WinLegacy.Net
 
         public override string[] GetValues(int index)
         {
-#if WINDOWS_PHONE || NETFX_CORE
+#if NETFX_CORE
             throw new PlatformNotSupportedException();
 #else
             return _actual.GetValues(index);
@@ -80,7 +80,7 @@ namespace MarkerMetro.Unity.WinLegacy.Net
 
         public override string[] GetValues(string name)
         {
-#if WINDOWS_PHONE || NETFX_CORE
+#if NETFX_CORE
             throw new PlatformNotSupportedException();
 #else
             return _actual.GetValues(name);
@@ -89,7 +89,7 @@ namespace MarkerMetro.Unity.WinLegacy.Net
 
         public override void Remove(string name)
         {
-#if WINDOWS_PHONE || NETFX_CORE
+#if NETFX_CORE
             throw new PlatformNotSupportedException();
 #else
             _actual.Remove(name);
@@ -98,7 +98,7 @@ namespace MarkerMetro.Unity.WinLegacy.Net
 
         public override void Set(string name, string value)
         {
-#if WINDOWS_PHONE || NETFX_CORE
+#if NETFX_CORE
             _actual[name] = value;
 #else
             _actual.Set(name, value);
@@ -107,7 +107,7 @@ namespace MarkerMetro.Unity.WinLegacy.Net
 
         public override System.Collections.IEnumerator GetEnumerator()
         {
-#if WINDOWS_PHONE || NETFX_CORE
+#if NETFX_CORE
             throw new PlatformNotSupportedException();
 #else
             return _actual.GetEnumerator();

@@ -1,5 +1,5 @@
 ﻿using System;
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 #else
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -11,7 +11,7 @@ namespace MarkerMetro.Unity.WinLegacy.Collections.Tests
     public class QueueTests
     {
 
-#if !(NETFX_CORE || WINDOWS_PHONE)
+#if !(NETFX_CORE)
         /// <summary>
         /// Test WinLegacy Queue.Enqueue and Queue.Dequeue and compare behaviour with System Queue.
         /// </summary>

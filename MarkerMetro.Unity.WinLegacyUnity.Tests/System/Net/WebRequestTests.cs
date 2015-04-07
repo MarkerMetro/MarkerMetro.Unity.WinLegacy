@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using MarkerMetro.Unity.WinLegacy.Net;
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 #else
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -12,7 +12,7 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Tests
     [TestClass]
     public class WebRequestTests
     {
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
 
         /// <summary>
         /// Test WebRequest.BeginGetResponse on valid url.

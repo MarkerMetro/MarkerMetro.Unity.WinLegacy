@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 #else
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -15,13 +15,7 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection.Tests
     public class StreamReaderExtensionsTests
     {
         [TestMethod]
-#if NETFX_CORE
         public void MetroStreamReaderExtensions_Close_Succeed()
-#elif WINDOWS_PHONE
-        public void WP8StreamReaderExtensions_Close_Succeed()
-#else
-        public void StreamReaderExtensions_Close_Succeed()
-#endif
         {
             using(var ms = new System.IO.MemoryStream())
             {

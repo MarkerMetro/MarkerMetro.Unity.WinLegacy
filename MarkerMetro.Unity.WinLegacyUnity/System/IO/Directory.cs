@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.ApplicationModel;
@@ -34,7 +34,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 
         public static string[] GetFiles(string path, string searchPattern, SearchOption searchOption)
         {
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
             var t = GetFilesAsync(path.FixPath());
             t.Wait();
             return t.Result == null ? new string[0] : t.Result;
@@ -55,12 +55,6 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             catch
             {
                 return false;
-            }
-#elif WINDOWS_PHONE
-            using (System.IO.IsolatedStorage.IsolatedStorageFile appStorage = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication())
-            {
-                var dir = Path.GetDirectoryName(path);
-                return appStorage.DirectoryExists(dir);
             }
 #else
             throw new PlatformNotSupportedException();
@@ -104,11 +98,6 @@ namespace MarkerMetro.Unity.WinLegacy.IO
                 task.Wait();
                 folder = task.Result;
             }
-#elif WINDOWS_PHONE
-            using (System.IO.IsolatedStorage.IsolatedStorageFile appStorage = System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication())
-            {
-                appStorage.CreateDirectory(path);
-            }
 #else
             throw new PlatformNotSupportedException();
 #endif
@@ -130,8 +119,6 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             }
 
             folder.DeleteAsync().AsTask().Wait();  
-#elif WINDOWS_PHONE
-            System.IO.IsolatedStorage.IsolatedStorageFile.GetUserStoreForApplication().DeleteDirectory(path);
 #else
             throw new PlatformNotSupportedException();
 #endif
@@ -172,7 +159,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
 
 #endif
 
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
         private static async Task<string[]> GetFilesAsync(string path)
         {
             try

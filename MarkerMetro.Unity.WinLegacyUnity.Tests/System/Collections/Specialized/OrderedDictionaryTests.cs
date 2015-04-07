@@ -1,7 +1,7 @@
 ﻿using MarkerMetro.Unity.WinLegacy.Collections.Specialized;
 using System;
 
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 #else
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -18,8 +18,6 @@ namespace MarkerMetro.Unity.WinLegacy.Collections.Specialized.Tests
         [TestMethod]
 #if NETFX_CORE
         public void MetroOrderedDictionary_BasicOperations_Succeed()
-#elif WINDOWS_PHONE
-        public void WP8OrderedDictionary_BasicOperations_Succeed()
 #else
         public void OrderedDictionary_BasicOperations_Succeed()
 #endif
@@ -53,8 +51,6 @@ namespace MarkerMetro.Unity.WinLegacy.Collections.Specialized.Tests
         [TestMethod]
 #if NETFX_CORE
         public void MetroOrderedDictionary_GetNonExistingValue_Fail()
-#elif WINDOWS_PHONE
-        public void WP8OrderedDictionary_GetNonExistingValue_Fail()
 #else
         public void OrderedDictionary_GetNonExistingValue_Fail()
 #endif

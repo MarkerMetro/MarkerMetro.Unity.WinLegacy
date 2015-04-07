@@ -2,7 +2,7 @@
 using System.Text;
 using MarkerMetro.Unity.WinLegacy.Security.Cryptography;
 
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
 using Windows.Storage;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 #else

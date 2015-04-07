@@ -7,7 +7,7 @@ using MarkerMetro.Unity.WinLegacy.IO;
 
 using System.Threading.Tasks;
 
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
 using Windows.Storage;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 #else
@@ -19,7 +19,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO.Tests
     [TestClass]
     public class FileTests
     {
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
         bool success;
         string error;
         StorageFolder localFolder;
@@ -33,7 +33,6 @@ namespace MarkerMetro.Unity.WinLegacy.IO.Tests
         }
 
 
-#if NETFX_CORE
         /// <summary>
         /// Test FileInfo constructor on existing file.
         /// </summary>
@@ -71,17 +70,12 @@ namespace MarkerMetro.Unity.WinLegacy.IO.Tests
             var fileInfo = new FileInfo(path);
             Assert.IsFalse(fileInfo.Exists, "fileInfo.Exists returned true on file that doesn't exist.");
         }
-#endif
 
         /// <summary>
         /// Test File.Move to existing sub folder.
         /// </summary>
         [TestMethod]
-#if NETFX_CORE
         public void MetroFileMove_ToExistingSubFolder_Succeed()
-#elif WINDOWS_PHONE
-        public void WP8FileMove_ToExistingSubFolder_Succeed()
-#endif
         {
             // create a file.
             string path = Path.Combine(localFolder.Path, @"File.txt");
@@ -122,11 +116,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO.Tests
         /// Test File.Move to sub folder that doesn't exist.
         /// </summary>
         [TestMethod]
-#if NETFX_CORE
         public void MetroFileMove_ToNonExistingSubFolder_Fail()
-#elif WINDOWS_PHONE
-        public void WP8FileMove_ToNonExistingSubFolder_Fail()
-#endif
         {
             // create a file.
             string path = Path.Combine(localFolder.Path, @"File.txt");
@@ -165,11 +155,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO.Tests
         /// Test File.CreateText in root directory.
         /// </summary>
         [TestMethod]
-#if NETFX_CORE
         public void MetroFileCreateText_RootFile_Succeed()
-#elif WINDOWS_PHONE
-        public void WP8FileCreateText_RootFile_Succeed()
-#endif
         {
             string path = Path.Combine(localFolder.Path, @"File.txt");
             try
@@ -193,11 +179,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO.Tests
         /// Test File.CreateText in existing sub folder.
         /// </summary>
         [TestMethod]
-#if NETFX_CORE
         public void MetroFileCreateText_SubFolder_Succeed()
-#elif WINDOWS_PHONE
-        public void WP8FileCreateText_SubFolder_Succeed()
-#endif
         {
             string path = localFolder.Path + @"\fwgsqduw.jh4/out/" + @"File.txt";
 
@@ -224,11 +206,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO.Tests
         /// Test File.WriteAllText in root directory.
         /// </summary>
         [TestMethod]
-#if NETFX_CORE
         public void MetroFileWriteAllText_RootFile_Succeed()
-#elif WINDOWS_PHONE
-        public void WP8FileWriteAllText_RootFile_Succeed()
-#endif
         {
             string path = Path.Combine(localFolder.Path, @"File.txt");
             try
@@ -247,11 +225,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO.Tests
         /// Test File.WriteAllText in exisiting sub folder.
         /// </summary>
         [TestMethod]
-#if NETFX_CORE
         public void MetroFileWriteAllText_SubFoldersAndFile_Succeed()
-#elif WINDOWS_PHONE
-        public void WP8FileWriteAllText_SubFoldersAndFile_Succeed()
-#endif
         {
             string path = Path.Combine(localFolder.Path, @"Test\Test2\Test3\Test4\Test5\File.txt");
 
@@ -273,11 +247,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO.Tests
         /// Test File.ReadAllText in root directory.
         /// </summary>
         [TestMethod]
-#if NETFX_CORE
         public void MetroFileReadAllText_RootFile_Succeed()
-#elif WINDOWS_PHONE
-        public void WP8FileReadAllText_RootFile_Succeed()
-#endif
         {
             string path = Path.Combine(localFolder.Path, @"File.txt");
             try
@@ -298,11 +268,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO.Tests
         /// Test FileStream write and read.
         /// </summary>
         [TestMethod]
-#if NETFX_CORE
         public void MetroFileStream_WriteAndRead_Succeed()
-#elif WINDOWS_PHONE
-        public void WP8FileStream_WriteAndRead_Succeed()
-#endif
         {
             string path = Path.Combine(localFolder.Path, @"File.txt");
             try
@@ -338,7 +304,6 @@ namespace MarkerMetro.Unity.WinLegacy.IO.Tests
         }
 
 
-#if NETFX_CORE
         /// <summary>
         /// Test ReadWriteStream begin and end successfully.
         /// </summary>
@@ -351,7 +316,6 @@ namespace MarkerMetro.Unity.WinLegacy.IO.Tests
             IAsyncResult ar = rwStream.BeginRead(new byte[1], 0, 0, null);
             rwStream.EndRead(ar);
         }
-#endif
 #endif
     }
 }

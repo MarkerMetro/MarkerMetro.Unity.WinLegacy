@@ -1,4 +1,4 @@
-﻿#if NETFX_CORE || WINDOWS_PHONE
+﻿#if NETFX_CORE
 using MarkerMetro.Unity.WinLegacy.Runtime.Remoting.Messaging;
 using System;
 using System.Collections.Generic;

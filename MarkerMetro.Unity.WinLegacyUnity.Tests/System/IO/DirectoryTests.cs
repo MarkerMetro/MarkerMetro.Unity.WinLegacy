@@ -2,7 +2,7 @@
 using System.IO;
 using MarkerMetro.Unity.WinLegacy.IO;
 
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
 using Windows.Storage;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 #else
@@ -14,7 +14,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO.Tests
     [TestClass]
     public class DirectoryTests
     {
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
         StorageFolder localFolder;
         bool success;
         string error;
