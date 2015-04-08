@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 using MarkerMetro.Unity.WinLegacy.Net.Sockets;
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
 using MarkerMetro.Unity.WinLegacy.Runtime.Remoting.Messaging;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 #else
@@ -13,7 +13,7 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets.Tests
     [TestClass]
     public class TcpClientTests
     {
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
 
         /// <summary>
         /// Test TcpClient.ReadFromInputStreamAsync catch exception thrown in TcpClient.ReadFromInputStreamAsyncInner.

@@ -1,7 +1,7 @@
 ﻿using System;
 using MarkerMetro.Unity.WinLegacy.Threading;
 
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
 using Windows.Storage;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 #else

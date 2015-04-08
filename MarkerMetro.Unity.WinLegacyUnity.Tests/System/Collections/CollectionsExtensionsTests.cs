@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using MarkerMetro.Unity.WinLegacy.Collections;
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 #else
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -18,8 +18,6 @@ namespace MarkerMetro.Unity.WinLegacy.Collections.Tests
         [TestMethod]
 #if NETFX_CORE
         public void MetroCollectionsExtensionsListConvertAll_IntToStringConverter_Succeed()
-#elif WINDOWS_PHONE
-        public void WP8CollectionsExtensionsListConvertAll_IntToStringConverter_Succeed()
 #else
         public void CollectionsExtensionsListConvertAll_IntToStringConverter_Succeed()
 #endif
@@ -37,8 +35,6 @@ namespace MarkerMetro.Unity.WinLegacy.Collections.Tests
         [TestMethod]
 #if NETFX_CORE
         public void MetroCollectionsExtensionsListConvertAll_NullConverter_Fail()
-#elif WINDOWS_PHONE
-        public void WP8CollectionsExtensionsListConvertAll_NullConverter_Fail()
 #else
         public void CollectionsExtensionsListConvertAll_NullConverter_Fail()
 #endif

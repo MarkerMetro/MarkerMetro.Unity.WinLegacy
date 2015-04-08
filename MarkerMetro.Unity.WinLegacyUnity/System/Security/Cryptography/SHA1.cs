@@ -38,12 +38,6 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
             CryptographicBuffer.CopyToByteArray(buffHash, out hash);
             return hash;
         }
-#elif WINDOWS_PHONE
-        public byte[] ComputeHash(byte[] buffer)
-        {
-            using (var sha = new System.Security.Cryptography.SHA1Managed())
-                return sha.ComputeHash(buffer);
-        }
 #else
         public byte[] ComputeHash(byte[] buffer) { throw new System.NotImplementedException(); }
 #endif

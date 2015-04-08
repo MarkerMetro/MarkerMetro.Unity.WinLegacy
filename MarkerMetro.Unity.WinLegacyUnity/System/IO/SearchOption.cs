@@ -9,7 +9,7 @@ namespace MarkerMetro.Unity.WinLegacy.IO
     /// Specifies whether to search the current directory, or the current directory and all subdirectories.
     /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.io.searchoption.aspx.
     /// </summary>
-#if !NETFX_CORE && !WINDOWS_PHONE
+#if !NETFX_CORE
     [Serializable]
 #endif
     //[ComVisible(true)]

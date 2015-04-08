@@ -7,7 +7,7 @@ using Windows.ApplicationModel.Store;
 
 namespace MarkerMetro.Unity.WinLegacy.IO
 {
-    internal class EncryptedStreamWriter : MarkerMetro.Unity.WinLegacy.IO.StreamWriter
+    internal class EncryptedStreamWriter : System.IO.StreamWriter
     {
         public EncryptedStreamWriter(Stream str)
             : base(str)

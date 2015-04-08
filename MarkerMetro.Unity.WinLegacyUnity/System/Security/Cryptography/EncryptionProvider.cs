@@ -4,9 +4,6 @@
 using Windows.Security.Cryptography;
 using Windows.Security.Cryptography.Core;
 using Windows.Storage.Streams;
-#elif WINDOWS_PHONE
-using System.Security.Cryptography;
-using System.Text;
 #endif
 
 
@@ -23,9 +20,6 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
             byte[] resultBytes;
             CryptographicBuffer.CopyToByteArray(result, out resultBytes);
             return resultBytes;
-#elif WINDOWS_PHONE
-            using (var md5 = MD5CryptoServiceProvider.Create())
-                return md5.ComputeHash(input);
 #else
             throw new System.PlatformNotSupportedException();
 #endif
@@ -36,8 +30,6 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
 #if NETFX_CORE
             return CryptographicBuffer.EncodeToHexString(GetMD5Hash(input));
 
-#elif WINDOWS_PHONE
-            return MD5CryptoServiceProvider.GetMd5String(input);
 #else
             throw new System.PlatformNotSupportedException();
 #endif
@@ -47,11 +39,6 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
         {
 #if NETFX_CORE
             return CryptographicBuffer.EncodeToHexString(GetSHA1Hash(input));
-#elif WINDOWS_PHONE
-            var sha = new System.Security.Cryptography.SHA1Managed();
-            var bytes = System.Text.Encoding.UTF8.GetBytes(input);
-            var bytesHash = sha.ComputeHash(bytes);
-            return System.Text.Encoding.UTF8.GetString(bytesHash, 0, bytesHash.Length);
 #else
             throw new System.PlatformNotSupportedException();
 #endif
@@ -99,10 +86,6 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
                 System.Diagnostics.Debug.WriteLine(ex.Message);
                 throw new Exception("[EncryptionProvider] Error Encrypting a string");
             }
-#elif WINDOWS_PHONE
-            var bytesToProtect = Encoding.UTF8.GetBytes(toEncrypt);
-            var protectedBytes = ProtectedData.Protect(bytesToProtect, null);
-            return Convert.ToBase64String(protectedBytes);
 #else
             throw new System.PlatformNotSupportedException();
 #endif
@@ -142,10 +125,6 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
                System.Diagnostics.Debug.WriteLine(ex.Message);
                throw new Exception("[EncryptionProvider] Error Decrypting a string");
             }
-#elif WINDOWS_PHONE
-            var bytesToUnprotect = Convert.FromBase64String(cipherString);
-            var unprotectedBytes = ProtectedData.Unprotect(bytesToUnprotect, null);
-            return Encoding.UTF8.GetString(unprotectedBytes, 0, unprotectedBytes.Length);
 #else
             throw new System.PlatformNotSupportedException();
 #endif
