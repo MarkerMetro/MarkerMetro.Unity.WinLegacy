@@ -112,29 +112,8 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\ApplicationException.cs">
       <Link>System\ApplicationException.cs</Link>
     </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Collections\ArrayList.cs">
-      <Link>System\Collections\ArrayList.cs</Link>
-    </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Collections\CollectionsExtensions.cs">
       <Link>System\Collections\CollectionsExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Collections\Hashtable.cs">
-      <Link>System\Collections\Hashtable.cs</Link>
-    </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Collections\Queue.cs">
-      <Link>System\Collections\Queue.cs</Link>
-    </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Collections\SortedList.cs">
-      <Link>System\Collections\SortedList.cs</Link>
-    </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Collections\Specialized\IOrderedDictionary.cs">
-      <Link>System\Collections\Specialized\IOrderedDictionary.cs</Link>
-    </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Collections\Specialized\NameValueCollection.cs">
-      <Link>System\Collections\Specialized\NameValueCollection.cs</Link>
-    </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Collections\Specialized\OrderedDictionary.cs">
-      <Link>System\Collections\Specialized\OrderedDictionary.cs</Link>
     </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Diagnostics\StackFrame.cs">
       <Link>System\Diagnostics\StackFrame.cs</Link>
@@ -145,24 +124,6 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\BinaryWriterExtensions.cs">
       <Link>System\IO\BinaryWriterExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\Directory.cs">
-      <Link>System\IO\Directory.cs</Link>
-    </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\DirectoryInfo.cs">
-      <Link>System\IO\DirectoryInfo.cs</Link>
-    </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\File.cs">
-      <Link>System\IO\File.cs</Link>
-    </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\FileAccess.cs">
-      <Link>System\IO\FileAccess.cs</Link>
-    </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\FileInfo.cs">
-      <Link>System\IO\FileInfo.cs</Link>
-    </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\FileMode.cs">
-      <Link>System\IO\FileMode.cs</Link>
-    </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\MemoryStreamExtensions.cs">
       <Link>System\IO\MemoryStreamExtensions.cs</Link>
     </Compile>
@@ -172,23 +133,8 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\SearchOption.cs">
       <Link>System\IO\SearchOption.cs</Link>
     </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\StreamReader.cs">
-      <Link>System\IO\StreamReader.cs</Link>
-    </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\StreamReaderExtensions.cs">
-      <Link>System\IO\StreamReaderExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\StreamWriter.cs">
-      <Link>System\IO\StreamWriter.cs</Link>
-    </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\TextReaderExtensions.cs">
       <Link>System\IO\TextReaderExtensions.cs</Link>
-    </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\FileShare.cs">
-      <Link>System\IO\FileShare.cs</Link>
-    </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\FileStream.cs">
-      <Link>System\IO\FileStream.cs</Link>
     </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\StreamExtensions.cs">
       <Link>System\IO\StreamExtensions.cs</Link>
@@ -201,12 +147,6 @@
     </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Net\Sockets\TcpClient.cs">
       <Link>System\Net\Sockets\TcpClient.cs</Link>
-    </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Net\WebHeaderCollection.cs">
-      <Link>System\Net\WebHeaderCollection.cs</Link>
-    </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Net\WebRequest.cs">
-      <Link>System\Net\WebRequest.cs</Link>
     </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Reflection\ReflectionExtensions.cs">
       <Link>System\Reflection\ReflectionExtensions.cs</Link>
@@ -239,7 +179,9 @@
     <Compile Include="System\IO\EncryptedStreamReader.cs" />
     <Compile Include="System\IO\EncryptedStreamWriter.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="System\Collections\Specialized\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>
