@@ -38,6 +38,16 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
             CryptographicBuffer.CopyToByteArray(buffHash, out hash);
             return hash;
         }
+        public string ComputeHashString(byte[] buffer)
+        {
+            byte[] byteHash = ComputeHash(buffer);
+            return BitConverter.ToString(byteHash).Replace("-", "").ToLower();
+        }
+        public string ComputeHashString(string buffer)
+        {
+            byte[] byteHash = ComputeHash(System.Text.Encoding.UTF8.GetBytes(buffer));
+            return BitConverter.ToString(byteHash).Replace("-", "").ToLower();
+        }
 #elif WINDOWS_PHONE
         public byte[] ComputeHash(byte[] buffer)
         {
@@ -46,6 +56,8 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
         }
 #else
         public byte[] ComputeHash(byte[] buffer) { throw new System.NotImplementedException(); }
+        public string ComputeHashString(byte[] buffer) { throw new System.NotImplementedException(); }
+        public string ComputeHashString(string buffer) { throw new System.NotImplementedException(); }
 #endif
     }
 }

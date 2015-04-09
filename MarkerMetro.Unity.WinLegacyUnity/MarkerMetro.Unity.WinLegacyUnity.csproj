@@ -54,6 +54,7 @@
     <Compile Include="System\Collections\Specialized\OrderedDictionary.cs" />
     <Compile Include="System\Security\Cryptography\DESCryptography.cs" />
     <Compile Include="System\Security\Cryptography\EncryptionProvider.cs" />
+    <Compile Include="System\Security\Cryptography\HashProvider.cs" />
     <Compile Include="System\Security\Cryptography\HmacSHA256.cs">
       <SubType>Code</SubType>
     </Compile>

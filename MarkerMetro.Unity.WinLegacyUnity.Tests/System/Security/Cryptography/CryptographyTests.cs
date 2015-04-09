@@ -23,16 +23,9 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography.Tests
         {
             SHA1 sha1 = SHA1.Create();
 
-            byte[] hash = sha1.ComputeHash(Encoding.UTF8.GetBytes("MarkerMetro"));
-            var sb = new StringBuilder(hash.Length * 2);
-            foreach (byte b in hash)
-            {
-                sb.Append(b.ToString("x2"));
-            }
+            string hash = sha1.ComputeHashString(Encoding.UTF8.GetBytes("MarkerMetro"));
 
-            string hashString = sb.ToString();
-
-            Assert.IsTrue(sb.ToString() == "6d0abfbda56702bd259dfb262383329af17f8eb4");
+            Assert.IsTrue(hash == "6d0abfbda56702bd259dfb262383329af17f8eb4");
         }
         
 
@@ -41,17 +34,9 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography.Tests
         {
             HmacSHA256 hmac = HmacSHA256.Create();
 
-            byte[] hash = hmac.ComputeHash("MarkerMetro", "secret");
+            string hash = hmac.ComputeHashString("MarkerMetro", "secret");
 
-            var sb = new StringBuilder(hash.Length * 2);
-            foreach (byte b in hash)
-            {
-                sb.Append(b.ToString("x2"));
-            }
-
-            string hashString = sb.ToString();
-
-            Assert.IsTrue(sb.ToString() == "fa2383f663bbe784c7e5d9076755e37cd3dcf09e4313d40eb3ae86ba2bcb8dde");
+            Assert.IsTrue(hash == "fa2383f663bbe784c7e5d9076755e37cd3dcf09e4313d40eb3ae86ba2bcb8dde");
         }
 
         /// <summary>
