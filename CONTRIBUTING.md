@@ -37,6 +37,9 @@ in Unity projects. The namespaces are organized following the .NET namespaces.
 So for example, `System.Net.Sockets` becomes
 `MarkerMetro.Unity.WinLegacy.Net.Sockets`.
 
+Some classes that were provided (System.IO or System.Collections.ArrayList etc) in later 
+versions of Unity are located under MarkerMetro.Unity.WinLegacy.Plugin namespace.
+
 ## Making Changes
 
 When you're ready to make a change,

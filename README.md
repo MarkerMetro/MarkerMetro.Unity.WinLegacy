@@ -4,6 +4,8 @@ Unity Plugin for Windows Universal 8.1 (Windows 8.1 and Windows Phone 8.1) used 
 
 Not all unsupported WinRT/Windows Phone APIS are implemented, or implemented well by Unity. Where this is the case, we have implemented this plugin to help. 
 
+It is recommended to use methods implemented by Unity wherever possible, however missing APIs are still available under MarkerMetro.Unity.WinLegacy.Plugin namespace
+
 See the [Unity FAQ on Universal Apps](http://docs.unity3d.com/Manual/WindowsUniversalApps-faq.html) which contains a complete breakdown of the platform conditional compilation you can use with Windows Apps and also broad guidance around the special plugin folders on Windows apps.
 
 ## Prerequisites
