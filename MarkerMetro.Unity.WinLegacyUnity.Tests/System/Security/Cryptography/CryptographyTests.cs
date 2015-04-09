@@ -14,27 +14,13 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography.Tests
     [TestClass]
     public class CryptographyTests
     {
-#if WINDOWS_PHONE
-        /// <summary>
-        /// Test MD5.GetMd5String should equal expected result.
-        /// </summary>
-        [TestMethod]
-        public void WP8MD5GetMd5String_MarkerMetro_Succeed()
-        {
-            Assert.IsTrue(MD5.GetMd5String("MarkerMetro") == "9c33c811d0c45c41cb66b393ec9f7ed7");
-        }
-#endif
 
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
         /// <summary>
         /// Test SHA1.ComputeHash should equal expected result.
         /// </summary>
         [TestMethod]
-#if NETFX_CORE
         public void MetroSHA1ComputeHash_MarkerMetro_Succeed()
-#else
-        public void WP8SHA1ComputeHash_MarkerMetro_Succeed()
-#endif
         {
             SHA1 sha1 = SHA1.Create();
 
@@ -54,11 +40,7 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography.Tests
         /// Test EncryptionProvider encrypt and decrypt.
         /// </summary>
         [TestMethod]
-#if NETFX_CORE
         public void MetroEncryptionProvider_EncryptDecrypt_ShouldEqualOriginal()
-#else
-        public void WP8EncryptionProvider_EncryptDecrypt_ShouldEqualOriginal()
-#endif
         {
             string originalString = "MarkerMetro";
             string key = "encryptionKey";

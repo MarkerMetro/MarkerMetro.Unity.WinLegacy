@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MarkerMetro.Unity.WinLegacy.IO
+namespace MarkerMetro.Unity.WinLegacy.Plugin.IO
 {
     /// <summary>
     /// We need this to prevent WACK failures due to Unity 3D constructor re-writting.

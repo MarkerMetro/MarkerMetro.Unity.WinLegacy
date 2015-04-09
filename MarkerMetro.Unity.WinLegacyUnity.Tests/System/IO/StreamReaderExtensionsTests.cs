@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 #else
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 #endif
-using MarkerMetro.Unity.WinLegacy.IO;
+using MarkerMetro.Unity.WinLegacy.Plugin.IO;
 
 namespace MarkerMetro.Unity.WinLegacy.Reflection.Tests
 {

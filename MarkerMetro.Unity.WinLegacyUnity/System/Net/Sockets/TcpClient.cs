@@ -11,7 +11,7 @@ using Windows.Networking;
 using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
 using MarkerMetro.Unity.WinLegacy.Runtime.Remoting.Messaging;
-using MarkerMetro.Unity.WinLegacy.IO;
+using MarkerMetro.Unity.WinLegacy.Plugin.IO;
 using Windows.Foundation;
 using System.Runtime.ExceptionServices;
 #else

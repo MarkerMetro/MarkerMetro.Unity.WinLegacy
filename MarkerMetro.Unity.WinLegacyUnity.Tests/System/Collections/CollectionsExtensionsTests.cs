@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using MarkerMetro.Unity.WinLegacy.Collections;
+using MarkerMetro.Unity.WinLegacy.Plugin.Collections;
 #if NETFX_CORE
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 #else
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 #endif
 
-namespace MarkerMetro.Unity.WinLegacy.Collections.Tests
+namespace MarkerMetro.Unity.WinLegacy.Plugin.Collections.Tests
 {
     [TestClass]
     public class CollectionsExtensionsTests

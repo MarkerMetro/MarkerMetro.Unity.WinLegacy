@@ -123,9 +123,6 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\System\Collections\HashTableTests.cs">
       <Link>System\Collections\HashTableTests.cs</Link>
     </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\System\Collections\QueueTests.cs">
-      <Link>System\Collections\QueueTests.cs</Link>
-    </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\System\Collections\SortedListTests.cs">
       <Link>System\Collections\SortedListTests.cs</Link>
     </Compile>

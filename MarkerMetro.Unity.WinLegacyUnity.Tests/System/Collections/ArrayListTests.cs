@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 #endif
 
-namespace MarkerMetro.Unity.WinLegacy.Collections.Tests
+namespace MarkerMetro.Unity.WinLegacy.Plugin.Collections.Tests
 {
     [TestClass]
     public class ArrayListTests
@@ -19,7 +19,7 @@ namespace MarkerMetro.Unity.WinLegacy.Collections.Tests
         public void ArrayList_CompareWithSystemArrayList_ShouldBehaveSame()
         {
             var sysArrayList = new System.Collections.ArrayList();
-            var mmArrayList = new MarkerMetro.Unity.WinLegacy.Collections.ArrayList();
+            var mmArrayList = new MarkerMetro.Unity.WinLegacy.Plugin.Collections.ArrayList();
 
             sysArrayList.Add("one");
             sysArrayList.Add(2);

@@ -6,7 +6,7 @@ using System.Reflection;
 using System;
 using System.Runtime.InteropServices;
 
-namespace MarkerMetro.Unity.WinLegacy.Collections.Specialized
+namespace MarkerMetro.Unity.WinLegacy.Plugin.Collections.Specialized
 {
     /// <summary>
     /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.collections.specialized.iordereddictionary.aspx.

@@ -8,7 +8,7 @@ using MarkerMetro.Unity.WinLegacy.Runtime.Remoting.Messaging;
 using System.Collections.Concurrent;
 #endif
 
-namespace MarkerMetro.Unity.WinLegacy.IO
+namespace MarkerMetro.Unity.WinLegacy.Plugin.IO
 {
     public static class StreamExtensions
     {

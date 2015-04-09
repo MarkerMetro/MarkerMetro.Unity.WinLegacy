@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MarkerMetro.Unity.WinLegacy.IO
+namespace MarkerMetro.Unity.WinLegacy.Plugin.IO
 {
     /// <summary>
     /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.io.directoryinfo.aspx.

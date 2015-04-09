@@ -1,4 +1,4 @@
-﻿using MarkerMetro.Unity.WinLegacy.Collections.Specialized;
+﻿using MarkerMetro.Unity.WinLegacy.Plugin.Collections.Specialized;
 using System;
 
 #if NETFX_CORE
@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 #endif
 
-namespace MarkerMetro.Unity.WinLegacy.Collections.Specialized.Tests
+namespace MarkerMetro.Unity.WinLegacy.Plugin.Collections.Specialized.Tests
 {
     /// <summary>
     /// Test Generic implementations of OrderedDictionary.

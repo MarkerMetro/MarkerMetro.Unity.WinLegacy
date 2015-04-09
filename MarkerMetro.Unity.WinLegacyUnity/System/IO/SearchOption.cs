@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MarkerMetro.Unity.WinLegacy.IO
+namespace MarkerMetro.Unity.WinLegacy.Plugin.IO
 {
     /// <summary>
     /// Specifies whether to search the current directory, or the current directory and all subdirectories.

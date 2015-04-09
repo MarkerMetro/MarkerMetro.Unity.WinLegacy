@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using Windows.ApplicationModel.Store;
 
-namespace MarkerMetro.Unity.WinLegacy.IO
+namespace MarkerMetro.Unity.WinLegacy.Plugin.IO
 {
-    internal class EncryptedStreamReader : MarkerMetro.Unity.WinLegacy.IO.StreamReader
+    internal class EncryptedStreamReader : MarkerMetro.Unity.WinLegacy.Plugin.IO.StreamReader
     {
         public EncryptedStreamReader(Stream stream)
             : base(stream)

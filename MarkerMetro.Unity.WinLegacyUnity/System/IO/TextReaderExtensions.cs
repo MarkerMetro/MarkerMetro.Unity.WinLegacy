@@ -1,6 +1,6 @@
 ﻿using System.IO;
 
-namespace MarkerMetro.Unity.WinLegacy.IO
+namespace MarkerMetro.Unity.WinLegacy.Plugin.IO
 {
     public static class TextReaderExtensions
     {

@@ -5,7 +5,7 @@ using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 #endif
 
-namespace MarkerMetro.Unity.WinLegacy.Collections.Tests
+namespace MarkerMetro.Unity.WinLegacy.Plugin.Collections.Tests
 {
     [TestClass]
     public class HashtableTests
@@ -19,7 +19,7 @@ namespace MarkerMetro.Unity.WinLegacy.Collections.Tests
         public void Hashtable_CompareWithSystemHashtable_ShouldBehaveSame()
         {
             var sysHashtable = new System.Collections.Hashtable();
-            var mmHashtable = new MarkerMetro.Unity.WinLegacy.Collections.Hashtable();
+            var mmHashtable = new MarkerMetro.Unity.WinLegacy.Plugin.Collections.Hashtable();
 
             sysHashtable.Add(1, "one");
             sysHashtable.Add(2, "two");

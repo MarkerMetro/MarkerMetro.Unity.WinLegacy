@@ -1,4 +1,4 @@
-﻿using MarkerMetro.Unity.WinLegacy.Collections.Specialized;
+﻿using MarkerMetro.Unity.WinLegacy.Plugin.Collections.Specialized;
 using System;
 
 #if NETFX_CORE
@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 #endif
 
-namespace MarkerMetro.Unity.WinLegacy.Collections.Specialized.Tests
+namespace MarkerMetro.Unity.WinLegacy.Plugin.Collections.Specialized.Tests
 {
     [TestClass]
     public class NameValueCollectionTests
@@ -24,21 +24,13 @@ namespace MarkerMetro.Unity.WinLegacy.Collections.Specialized.Tests
             }
 
             [TestMethod]
-#if NETFX_CORE
             public void MetroNameValueCollection_Count_IsZero()
-#else
-            public void NameValueCollection_Count_IsZero()
-#endif
             {
                 Assert.AreEqual(0, target.Count);
             }
 
             [TestMethod]
-#if NETFX_CORE
             public void MetroNameValueCollection_HasKeys_IsFalse()
-#else
-            public void NameValueCollection_HasKeys_IsFalse()
-#endif
             {
                 Assert.IsFalse(target.HasKeys());
             }

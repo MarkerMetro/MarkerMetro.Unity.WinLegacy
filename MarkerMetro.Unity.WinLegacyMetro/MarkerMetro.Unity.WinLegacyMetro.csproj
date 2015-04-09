@@ -121,9 +121,6 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Collections\Hashtable.cs">
       <Link>System\Collections\Hashtable.cs</Link>
     </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Collections\Queue.cs">
-      <Link>System\Collections\Queue.cs</Link>
-    </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Collections\SortedList.cs">
       <Link>System\Collections\SortedList.cs</Link>
     </Compile>

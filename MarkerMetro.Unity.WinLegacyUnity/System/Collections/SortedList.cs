@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MarkerMetro.Unity.WinLegacy.Collections
+namespace MarkerMetro.Unity.WinLegacy.Plugin.Collections
 {
     /// <summary>
     /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.collections.sortedlist.aspx.

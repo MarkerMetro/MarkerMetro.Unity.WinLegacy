@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using MarkerMetro.Unity.WinLegacy.IO;
+using MarkerMetro.Unity.WinLegacy.Plugin.IO;
 #if NETFX_CORE
 using System.Threading.Tasks;
 using Windows.Storage;
 #endif
 using System.Diagnostics;
 
-namespace MarkerMetro.Unity.WinLegacy.IO
+namespace MarkerMetro.Unity.WinLegacy.Plugin.IO
 {
     /// <summary>
     /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.io.filestream.aspx.

@@ -6,7 +6,7 @@ using System.Reflection;
 using System;
 using System.Runtime.InteropServices;
 
-namespace MarkerMetro.Unity.WinLegacy.Collections
+namespace MarkerMetro.Unity.WinLegacy.Plugin.Collections
 {
     /**
      * Implement Hashtable like it exists in .NET 2.0... or at least the part I'm using.

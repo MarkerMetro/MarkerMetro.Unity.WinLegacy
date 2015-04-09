@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using MarkerMetro.Unity.WinLegacy.IO;
+using MarkerMetro.Unity.WinLegacy.Plugin.IO;
 
 #if NETFX_CORE
 using Windows.Storage;
@@ -9,7 +9,7 @@ using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 #endif
 
-namespace MarkerMetro.Unity.WinLegacy.IO.Tests
+namespace MarkerMetro.Unity.WinLegacy.Plugin.IO.Tests
 {
     [TestClass]
     public class DirectoryTests

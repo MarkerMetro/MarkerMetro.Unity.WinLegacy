@@ -10,7 +10,7 @@ using System.Linq;
 /**
  * Modified code from http://stackoverflow.com/questions/2629027/no-generic-implementation-of-ordereddictionary
  */
-namespace MarkerMetro.Unity.WinLegacy.Collections.Specialized
+namespace MarkerMetro.Unity.WinLegacy.Plugin.Collections.Specialized
 {
     public interface IOrderedDictionary<TKey, TValue> : IDictionary<TKey, TValue>, IOrderedDictionary {
         new TValue this[int index] { get; set; }

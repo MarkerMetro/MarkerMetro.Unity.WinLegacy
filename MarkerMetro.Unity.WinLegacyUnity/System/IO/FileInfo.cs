@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Collections;
 #endif
 
-namespace MarkerMetro.Unity.WinLegacy.IO
+namespace MarkerMetro.Unity.WinLegacy.Plugin.IO
 {
     /// <summary>
     /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.io.fileinfo.aspx.
