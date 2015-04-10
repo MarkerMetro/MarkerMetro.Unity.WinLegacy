@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace MarkerMetro.Unity.WinLegacy.Net
+namespace MarkerMetro.Unity.WinLegacy.Plugin.Net
 {
     /// <summary>
     /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.net.webheadercollection.aspx.

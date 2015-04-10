@@ -3,6 +3,7 @@ using System.IO;
 using MarkerMetro.Unity.WinLegacy.Net;
 #if NETFX_CORE
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+using MarkerMetro.Unity.WinLegacy.Plugin.Net;
 #else
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 #endif
