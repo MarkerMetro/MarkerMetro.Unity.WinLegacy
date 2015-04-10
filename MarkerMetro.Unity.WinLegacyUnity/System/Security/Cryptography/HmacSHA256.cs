@@ -11,34 +11,46 @@ using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
 {
-    public class HmacSHA256 : IDisposable
+    public class HMACSHA256 : IDisposable
     {
-        public static HmacSHA256 Create()
-        {
-            return new HmacSHA256();
-        }
-
         public void Dispose() { }
 
-#if NETFX_CORE        
-        private MacAlgorithmProvider hap;
 
-        private HmacSHA256()
+#if NETFX_CORE
+        private MacAlgorithmProvider hmacSha256;
+
+        private byte[] KeyValue;
+
+        public byte[] Key
+        {
+            get { return KeyValue; }
+            set { KeyValue = value; }
+        }
+        public HMACSHA256(byte[] keyValue)
         {
             //creates algorithm provider
-            hap = MacAlgorithmProvider.OpenAlgorithm(MacAlgorithmNames.HmacSha256);
+            hmacSha256 = MacAlgorithmProvider.OpenAlgorithm(MacAlgorithmNames.HmacSha256);
+            KeyValue = keyValue;
         }
 
+        public HMACSHA256()
+        {
+            //creates algorithm provider
+            KeyValue = new Byte[64];
+            hmacSha256 = MacAlgorithmProvider.OpenAlgorithm(MacAlgorithmNames.HmacSha256);
+            IBuffer randomBuffer = CryptographicBuffer.GenerateRandom(hmacSha256.MacLength);
+            CryptographicBuffer.CopyToByteArray(randomBuffer, out KeyValue);
+        }
         /// <summary>
         /// takes in a UTF8 byte array, returns hashed byte array using HmacSHA256
         /// </summary>
         /// <param name="buffer"> UTF8 byte array</param>
         /// <param name="cryptSecret"> a secret key to be used in hash function</param>
         /// <returns>hashed byte array</returns>
-        public byte[] ComputeHash(byte[] buffer, string cryptSecret)
+        public byte[] ComputeHash(byte[] buffer)
         {
             //creates algorithm with secret provided
-            var hmacAlg = hap.CreateHash(Encoding.UTF8.GetBytes(cryptSecret).AsBuffer());
+            var hmacAlg = hmacSha256.CreateHash(KeyValue.AsBuffer());
             //adds data
             hmacAlg.Append(CryptographicBuffer.CreateFromByteArray(buffer));
             byte[] hash;
@@ -46,34 +58,11 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
             CryptographicBuffer.CopyToByteArray(hmacAlg.GetValueAndReset(), out hash);
             return hash;
         }
-
-        /// <summary>
-        /// takes in a string, encodes into UTF8 and returns hash
-        /// </summary>
-        /// <param name="value"> string data to be converted into UTF8 </param>
-        /// <param name="cryptSecret"> a secret key to be used in hash function</param>
-        /// <returns>hashed byte array</returns>
-        public byte[] ComputeHash(string value, string cryptSecret)
-        {
-            return ComputeHash(Encoding.UTF8.GetBytes(value), cryptSecret);
-        }
-
-        /// <summary>
-        /// takes in a string, encodes into UTF8 and returns hashed string
-        /// </summary>
-        /// <param name="value"> string data to be converted into UTF8 </param>
-        /// <param name="cryptSecret"> a secret key to be used in hash function</param>
-        /// <returns>hashed byte array</returns>
-        public string ComputeHashString(string value, string cryptSecret)
-        {
-            byte[] byteHash = ComputeHash(Encoding.UTF8.GetBytes(value), cryptSecret);
-            return BitConverter.ToString(byteHash).Replace("-", "").ToLower();
-        }
 #else
-        public byte[] ComputeHash(byte[] buffer, string cryptSecret) { throw new System.NotImplementedException(); }
-        public byte[] ComputeHash(string value, string cryptSecret) { throw new System.NotImplementedException(); }
-        public string ComputeHashString(string value, string cryptSecret) { throw new System.NotImplementedException(); }
-
+        public byte[] ComputeHash(byte[] buffer) { throw new System.NotImplementedException(); }
+        public byte[] ComputeHash(string value) { throw new System.NotImplementedException(); }
+        public HMACSHA256(byte[] keyValue) {throw new System.NotImplementedException(); }
+        public HMACSHA256(){}
 #endif
     }
 }

@@ -4,6 +4,7 @@
 using Windows.Security.Cryptography;
 using Windows.Security.Cryptography.Core;
 using Windows.Storage.Streams;
+using System.Runtime.InteropServices.WindowsRuntime;
 #elif WINDOWS_PHONE
 using System.Security.Cryptography;
 using System.Text;
@@ -21,14 +22,14 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
         /// <param name="toEncrypt">String to be encrypted</param>
         /// <param name="key">Unique key for encryption/decryption</param>m>
         /// <returns>Returns encrypted string.</returns>
-        public static string Encrypt(string toEncrypt, string key)
+        public static string Encrypt(string toEncrypt, string key, HashFunctionType type = HashFunctionType.MD5, byte[] hashKey = null)
         {
 #if NETFX_CORE
             try
             {
 
-                // Get the MD5 key hash (you can as well use the binary of the key string)
-                var keyHash = HashProvider.GetMD5Hash(key);
+                byte[] keyHash = Hash(key, type, hashKey);
+
 
                 // Create a buffer that contains the encoded message to be encrypted.
                 var toDecryptBuffer = CryptographicBuffer.ConvertStringToBinary(toEncrypt, BinaryStringEncoding.Utf8);
@@ -36,8 +37,16 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
                 // Open a symmetric algorithm provider for the specified algorithm.
                 var aes = SymmetricKeyAlgorithmProvider.OpenAlgorithm(SymmetricAlgorithmNames.AesEcbPkcs7);
 
+                //Since all hashing functions have fixed length some algorithms do not suit to be used as key hashers
+                //ie SHA1 will throw an error since its size is 160 bit while Aes requires 16 byte block size (or multiples of 16)
+                if (keyHash.Length % aes.BlockLength != 0)
+                {
+                    //if SHA1 used for encryption please not its block size is 160 bit
+                    System.Diagnostics.Debug.WriteLine("Invalid key block size!");
+                    throw new Exception("Invalid key block size!");
+                }
                 // Create a symmetric key.
-                var symetricKey = aes.CreateSymmetricKey(keyHash);
+                var symetricKey = aes.CreateSymmetricKey(CryptographicBuffer.CreateFromByteArray(keyHash));
 
                 // The input key must be securely shared between the sender of the cryptic message
                 // and the recipient. The initialization vector must also be shared but does not
@@ -61,6 +70,44 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
             throw new System.PlatformNotSupportedException();
 #endif
         }
+        /// <summary>
+        /// Hashes given string using specified algorithm.
+        /// </summary>
+        /// <param name="toHash"> String to be hashed. </param>
+        /// <param name="type"> Type of Hash function to be used. </param>
+        /// <param name="byteHashKey"> optional key to be used with HMACSHA256 algorithm </param>
+        /// <returns></returns>
+        private static byte[] Hash(string toHash, HashFunctionType type = HashFunctionType.MD5, byte[] hashKey = null)
+        {
+            byte[] keyByteArray = System.Text.Encoding.UTF8.GetBytes(toHash);
+            switch (type)
+            {
+                case HashFunctionType.MD5:
+                    var md5Algorithm = MD5.Create();
+                    return md5Algorithm.ComputeHash(keyByteArray);
+                case HashFunctionType.SHA1:
+                    var sha1Algorithm = SHA1.Create();
+                    return sha1Algorithm.ComputeHash(keyByteArray);
+                case HashFunctionType.HMACSHA256:
+                    HMACSHA256 hmac = hashKey != null ?
+                        new HMACSHA256(hashKey) : new HMACSHA256();
+                    return hmac.ComputeHash(keyByteArray);
+                default:
+                    System.Diagnostics.Debug.WriteLine("Unrecognized Hash function type: " + type);
+                    throw new Exception("Unrecognized Hash function type: " + type);
+            }
+        }
+
+        /// <summary>
+        /// takes in a string, encodes into UTF8 and returns hashed string
+        /// </summary>
+        /// <param name="value"> string data to be converted into UTF8 </param>
+        /// <param name="cryptSecret"> a secret key to be used in hash function</param>
+        /// <returns>hashed byte array</returns>
+        public static string HashToString(byte[] byteHash)
+        {
+            return BitConverter.ToString(byteHash).Replace("-", "").ToLower();
+        }
 
         /// <summary>
         /// Decrypt a string using dual encryption method. Return a Decrypted clear string
@@ -68,13 +115,12 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
         /// <param name="cipherString">Encrypted string</param>
         /// <param name="key">Unique key for encryption/decryption</param>
         /// <returns>Returns decrypted text.</returns>
-        public static string Decrypt(string cipherString, string key)
+        public static string Decrypt(string cipherString, string key, HashFunctionType type = HashFunctionType.MD5, byte[] hashKey = null)
         {
 #if NETFX_CORE
             try
             {
-                // Get the MD5 key hash (you can as well use the binary of the key string)
-                var keyHash = HashProvider.GetMD5Hash(key);
+                byte[] keyHash = Hash(key, type, hashKey);
 
                 // Create a buffer that contains the encoded message to be decrypted.
                 IBuffer toDecryptBuffer = CryptographicBuffer.DecodeFromBase64String(cipherString);
@@ -82,8 +128,16 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
                 // Open a symmetric algorithm provider for the specified algorithm.
                 SymmetricKeyAlgorithmProvider aes = SymmetricKeyAlgorithmProvider.OpenAlgorithm(SymmetricAlgorithmNames.AesEcbPkcs7);
 
+                //Since all hashing functions have fixed length some algorithms do not suit to be used as key hashers
+                //ie SHA1 will throw an error since its size is 160 bit while Aes requires 16 byte block size (or multiples of 16)
+                if (keyHash.Length % aes.BlockLength != 0)
+                {
+                    //if SHA1 used for encryption please not its block size is 160 bit
+                    System.Diagnostics.Debug.WriteLine("Invalid key block size!");
+                    throw new Exception("Invalid key block size!");
+                }
                 // Create a symmetric key.
-                var symetricKey = aes.CreateSymmetricKey(keyHash);
+                var symetricKey = aes.CreateSymmetricKey(CryptographicBuffer.CreateFromByteArray(keyHash));
 
                 var buffDecrypted = CryptographicEngine.Decrypt(symetricKey, toDecryptBuffer, null);
 
