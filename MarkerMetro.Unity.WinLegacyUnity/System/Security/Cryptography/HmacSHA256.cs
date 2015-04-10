@@ -20,26 +20,45 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
         private MacAlgorithmProvider hmacSha256;
 
         private byte[] KeyValue;
-
+#endif
         public byte[] Key
         {
+#if NETFX_CORE
             get { return KeyValue; }
             set { KeyValue = value; }
+#else
+            get
+            {
+                throw new System.NotImplementedException();
+            }
+            set
+            {
+                throw new System.NotImplementedException();
+            }
+#endif
         }
         public HMACSHA256(byte[] keyValue)
         {
+#if NETFX_CORE
             //creates algorithm provider
             hmacSha256 = MacAlgorithmProvider.OpenAlgorithm(MacAlgorithmNames.HmacSha256);
             KeyValue = keyValue;
+#else
+            throw new System.PlatformNotSupportedException();
+#endif
         }
 
         public HMACSHA256()
         {
+#if NETFX_CORE
             //creates algorithm provider
             KeyValue = new Byte[64];
             hmacSha256 = MacAlgorithmProvider.OpenAlgorithm(MacAlgorithmNames.HmacSha256);
             IBuffer randomBuffer = CryptographicBuffer.GenerateRandom(hmacSha256.MacLength);
             CryptographicBuffer.CopyToByteArray(randomBuffer, out KeyValue);
+#else
+            throw new System.PlatformNotSupportedException();
+#endif
         }
         /// <summary>
         /// takes in a UTF8 byte array, returns hashed byte array using HmacSHA256
@@ -49,6 +68,7 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
         /// <returns>hashed byte array</returns>
         public byte[] ComputeHash(byte[] buffer)
         {
+#if NETFX_CORE
             //creates algorithm with secret provided
             var hmacAlg = hmacSha256.CreateHash(KeyValue.AsBuffer());
             //adds data
@@ -57,12 +77,9 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
             //converts to byte array
             CryptographicBuffer.CopyToByteArray(hmacAlg.GetValueAndReset(), out hash);
             return hash;
-        }
 #else
-        public byte[] ComputeHash(byte[] buffer) { throw new System.NotImplementedException(); }
-        public byte[] ComputeHash(string value) { throw new System.NotImplementedException(); }
-        public HMACSHA256(byte[] keyValue) {throw new System.NotImplementedException(); }
-        public HMACSHA256(){}
+            throw new System.NotImplementedException();
 #endif
+        }
     }
 }

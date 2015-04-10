@@ -25,14 +25,17 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
         {
             return new MD5();
         }
-
-#if NETFX_CORE        
+#if NETFX_CORE
         private HashAlgorithmProvider hap;
-
+#endif
         protected MD5()
         {
+#if NETFX_CORE
             //creates algorithm provider
             hap = HashAlgorithmProvider.OpenAlgorithm(HashAlgorithmNames.Md5);
+#else
+            throw new System.PlatformNotSupportedException();
+#endif
         }
 
         /// <summary>
@@ -43,16 +46,17 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
         /// <returns>hashed byte array</returns>
         public byte[] ComputeHash(byte[] buffer)
         {
+#if NETFX_CORE        
+
             IBuffer buff = CryptographicBuffer.CreateFromByteArray(buffer);
             var hashed = hap.HashData(buff);
             byte[] hash;
             CryptographicBuffer.CopyToByteArray(hashed, out hash);
             return hash;
-        }
 #else
-        public byte[] ComputeHash(byte[] buffer) { throw new System.NotImplementedException(); }
-        public byte[] ComputeHash(string value) { throw new System.NotImplementedException(); }
-
+            throw new System.NotImplementedException();
 #endif
+        }
+
     }
 }
