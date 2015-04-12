@@ -5,13 +5,13 @@ using System.Linq;
 using System.Net;
 using System.Text;
 
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
 using System.Threading.Tasks;
 using Windows.Networking;
 using Windows.Networking.Sockets;
 using Windows.Storage.Streams;
 using MarkerMetro.Unity.WinLegacy.Runtime.Remoting.Messaging;
-using MarkerMetro.Unity.WinLegacy.IO;
+using MarkerMetro.Unity.WinLegacy.Plugin.IO;
 using Windows.Foundation;
 using System.Runtime.ExceptionServices;
 #else
@@ -28,7 +28,7 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
     {
         public bool UsePlainSocket { get; set; }
    
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
         private StreamSocket _socket = null;
         DataWriter _writer;
         bool _isConnected = false;
@@ -61,7 +61,7 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
         {
             get
             {
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
                 return _socket != null && _isConnected;
 #else
                 throw new NotImplementedException();
@@ -74,7 +74,7 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
 
         public void Connect(string hostName, int port)
         {
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
             var thread = EnsureSocket(hostName, port);
             thread.Wait();
 #else
@@ -84,7 +84,7 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
 
         public IAsyncResult BeginConnect(string host, int port, AsyncCallback requestCallback, object state)
         {
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
 
             var task = EnsureSocket(host, port);
             TaskStateAsyncResult res = new TaskStateAsyncResult(task, state);
@@ -102,7 +102,7 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
 
         public void EndConnect(IAsyncResult result)
         {
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
             var ar = (TaskStateAsyncResult)result;
             if (ar.InnerTask.IsFaulted)
                 throw ar.InnerTask.Exception;
@@ -114,7 +114,7 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
 
         public Stream GetStream()
         {
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
             if (_socket == null || !_isConnected) return null;
             return _readWriteStream;
 #else
@@ -124,7 +124,7 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
 
         public void Close()
         {
-#if NETFX_CORE || WINDOWS_PHONE  
+#if NETFX_CORE  
             _isConnected = false;
             if (_socket != null)
             {
@@ -143,7 +143,7 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
 
         public void ReadFromInputStreamAsync(int size, Action<byte[]> successCallback, Action<Exception> failureCallback)
         {
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
             var task = ReadFromInputStreamAsyncInner(size);
             task.ContinueWith((t) =>
             {
@@ -158,7 +158,7 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
 #endif
         }
 
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
 
         private async Task<byte[]> ReadFromInputStreamAsyncInner(int size)
         {
@@ -180,7 +180,7 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
 
         public void WriteToOutputStream(byte[] bytes)
         {
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
             var thread = WriteToOutputStreamAsyncInner(bytes);
             thread.Wait();
 #else
@@ -190,7 +190,7 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
 
         public void WriteToOutputStreamAsync(byte[] bytes, Action successCallback, Action<Exception> failureCallback)
         {
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
             var task = WriteToOutputStreamAsyncInner(bytes);
             task.ContinueWith((t) =>
             {
@@ -204,7 +204,7 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
 #endif
         }
 
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
         private async Task WriteToOutputStreamAsyncInner(byte[] bytes)
         {
             if (_socket == null) return;
