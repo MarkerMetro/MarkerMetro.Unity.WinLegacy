@@ -226,6 +226,15 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Security\Cryptography\SHA1.cs">
       <Link>System\Security\Cryptography\SHA1.cs</Link>
     </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Security\Cryptography\HMACSHA256.cs">
+      <Link>System\Security\Cryptography\HMACSHA256.cs</Link>
+    </Compile>
+	<Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Security\Cryptography\HashFunctionType.cs">
+      <Link>System\Security\Cryptography\HashFunctionType.cs</Link>
+    </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Security\Cryptography\MD5.cs">
+      <Link>System\Security\Cryptography\MD5.cs</Link>
+    </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Threading\Thread.cs">
       <Link>System\Threading\Thread.cs</Link>
     </Compile>

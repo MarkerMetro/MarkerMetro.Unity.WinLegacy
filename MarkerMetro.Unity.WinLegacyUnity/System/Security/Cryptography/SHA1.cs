@@ -20,32 +20,33 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
         }
 
         public void Dispose() {}
-
-#if NETFX_CORE        
+     
+#if NETFX_CORE
         private HashAlgorithmProvider hap;
+#endif
 
         private SHA1()
         {
+#if NETFX_CORE
             hap = HashAlgorithmProvider.OpenAlgorithm(HashAlgorithmNames.Sha1);
+#endif
+
         }
 
         public byte[] ComputeHash(byte[] buffer)
         {
+
+#if NETFX_CORE
             IBuffer buffInput = CryptographicBuffer.CreateFromByteArray(buffer);
             IBuffer buffHash = hap.HashData(buffInput);
 
             byte[] hash;
             CryptographicBuffer.CopyToByteArray(buffHash, out hash);
             return hash;
-        }
-#elif WINDOWS_PHONE
-        public byte[] ComputeHash(byte[] buffer)
-        {
-            using (var sha = new System.Security.Cryptography.SHA1Managed())
-                return sha.ComputeHash(buffer);
-        }
 #else
-        public byte[] ComputeHash(byte[] buffer) { throw new System.NotImplementedException(); }
+            throw new System.NotImplementedException();
 #endif
+        }
+
     }
 }

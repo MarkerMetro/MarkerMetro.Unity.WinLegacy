@@ -54,6 +54,11 @@
     <Compile Include="System\Collections\Specialized\OrderedDictionary.cs" />
     <Compile Include="System\Security\Cryptography\DESCryptography.cs" />
     <Compile Include="System\Security\Cryptography\EncryptionProvider.cs" />
+    <Compile Include="System\Security\Cryptography\HashFunctionType.cs" />
+    <Compile Include="System\Security\Cryptography\HMACSHA256.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="System\Security\Cryptography\MD5.cs" />
     <Compile Include="System\Security\Cryptography\MD5CryptoServiceProvider.cs" />
     <Compile Include="System\Security\Cryptography\SHA1.cs" />
     <Compile Include="System\Diagnostics\StackFrame.cs" />
