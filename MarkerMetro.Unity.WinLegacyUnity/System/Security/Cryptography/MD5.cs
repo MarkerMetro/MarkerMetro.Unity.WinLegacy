@@ -25,9 +25,11 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
         {
             return new MD5();
         }
+
 #if NETFX_CORE
         private HashAlgorithmProvider hap;
 #endif
+
         protected MD5()
         {
 #if NETFX_CORE

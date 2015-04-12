@@ -23,15 +23,12 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
      
 #if NETFX_CORE
         private HashAlgorithmProvider hap;
-#endif
 
         private SHA1()
         {
-#if NETFX_CORE
             hap = HashAlgorithmProvider.OpenAlgorithm(HashAlgorithmNames.Sha1);
-#endif
-
         }
+#endif
 
         public byte[] ComputeHash(byte[] buffer)
         {
