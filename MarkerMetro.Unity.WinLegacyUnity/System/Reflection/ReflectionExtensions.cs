@@ -385,7 +385,7 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 
         public static FieldInfo[] GetFields(this Type t, BindingFlags flags)
         {
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
             if (!flags.HasFlag(BindingFlags.Instance) && !flags.HasFlag(BindingFlags.Static))
                 return null;
 
@@ -409,7 +409,7 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 
         public static FieldInfo GetField(this Type type, string name)
         {
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
             var fields = type.GetFields();
             if (!fields.Any()) return null;
             return fields.FirstOrDefault(f => f.Name == name);
@@ -420,7 +420,7 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 
         public static FieldInfo GetField(this Type type, string name, BindingFlags flags)
         {
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
             FieldInfo[] fields = type.GetFields(flags);
             if (fields != null)
                 for (int i = 0; i < fields.Length; i++)
@@ -550,7 +550,7 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 
         public static Type GetType(this Assembly assembly)
         {
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
             if (assembly.DefinedTypes == null) return null;
             return assembly.GetType();
 #else

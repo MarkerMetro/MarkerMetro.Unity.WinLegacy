@@ -4,10 +4,6 @@
 using Windows.Security.Cryptography;
 using Windows.Security.Cryptography.Core;
 using Windows.Storage.Streams;
-using System.Runtime.InteropServices.WindowsRuntime;
-#elif WINDOWS_PHONE
-using System.Security.Cryptography;
-using System.Text;
 #endif
 
 

@@ -1,5 +1,5 @@
 ﻿using System;
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
 using Windows.System.Threading;
 #endif
 
@@ -12,7 +12,7 @@ namespace MarkerMetro.Unity.WinLegacy.Timers
     /// </summary>
     public class Timer
     {
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
         private ThreadPoolTimer timer;
         private bool running;
 #endif
@@ -93,7 +93,7 @@ namespace MarkerMetro.Unity.WinLegacy.Timers
 
         public Timer() 
         {
-#if !NETFX_CORE && !WINDOWS_PHONE
+#if !NETFX_CORE
             throw new PlatformNotSupportedException();     
 #endif
         }
@@ -108,7 +108,7 @@ namespace MarkerMetro.Unity.WinLegacy.Timers
          */
         public void Start()
         {
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
             enabled = true;
 
             if (!running)

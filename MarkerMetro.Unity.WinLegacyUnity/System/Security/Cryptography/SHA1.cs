@@ -44,7 +44,7 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
             CryptographicBuffer.CopyToByteArray(buffHash, out hash);
             return hash;
 #else
-            throw new System.NotImplementedException();
+			throw new System.NotImplementedException();
 #endif
         }
 

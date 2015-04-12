@@ -114,40 +114,37 @@
     <SDKReference Include="TestPlatform, Version=11.0" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\System\Collections\ArrayListTests.cs">
-      <Link>System\Collections\ArrayListTests.cs</Link>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\Plugin\Collections\ArrayListTests.cs">
+      <Link>Plugin\Collections\ArrayListTests.cs</Link>
     </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\System\Collections\CollectionsExtensionsTests.cs">
-      <Link>System\Collections\CollectionsExtensionsTests.cs</Link>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\Plugin\Collections\CollectionsExtensionsTests.cs">
+      <Link>Plugin\Collections\CollectionsExtensionsTests.cs</Link>
     </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\System\Collections\HashTableTests.cs">
-      <Link>System\Collections\HashTableTests.cs</Link>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\Plugin\Collections\HashTableTests.cs">
+      <Link>Plugin\Collections\HashTableTests.cs</Link>
     </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\System\Collections\QueueTests.cs">
-      <Link>System\Collections\QueueTests.cs</Link>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\Plugin\Collections\SortedListTests.cs">
+      <Link>Plugin\Collections\SortedListTests.cs</Link>
     </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\System\Collections\SortedListTests.cs">
-      <Link>System\Collections\SortedListTests.cs</Link>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\Plugin\Collections\Specialized\NameValueCollectionTests.cs">
+      <Link>Plugin\Collections\Specialized\NameValueCollectionTests.cs</Link>
     </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\System\Collections\Specialized\NameValueCollectionTests.cs">
-      <Link>System\Collections\Specialized\NameValueCollectionTests.cs</Link>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\Plugin\Collections\Specialized\OrderedDictionaryTests.cs">
+      <Link>Plugin\Collections\Specialized\OrderedDictionaryTests.cs</Link>
     </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\System\Collections\Specialized\OrderedDictionaryTests.cs">
-      <Link>System\Collections\Specialized\OrderedDictionaryTests.cs</Link>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\Plugin\IO\DirectoryTests.cs">
+      <Link>Plugin\IO\DirectoryTests.cs</Link>
     </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\System\IO\DirectoryTests.cs">
-      <Link>System\IO\DirectoryTests.cs</Link>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\Plugin\IO\FileTests.cs">
+      <Link>Plugin\IO\FileTests.cs</Link>
     </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\System\IO\FileTests.cs">
-      <Link>System\IO\FileTests.cs</Link>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\Plugin\IO\StreamReaderExtensionsTests.cs">
+      <Link>Plugin\IO\StreamReaderExtensionsTests.cs</Link>
     </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\System\IO\StreamReaderExtensionsTests.cs">
-      <Link>System\IO\StreamReaderExtensionsTests.cs</Link>
-    </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\System\Net\Sockets\TcpClientTests.cs">
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\Plugin\Net\Sockets\TcpClientTests.cs">
       <Link>System\Net\Sockets\TcpClientTests.cs</Link>
     </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\System\Net\WebRequestTests.cs">
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\Plugin\Net\WebRequestTests.cs">
       <Link>System\Net\WebRequestTests.cs</Link>
     </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity.Tests\System\Reflection\ReflectionTests.cs">
