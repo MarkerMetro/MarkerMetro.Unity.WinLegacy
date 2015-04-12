@@ -71,6 +71,10 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
             throw new System.PlatformNotSupportedException();
 #endif
         }
+
+
+#if NETFX_CORE
+
         /// <summary>
         /// Hashes given string using specified algorithm.
         /// </summary>
@@ -80,7 +84,6 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
         /// <returns></returns>
         private static byte[] Hash(string toHash, HashFunctionType type = HashFunctionType.MD5, byte[] hashKey = null)
         {
-#if NETFX_CORE
             byte[] keyByteArray = System.Text.Encoding.UTF8.GetBytes(toHash);
             switch (type)
             {
@@ -98,11 +101,8 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
                     System.Diagnostics.Debug.WriteLine("Unrecognized Hash function type: " + type);
                     throw new ArgumentException("Unrecognized Hash function type: " + type);
             }
-#else
-            throw new System.PlatformNotSupportedException();
-#endif
         }
-
+#endif
 
         /// <summary>
         /// Decrypt a string using dual encryption method. Return a Decrypted clear string

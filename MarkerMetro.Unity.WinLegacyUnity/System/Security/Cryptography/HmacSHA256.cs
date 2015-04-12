@@ -15,12 +15,11 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
     {
         public void Dispose() { }
 
-
 #if NETFX_CORE
         private MacAlgorithmProvider hmacSha256;
-
         private byte[] KeyValue;
 #endif
+
         public byte[] Key
         {
 #if NETFX_CORE
@@ -37,6 +36,7 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
             }
 #endif
         }
+
         public HMACSHA256(byte[] keyValue)
         {
 #if NETFX_CORE
@@ -60,6 +60,7 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
             throw new System.PlatformNotSupportedException();
 #endif
         }
+
         /// <summary>
         /// takes in a UTF8 byte array, returns hashed byte array using HmacSHA256
         /// </summary>
@@ -81,5 +82,6 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
             throw new System.NotImplementedException();
 #endif
         }
+
     }
 }
