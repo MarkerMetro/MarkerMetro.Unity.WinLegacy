@@ -1,7 +1,7 @@
 ﻿using System;
 using MarkerMetro.Unity.WinLegacy.Timers;
 
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
 using Windows.Storage;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 #else
@@ -13,7 +13,7 @@ namespace MarkerMetro.Unity.WinLegacy.Timers.Tests
     [TestClass]
     public class TimerTests
     {
-#if NETFX_CORE || WINDOWS_PHONE
+#if NETFX_CORE
 
         /// <summary>
         /// Test Timer with valid interval value.
