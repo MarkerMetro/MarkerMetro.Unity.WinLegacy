@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MarkerMetro.Unity.WinLegacy.IO;
 
 namespace MarkerMetro.Unity.WinLegacy.Plugin.IO
 {
