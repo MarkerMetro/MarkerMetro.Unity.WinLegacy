@@ -115,8 +115,8 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\Plugin\Collections\ArrayList.cs">
       <Link>Plugin\Collections\ArrayList.cs</Link>
     </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\Plugin\Collections\CollectionsExtensions.cs">
-      <Link>Plugin\Collections\CollectionsExtensions.cs</Link>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Collections\CollectionsExtensions.cs">
+      <Link>System\Collections\CollectionsExtensions.cs</Link>
     </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\Plugin\Collections\Hashtable.cs">
       <Link>Plugin\Collections\Hashtable.cs</Link>
@@ -145,8 +145,8 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\Plugin\IO\Directory.cs">
       <Link>Plugin\IO\Directory.cs</Link>
     </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\Plugin\IO\DirectoryInfo.cs">
-      <Link>Plugin\IO\DirectoryInfo.cs</Link>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\DirectoryInfo.cs">
+      <Link>System\IO\DirectoryInfo.cs</Link>
     </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\Plugin\IO\File.cs">
       <Link>Plugin\IO\File.cs</Link>
@@ -154,11 +154,11 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\Plugin\IO\FileAccess.cs">
       <Link>Plugin\IO\FileAccess.cs</Link>
     </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\Plugin\IO\FileInfo.cs">
-      <Link>Plugin\IO\FileInfo.cs</Link>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\FileInfo.cs">
+      <Link>System\IO\FileInfo.cs</Link>
     </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\Plugin\IO\FileMode.cs">
-      <Link>Plugin\IO\FileMode.cs</Link>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\IO\FileModeExtensions.cs">
+      <Link>System\IO\FileModeExtensions.cs</Link>
     </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\Plugin\IO\MemoryStreamExtensions.cs">
       <Link>Plugin\IO\MemoryStreamExtensions.cs</Link>

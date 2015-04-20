@@ -2,13 +2,15 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using MarkerMetro.Unity.WinLegacy.Plugin.IO;
+
 #if NETFX_CORE
 using Windows.Storage;
 using System.Threading.Tasks;
 using System.Collections;
 #endif
 
-namespace MarkerMetro.Unity.WinLegacy.Plugin.IO
+namespace MarkerMetro.Unity.WinLegacy.IO
 {
     /// <summary>
     /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.io.fileinfo.aspx.
