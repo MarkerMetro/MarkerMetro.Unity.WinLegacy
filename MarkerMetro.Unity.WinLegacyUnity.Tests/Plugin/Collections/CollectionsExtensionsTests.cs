@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using MarkerMetro.Unity.WinLegacy.Plugin.Collections;
+using MarkerMetro.Unity.WinLegacy.Collections;
 #if NETFX_CORE
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 #else

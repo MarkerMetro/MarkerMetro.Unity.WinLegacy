@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MarkerMetro.Unity.WinLegacy.Plugin.Collections
+namespace MarkerMetro.Unity.WinLegacy.Collections
 {
     /** 
      * Converter is not supported in Win8 or WP8.1, but supported in WP8.

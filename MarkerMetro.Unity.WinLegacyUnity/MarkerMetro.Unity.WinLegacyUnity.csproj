@@ -45,7 +45,7 @@
     <Compile Include="System\AppDomain.cs" />
     <Compile Include="System\ApplicationException.cs" />
     <Compile Include="Plugin\Collections\ArrayList.cs" />
-    <Compile Include="Plugin\Collections\CollectionsExtensions.cs" />
+    <Compile Include="System\Collections\CollectionsExtensions.cs" />
     <Compile Include="Plugin\Collections\Hashtable.cs" />
     <Compile Include="Plugin\Collections\SortedList.cs" />
     <Compile Include="Plugin\Collections\Specialized\IOrderedDictionary.cs" />
@@ -64,9 +64,9 @@
     <Compile Include="Plugin\IO\BinaryReaderExtensions.cs" />
     <Compile Include="Plugin\IO\BinaryWriterExtensions.cs" />
     <Compile Include="Plugin\IO\FileAccess.cs" />
-    <Compile Include="Plugin\IO\DirectoryInfo.cs" />
-    <Compile Include="Plugin\IO\FileInfo.cs" />
-    <Compile Include="Plugin\IO\FileMode.cs" />
+    <Compile Include="System\IO\DirectoryInfo.cs" />
+    <Compile Include="System\IO\FileInfo.cs" />
+    <Compile Include="System\IO\FileModeExtensions.cs" />
     <Compile Include="Plugin\IO\FileShare.cs" />
     <Compile Include="Plugin\IO\FileStream.cs" />
     <Compile Include="Plugin\IO\MemoryStreamExtensions.cs" />

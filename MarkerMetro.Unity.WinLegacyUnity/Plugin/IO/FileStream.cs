@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using MarkerMetro.Unity.WinLegacy.IO;
 using MarkerMetro.Unity.WinLegacy.Plugin.IO;
 #if NETFX_CORE
 using System.Threading.Tasks;
@@ -26,22 +27,22 @@ namespace MarkerMetro.Unity.WinLegacy.Plugin.IO
             this.stream = stream;
         }
 
-        public FileStream(string filePath, FileMode mode)
+        public FileStream(string filePath, MarkerMetro.Unity.WinLegacy.IO.FileMode mode)
             : this(filePath, mode, FileAccess.ReadWrite)
         {
         }
 
-        public FileStream(string filePath, FileMode mode, FileAccess access)
+        public FileStream(string filePath, MarkerMetro.Unity.WinLegacy.IO.FileMode mode, FileAccess access)
             : this(filePath, mode, access, FileShare.None)
         {
         }
 
-        public FileStream(string filePath, FileMode mode, FileAccess access, FileShare share)
+        public FileStream(string filePath, MarkerMetro.Unity.WinLegacy.IO.FileMode mode, FileAccess access, FileShare share)
             : this(filePath, mode, access, share, 4096)
         {
         }
 
-        public FileStream(string filePath, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize)
+        public FileStream(string filePath, MarkerMetro.Unity.WinLegacy.IO.FileMode mode, FileAccess access, FileShare share, Int32 bufferSize)
         {
             filePath = filePath.FixPath();
 #if NETFX_CORE
