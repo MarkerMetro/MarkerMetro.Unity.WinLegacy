@@ -91,7 +91,10 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
 
             task.ContinueWith((t) =>
             {
-                requestCallback(res);
+                if (requestCallback != null)
+                {
+                    requestCallback(res);
+                }
             });
 
             return res;

@@ -51,6 +51,8 @@
     <Compile Include="Plugin\Collections\Specialized\IOrderedDictionary.cs" />
     <Compile Include="Plugin\Collections\Specialized\NameValueCollection.cs" />
     <Compile Include="Plugin\Collections\Specialized\OrderedDictionary.cs" />
+    <Compile Include="System\Net\Dns.cs" />
+    <Compile Include="System\Net\Sockets\Socket.cs" />
     <Compile Include="System\Security\Cryptography\DESCryptography.cs" />
     <Compile Include="System\Security\Cryptography\EncryptionProvider.cs" />
     <Compile Include="System\Security\Cryptography\HashFunctionType.cs" />
