@@ -10,7 +10,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 
 namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
 {
-    class RNGCryptoServiceProvider
+    public class RNGCryptoServiceProvider
     {
         public void GetBytes (byte[] buffer)
         {

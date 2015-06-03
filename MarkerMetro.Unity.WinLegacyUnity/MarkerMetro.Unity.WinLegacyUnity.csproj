@@ -91,6 +91,7 @@
     <Compile Include="System\Reflection\TargetException.cs" />
     <Compile Include="System\Runtime\Remoting\Messaging\AsyncResult.cs" />
     <Compile Include="System\Runtime\Remoting\Messaging\TaskStateAsyncResult.cs" />
+    <Compile Include="System\Security\Cryptography\SHA1CryptoServiceProvider.cs" />
     <Compile Include="System\Threading\ThreadPool.cs" />
     <Compile Include="System\Threading\Thread.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

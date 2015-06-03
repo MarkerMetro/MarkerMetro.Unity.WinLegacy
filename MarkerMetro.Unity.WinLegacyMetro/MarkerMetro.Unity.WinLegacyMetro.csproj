@@ -241,6 +241,9 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Security\Cryptography\MD5.cs">
       <Link>System\Security\Cryptography\MD5.cs</Link>
     </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Security\Cryptography\SHA1CryptoServiceProvider.cs">
+      <Link>System\Security\Cryptography\SHA1CryptoServiceProvider.cs</Link>
+    </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Threading\Thread.cs">
       <Link>System\Threading\Thread.cs</Link>
     </Compile>
