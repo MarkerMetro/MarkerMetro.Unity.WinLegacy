@@ -170,21 +170,5 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
     {
 
     }
-
-    /// <summary>
-    /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.threading.eventwaithandle.aspx.
-    /// </summary>
-    public class EventWaitHandle : WaitHandle
-    {
-
-    }
-
-    /// <summary>
-    /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.threading.autoresetevent.aspx.
-    /// </summary>
-    public class AutoResetEvent : EventWaitHandle
-    {
-
-    }
 }
 
