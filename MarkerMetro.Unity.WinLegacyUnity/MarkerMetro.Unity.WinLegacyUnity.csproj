@@ -61,6 +61,7 @@
     </Compile>
     <Compile Include="System\Security\Cryptography\MD5.cs" />
     <Compile Include="System\Security\Cryptography\MD5CryptoServiceProvider.cs" />
+    <Compile Include="System\Security\Cryptography\RNGCryptoServiceProvider.cs" />
     <Compile Include="System\Security\Cryptography\SHA1.cs" />
     <Compile Include="System\Diagnostics\StackFrame.cs" />
     <Compile Include="Plugin\IO\BinaryReaderExtensions.cs" />
