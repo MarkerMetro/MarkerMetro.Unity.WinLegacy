@@ -16,6 +16,17 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
     /// </summary>
     public class Thread
     {
+        public static int CurrentManagedThreadId
+        {
+            get
+            {
+#if NETFX_CORE
+                return Environment.CurrentManagedThreadId;
+#else
+                throw new PlatformNotSupportedException();
+#endif
+            }
+        }
 
         /*
          * pretty sure Task.Start doesn't always spin up a new thread (depends on synccontext).
