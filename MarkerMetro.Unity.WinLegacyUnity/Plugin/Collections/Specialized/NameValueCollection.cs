@@ -160,5 +160,9 @@ namespace MarkerMetro.Unity.WinLegacy.Plugin.Collections.Specialized
         {
             return _collection.GetEnumerator();
         }
+        public Dictionary<string, string> ToDictionary()
+        {
+            return new Dictionary<string,string>(_collection);
+        }
     }
 }
