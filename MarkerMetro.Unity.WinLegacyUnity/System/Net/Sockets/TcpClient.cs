@@ -144,6 +144,13 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
 #endif
         }
 
+        public byte[] ReadFromInputStream (int size)
+        {
+            var thread = ReadFromInputStreamAsyncInner(size);
+            thread.Wait();
+            return thread.Result;
+        }
+
         public void ReadFromInputStreamAsync(int size, Action<byte[]> successCallback, Action<Exception> failureCallback)
         {
 #if NETFX_CORE
