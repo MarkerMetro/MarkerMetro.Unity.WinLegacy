@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Collections;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Reflection;
@@ -61,7 +62,21 @@ namespace MarkerMetro.Unity.WinLegacy
 #endif
         }
 
+        /// <summary>
+        /// Decodes all the bytes in the specified byte array into a string.
+        /// </summary>
+        public static string GetString(this System.Text.Encoding encoding, byte[] b)
+        {
+            return encoding.GetString(b, 0, b.Length);
+        }
 
+        /// <summary>
+        /// Returns a read-only IList<T> wrapper for the current collection.
+        /// </summary>
+        public static ReadOnlyCollection<T> AsReadOnly<T> (this List<T> list)
+        {
+            return new ReadOnlyCollection<T>(list);
+        }
     }
 }
 

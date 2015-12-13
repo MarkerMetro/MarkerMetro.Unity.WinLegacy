@@ -175,6 +175,24 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
 #endif
         }
 
+        public static bool IsPublic(this Type type)
+        {
+#if NETFX_CORE
+            return type.GetTypeInfo().IsPublic;
+#else
+            return type.IsPublic;
+#endif
+        }
+
+        public static bool IsVisible(this Type type)
+        {
+#if NETFX_CORE
+            return type.GetTypeInfo().IsVisible;
+#else
+            return type.IsVisible;
+#endif
+        }
+
         public static ConstructorInfo GetParameterlessConstructor(this Type type)
         {
 #if NETFX_CORE
