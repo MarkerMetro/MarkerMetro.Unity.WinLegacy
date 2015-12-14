@@ -226,6 +226,9 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Security\Cryptography\EncryptionProvider.cs">
       <Link>System\Security\Cryptography\EncryptionProvider.cs</Link>
     </Compile>
+    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Security\Cryptography\HMACSHA1.cs">
+      <Link>System\Security\Cryptography\HMACSHA1.cs</Link>
+    </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Security\Cryptography\RNGCryptoServiceProvider.cs">
       <Link>System\Security\Cryptography\RNGCryptoServiceProvider.cs</Link>
     </Compile>

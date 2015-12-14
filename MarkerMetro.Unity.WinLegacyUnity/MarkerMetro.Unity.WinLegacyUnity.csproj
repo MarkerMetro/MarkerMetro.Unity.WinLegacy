@@ -56,6 +56,7 @@
     <Compile Include="System\Security\Cryptography\DESCryptography.cs" />
     <Compile Include="System\Security\Cryptography\EncryptionProvider.cs" />
     <Compile Include="System\Security\Cryptography\HashFunctionType.cs" />
+    <Compile Include="System\Security\Cryptography\HMACSHA1.cs" />
     <Compile Include="System\Security\Cryptography\HMACSHA256.cs">
       <SubType>Code</SubType>
     </Compile>
