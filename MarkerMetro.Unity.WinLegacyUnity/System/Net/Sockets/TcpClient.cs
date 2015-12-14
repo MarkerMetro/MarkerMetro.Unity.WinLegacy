@@ -146,9 +146,13 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
 
         public byte[] ReadFromInputStream (int size)
         {
+#if NETFX_CORE
             var thread = ReadFromInputStreamAsyncInner(size);
             thread.Wait();
             return thread.Result;
+#else
+            throw new PlatformNotSupportedException();
+#endif
         }
 
         public void ReadFromInputStreamAsync(int size, Action<byte[]> successCallback, Action<Exception> failureCallback)
