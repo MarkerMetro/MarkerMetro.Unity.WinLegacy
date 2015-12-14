@@ -19,7 +19,7 @@
     <PackageCertificateKeyFile>MarkerMetro.Unity.WinLegacyMetro.Tests_TemporaryKey.pfx</PackageCertificateKeyFile>
     <AppxBundle>Never</AppxBundle>
     <AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
-    <PackageCertificateThumbprint>D19BD952D2F566623088CE6A478E41AA2FA49092</PackageCertificateThumbprint>
+    <PackageCertificateThumbprint>3C80193980CEC3F4DCD20FCB5C8E05F9C1F8B49A</PackageCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
