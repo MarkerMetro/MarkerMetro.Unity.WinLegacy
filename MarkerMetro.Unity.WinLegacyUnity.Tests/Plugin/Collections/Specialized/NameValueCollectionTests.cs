@@ -21,6 +21,8 @@ namespace MarkerMetro.Unity.WinLegacy.Plugin.Collections.Specialized.Tests
             public void Initialize()
             {
                 target = new NameValueCollection();
+
+
             }
 
             [TestMethod]
@@ -33,6 +35,16 @@ namespace MarkerMetro.Unity.WinLegacy.Plugin.Collections.Specialized.Tests
             public void MetroNameValueCollection_HasKeys_IsFalse()
             {
                 Assert.IsFalse(target.HasKeys());
+            }
+
+            [TestMethod]
+            public void MetroNameValueCollection_ToDictionary_Converted()
+            {
+                target.Add("FirstKey", "First Value");
+                target.Add("SecondKey", "Second Value");
+                Assert.IsTrue(target.ToDictionary()["FirstKey"] == "First Value");
+                Assert.IsTrue(target.ToDictionary()["SecondKey"] == "Second Value");
+
             }
         }
     }

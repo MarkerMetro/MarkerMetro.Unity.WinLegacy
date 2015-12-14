@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest">
-  <Identity Name="2b53e564-f6e1-43b9-af87-fc8988479299" Publisher="CN=markermetro" Version="1.0.0.1" />
+  <Identity Name="2b53e564-f6e1-43b9-af87-fc8988479299" Publisher="CN=MarkerMetro" Version="1.0.0.1" />
   <Properties>
     <DisplayName>MarkerMetro.Unity.WinLegacyMetro.Tests</DisplayName>
     <PublisherDisplayName>ivan.z</PublisherDisplayName>
