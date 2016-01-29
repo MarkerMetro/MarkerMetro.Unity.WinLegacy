@@ -199,9 +199,6 @@
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Net\Dns.cs">
       <Link>System\Net\Dns.cs</Link>
     </Compile>
-    <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Net\Sockets\Socket.cs">
-      <Link>System\Net\Sockets\Socket.cs</Link>
-    </Compile>
     <Compile Include="..\MarkerMetro.Unity.WinLegacyUnity\System\Net\Sockets\TcpClient.cs">
       <Link>System\Net\Sockets\TcpClient.cs</Link>
     </Compile>
