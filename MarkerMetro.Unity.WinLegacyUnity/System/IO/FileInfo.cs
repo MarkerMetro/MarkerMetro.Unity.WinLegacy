@@ -99,7 +99,19 @@ namespace MarkerMetro.Unity.WinLegacy.IO
             }
         }
 
-        public FileStream OpenRead()
+        public int Attributes
+        {
+            get
+            {
+#if NETFX_CORE
+                return (int)_file.Attributes;
+#else
+                throw new PlatformNotSupportedException("FileInfo.Attributes");
+#endif
+            }
+        }
+
+        public MarkerMetro.Unity.WinLegacy.Plugin.IO.FileStream OpenRead()
         {
 #if NETFX_CORE
             return File.OpenRead(_path);

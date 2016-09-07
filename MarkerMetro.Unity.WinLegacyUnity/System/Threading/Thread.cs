@@ -16,6 +16,17 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
     /// </summary>
     public class Thread
     {
+        public static int CurrentManagedThreadId
+        {
+            get
+            {
+#if NETFX_CORE
+                return Environment.CurrentManagedThreadId;
+#else
+                throw new PlatformNotSupportedException();
+#endif
+            }
+        }
 
         /*
          * pretty sure Task.Start doesn't always spin up a new thread (depends on synccontext).
@@ -156,22 +167,6 @@ namespace MarkerMetro.Unity.WinLegacy.Threading
     /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.threading.threadabortexception.aspx.
     /// </summary>
     public class ThreadAbortException : Exception
-    {
-
-    }
-
-    /// <summary>
-    /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.threading.eventwaithandle.aspx.
-    /// </summary>
-    public class EventWaitHandle : WaitHandle
-    {
-
-    }
-
-    /// <summary>
-    /// MSDN reference: http://msdn.microsoft.com/en-us/library/system.threading.autoresetevent.aspx.
-    /// </summary>
-    public class AutoResetEvent : EventWaitHandle
     {
 
     }

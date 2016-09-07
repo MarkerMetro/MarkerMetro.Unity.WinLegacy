@@ -91,7 +91,10 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
 
             task.ContinueWith((t) =>
             {
-                requestCallback(res);
+                if (requestCallback != null)
+                {
+                    requestCallback(res);
+                }
             });
 
             return res;
@@ -136,6 +139,17 @@ namespace MarkerMetro.Unity.WinLegacy.Net.Sockets
                 _readWriteStream.Dispose();
                 _readWriteStream = null;
             }
+#else
+            throw new PlatformNotSupportedException();
+#endif
+        }
+
+        public byte[] ReadFromInputStream (int size)
+        {
+#if NETFX_CORE
+            var thread = ReadFromInputStreamAsyncInner(size);
+            thread.Wait();
+            return thread.Result;
 #else
             throw new PlatformNotSupportedException();
 #endif

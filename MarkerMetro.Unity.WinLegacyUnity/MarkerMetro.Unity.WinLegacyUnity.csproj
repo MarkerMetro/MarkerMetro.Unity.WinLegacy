@@ -51,14 +51,17 @@
     <Compile Include="Plugin\Collections\Specialized\IOrderedDictionary.cs" />
     <Compile Include="Plugin\Collections\Specialized\NameValueCollection.cs" />
     <Compile Include="Plugin\Collections\Specialized\OrderedDictionary.cs" />
+    <Compile Include="System\Net\Dns.cs" />
     <Compile Include="System\Security\Cryptography\DESCryptography.cs" />
     <Compile Include="System\Security\Cryptography\EncryptionProvider.cs" />
     <Compile Include="System\Security\Cryptography\HashFunctionType.cs" />
+    <Compile Include="System\Security\Cryptography\HMACSHA1.cs" />
     <Compile Include="System\Security\Cryptography\HMACSHA256.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="System\Security\Cryptography\MD5.cs" />
     <Compile Include="System\Security\Cryptography\MD5CryptoServiceProvider.cs" />
+    <Compile Include="System\Security\Cryptography\RNGCryptoServiceProvider.cs" />
     <Compile Include="System\Security\Cryptography\SHA1.cs" />
     <Compile Include="System\Diagnostics\StackFrame.cs" />
     <Compile Include="Plugin\IO\BinaryReaderExtensions.cs" />
@@ -88,6 +91,7 @@
     <Compile Include="System\Reflection\TargetException.cs" />
     <Compile Include="System\Runtime\Remoting\Messaging\AsyncResult.cs" />
     <Compile Include="System\Runtime\Remoting\Messaging\TaskStateAsyncResult.cs" />
+    <Compile Include="System\Security\Cryptography\SHA1CryptoServiceProvider.cs" />
     <Compile Include="System\Threading\ThreadPool.cs" />
     <Compile Include="System\Threading\Thread.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

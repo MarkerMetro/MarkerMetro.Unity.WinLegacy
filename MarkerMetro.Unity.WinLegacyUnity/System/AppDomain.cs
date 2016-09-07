@@ -43,11 +43,18 @@ namespace MarkerMetro.Unity.WinLegacy
             var list = new List<Assembly>();
             foreach(var file in await folder.GetFilesAsync())
             {
-                if(file.FileType == ".dll")
+                try
                 {
-                    var assemblyName = new AssemblyName(file.DisplayName);
-                    var assembly = Assembly.Load(assemblyName);
-                    list.Add(assembly);
+                    if (file.FileType == ".dll")
+                    {
+                        var assemblyName = new AssemblyName(file.DisplayName);
+                        var assembly = Assembly.Load(assemblyName);
+                        list.Add(assembly);
+                    }
+                }
+                catch (Exception)
+                {
+                    continue;
                 }
             }
             return list;

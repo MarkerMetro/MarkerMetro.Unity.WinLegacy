@@ -24,7 +24,7 @@ namespace MarkerMetro.Unity.WinLegacy.Security.Cryptography
 #if NETFX_CORE
         private HashAlgorithmProvider hap;
 
-        private SHA1()
+        protected SHA1()
         {
             hap = HashAlgorithmProvider.OpenAlgorithm(HashAlgorithmNames.Sha1);
         }
