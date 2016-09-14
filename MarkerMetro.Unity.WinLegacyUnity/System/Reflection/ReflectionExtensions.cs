@@ -590,7 +590,7 @@ namespace MarkerMetro.Unity.WinLegacy.Reflection
         public static bool IsSubclassOf(this Type type, global::System.Type parent)
         {
 #if NETFX_CORE
-            return parent.GetTypeInfo().IsAssignableFrom(type.GetTypeInfo());
+            return !parent.Equals(type) && parent.GetTypeInfo().IsAssignableFrom(type.GetTypeInfo());
 #else
             throw new NotImplementedException();
 #endif
